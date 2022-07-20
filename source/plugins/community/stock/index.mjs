@@ -14,7 +14,7 @@ export default async function({login, q, imports, data, account}, {enabled = fal
       throw {error: {message: "Company stock symbol is not set"}}
     symbol = symbol.toLocaleUpperCase()
 
-    //Query API for company informations
+    //Query API for company information
     console.debug(`metrics/compute/${login}/plugins > stock > querying api for company`)
     const {data: {quoteType: {shortName: company} = {shortName: symbol}}} = await imports.axios.get("https://yh-finance.p.rapidapi.com/stock/v2/get-profile", {
       params: {symbol, region: "US"},

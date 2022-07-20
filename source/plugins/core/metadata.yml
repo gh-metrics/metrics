@@ -32,7 +32,7 @@ inputs:
     description: |
       GitHub repository
 
-      This option is only revelant for repositories templates
+      This option is only relevant for repositories templates
     type: string
     default: ""
     preset: no
@@ -152,7 +152,7 @@ inputs:
     description: |
       Community templates to setup
 
-      See [community templates guide](https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md) for more informations
+      See [community templates guide](https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md) for more information
     type: array
     format: comma-separated
     default: ""

@@ -487,7 +487,7 @@ When doing so, any settings which defaults on user fetched values will not be te
   <tr>
     <td nowrap="nowrap"><h4><code>repo</code></h4></td>
     <td rowspan="2"><p>GitHub repository</p>
-<p>This option is only revelant for repositories templates</p>
+<p>This option is only relevant for repositories templates</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
@@ -650,7 +650,7 @@ When doing so, any settings which defaults on user fetched values will not be te
   <tr>
     <td nowrap="nowrap"><h4><code>setup_community_templates</code></h4></td>
     <td rowspan="2"><p>Community templates to setup</p>
-<p>See <a href="https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md">community templates guide</a> for more informations</p>
+<p>See <a href="https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md">community templates guide</a> for more information</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>

@@ -173,7 +173,7 @@ function quit(reason) {
     //See https://github.blog/2021-04-05-behind-githubs-new-authentication-token-formats
     info("GitHub token format", /^github_pat_/.test(token) ? "fine-grained" : /^gh[pousr]_/.test(token) ? "classic" : "legacy or invalid")
     if (!token)
-      throw new Error("You must provide a valid GitHub personal token to gather your metrics (see https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md for more informations)")
+      throw new Error("You must provide a valid GitHub personal token to gather your metrics (see https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md for more information)")
     if (/^github_pat_/.test(token))
       throw new Error("It seems you're trying to use a fine-grained personal access token. These are currently unsupported as GitHub does not support them (yet?) for GraphQL API authentication (see https://docs.github.com/fr/graphql/guides/forming-calls-with-graphql#authenticating-with-graphql for more informations). Use a classic token instead.")
     conf.settings.token = token
@@ -216,7 +216,7 @@ function quit(reason) {
         const {headers} = await api.rest.request("HEAD /")
         if (!("x-oauth-scopes" in headers)) {
           throw new Error(
-            'GitHub API did not send any "x-oauth-scopes" header back from provided "token". It means that your token may not be valid or you\'re using GITHUB_TOKEN which cannot be used since metrics will fetch data outside of this repository scope. Use a personal access token instead (see https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md for more informations).',
+            'GitHub API did not send any "x-oauth-scopes" header back from provided "token". It means that your token may not be valid or you\'re using GITHUB_TOKEN which cannot be used since metrics will fetch data outside of this repository scope. Use a personal access token instead (see https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md for more information).',
           )
         }
         info("Token validity", "seems ok")
@@ -258,7 +258,7 @@ function quit(reason) {
     //Committer
     const committer = {}
     if ((!dryrun) && (_action !== "none")) {
-      //Compute committer informations
+      //Compute committer information
       committer.token = _token || token
       committer.gist = _action === "gist" ? _gist : null
       committer.commit = true

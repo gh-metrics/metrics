@@ -378,7 +378,7 @@ It will fetch a specified amount of recent push events and perform linguistic an
 
 > 🌐 Web instances must enable this feature in `settings.json`
 
-## 🥽 Controling which languages are displayed
+## 🥽 Controlling which languages are displayed
 
 Several options lets you customize which languages should be displayed.
 It is possible to ignore completely languages or those lower than a given threshold, skip repositories, and filter by language categories.

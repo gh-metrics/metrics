@@ -2,7 +2,7 @@
 <table>
   <tr><td colspan="2"><a href="/README.md#-plugins">← Back to plugins index</a></td></tr>
   <tr><th colspan="2"><h3>📜 Repository licenses</h3></th></tr>
-  <tr><td colspan="2" align="center"><p>This plugin display repository license informations like permissions, limitations and conditions along with additional stats about dependencies.</p>
+  <tr><td colspan="2" align="center"><p>This plugin display repository license information like permissions, limitations and conditions along with additional stats about dependencies.</p>
 </td></tr>
   <tr><th>⚠️ Disclaimer</th><td><p>This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with <a href="https://github.com">GitHub</a>.
 All product and company names are trademarks™ or registered® trademarks of their respective holders.</p>

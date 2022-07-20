@@ -213,7 +213,7 @@ Because of GitHub Actions original limitations, only strings, numbers and boolea
     default: foo, bar
 ```
 
-> 💡 An array can be either `comma-separated` or `space-separated`, and will split user input by mentioned separator. Each value is trimmed and lowercased.
+> 💡 An array can be either `comma-separated` or `space-separated`, and will split user input by mentioned separator. Each value is trimmed and lower-cased.
 
 *Example: json type*
 ```yml

@@ -102,7 +102,7 @@ To enable it, open the `≡ Menu` from the project page and opt-in to `Track pro
 To create a personal project, select the `Projects` tab from your profile:
 ![Create a new project](/.github/readme/imgs/plugin_projects_create.png)
 
-Fill informations and set visibility to *public*:
+Fill information and set visibility to *public*:
 ![Configure project](/.github/readme/imgs/plugin_projects_setup.png)
 
 ## 📓 Use repositories projects

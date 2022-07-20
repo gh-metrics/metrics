@@ -30,7 +30,7 @@
   }
   //Placeholder function
   globalThis.placeholder = async function(set) {
-    //Load templates informations
+    //Load templates information
     let {image, style, fonts, partials} = await load(`/.templates/${set.templates.selected}`)
     await Promise.all(partials.map(async partial => await load(`/.templates/${set.templates.selected}/partials/${escape(partial)}.ejs`)))
     //Trap includes

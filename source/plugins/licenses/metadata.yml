@@ -1,7 +1,7 @@
 name: 📜 Repository licenses
 category: github
 description: |
-  This plugin display repository license informations like permissions, limitations and conditions along with additional stats about dependencies.
+  This plugin display repository license information like permissions, limitations and conditions along with additional stats about dependencies.
 notes: |
   > ⚠️ This is **NOT** legal advice, use at your own risk
 

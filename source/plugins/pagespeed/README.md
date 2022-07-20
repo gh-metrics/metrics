@@ -3,7 +3,7 @@
   <tr><td colspan="2"><a href="/README.md#-plugins">← Back to plugins index</a></td></tr>
   <tr><th colspan="2"><h3>⏱️ Google PageSpeed</h3></th></tr>
   <tr><td colspan="2" align="center"><p>This plugin displays performance statistics of a website.</p>
-<p>It uses <a href="https://developers.google.com/speed/docs/insights/v5/get-started">Google&#39;s PageSpeed API</a> (same as <a href="https://web.dev">web.dev</a>), see <a href="https://web.dev/performance-scoring/">performance scoring</a> and <a href="https://googlechrome.github.io/lighthouse/scorecalc/">score calculator</a> for more informations about results.</p>
+<p>It uses <a href="https://developers.google.com/speed/docs/insights/v5/get-started">Google&#39;s PageSpeed API</a> (same as <a href="https://web.dev">web.dev</a>), see <a href="https://web.dev/performance-scoring/">performance scoring</a> and <a href="https://googlechrome.github.io/lighthouse/scorecalc/">score calculator</a> for more information about results.</p>
 </td></tr>
   <tr><th>⚠️ Disclaimer</th><td><p>This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with <a href="https://pagespeed.web.dev/">Google PageSpeed</a>.
 All product and company names are trademarks™ or registered® trademarks of their respective holders.</p>
@@ -51,7 +51,7 @@ All product and company names are trademarks™ or registered® trademarks of th
     <td nowrap="nowrap"><h4><code>plugin_pagespeed_token</code></h4></td>
     <td rowspan="2"><p>PageSpeed token</p>
 <blockquote>
-<p>⚠️ While not mandatory, it is strongly advised pass a token to avoid triggering the rate limiter. See <a href="https://developers.google.com/speed/docs/insights/v5/get-started">PageSpeed documentation</a> for more informations.</p>
+<p>⚠️ While not mandatory, it is strongly advised pass a token to avoid triggering the rate limiter. See <a href="https://developers.google.com/speed/docs/insights/v5/get-started">PageSpeed documentation</a> for more information.</p>
 </blockquote>
 <img width="900" height="1" alt=""></td>
   </tr>
