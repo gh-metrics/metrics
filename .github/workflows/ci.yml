@@ -2,9 +2,11 @@ name: Continuous integration
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
+
   # Build, test and analyze
   build-test-analyze:
     name: Build, test and analyze
