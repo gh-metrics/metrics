@@ -44,6 +44,9 @@
       "CODE_OF_CONDUCT.md"
     ]
   },
+  "compilerOptions": {
+    "noImplicitOverride": false
+  },
   "tasks": {
     "make": "deno run --allow-env --allow-read --allow-write=.deno-make.json --allow-run=deno https://deno.land/x/make@1.2.0/mod.ts $0"
   },
