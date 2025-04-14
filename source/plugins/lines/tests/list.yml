@@ -205,7 +205,7 @@
         - assert:
             html:
               select: .lines .entry .week
-              match: /(2023|2022)/
+              match: /2025/
     - lines:
         history:
           limit: 1
