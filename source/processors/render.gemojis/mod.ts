@@ -1,7 +1,7 @@
 // Imports
 import { Processor, state } from "@engine/components/processor.ts"
 // @ts-ignore: json import
-import imported from "https://api.github.com/emojis" assert { type: "json" }
+import imported from "https://api.github.com/emojis" with { type: "json" }
 const gemojis = imported as Record<PropertyKey, string>
 
 /** Processor */

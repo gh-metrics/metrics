@@ -105,7 +105,7 @@ Deno.test(t(import.meta, "`page.evaluate()` runs scripts"), { permissions }, asy
   await expect(page.evaluate(() => {
     throw new Error("Expected error")
   })).to.be.rejected
-  await expect(page.evaluate(() => ({ width: window.innerWidth, height: window.innerHeight }))).to.eventually.deep.equal({ width: 800, height: 600 })
+  await expect(page.evaluate(() => ({ width: globalThis.innerWidth, height: globalThis.innerHeight }))).to.eventually.deep.equal({ width: 800, height: 600 })
   await page.close()
   await Browser.shared?.close()
   expect(Browser.shared).to.be.null

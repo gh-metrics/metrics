@@ -47,6 +47,7 @@ class App {
       fetch("/ratelimit").then(async response => this.data.ratelimit = await response.json()),
     ])
     this.data.dev = dev
+    // deno-lint-ignore no-explicit-any
     const partial = structuredClone(this.data.presets.schema) as any
     delete partial.properties.plugins.properties.args
     delete partial.properties.plugins.properties.processors
@@ -78,7 +79,8 @@ class App {
   }
 
   /** Return placeholder for given input */
-  getPlaceholder(input:any) {
+  // deno-lint-ignore no-explicit-any
+  getPlaceholder(input: any) {
     const override = /\((?:(?:e\.g\.)|(?:placeholder:)) `([\s\S]+)`\)/
     if (override.test(input.description))
       return input.description.match(override)?.[1] ?? ""
@@ -86,7 +88,8 @@ class App {
   }
 
   /** Return default value for given input */
-  getDefaultValue(input:any) {
+  // deno-lint-ignore no-explicit-any
+  getDefaultValue(input: any) {
     if (input.type === "null")
       return null
     if ((input.type === "string")&&(input.const))
@@ -113,7 +116,8 @@ class App {
   }
 
   /** Find index of default value for given input */
-  findDefaultValue(inputs:any) {
+  // deno-lint-ignore no-explicit-any
+  findDefaultValue(inputs: any) {
     const value = this.getDefaultValue(inputs)
     for (const input of inputs.anyOf) {
       if (value === null) {
@@ -121,6 +125,7 @@ class App {
           return inputs.anyOf.indexOf(input)
         continue
       }
+      // deno-lint-ignore valid-typeof
       if (input.type === typeof value)
         return inputs.anyOf.indexOf(input)
     }
@@ -184,6 +189,7 @@ class App {
 
 
   /** Render plugin */
+  // deno-lint-ignore no-unused-vars
   renderPlugin({ plugin: i, mock = false, force = false }: { plugin: number; mock?: boolean; force?: boolean }) {
     /*const handle = this.config.presets.default.plugins.handle || (mock = true, "octocat")
     const params = new URLSearchParams({ mock: `${mock}`, plugins: this.getPluginConfig({ plugin: i, output: "json" }) })

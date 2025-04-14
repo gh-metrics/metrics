@@ -8,7 +8,7 @@ import { Checkbox, Confirm, Input, Select } from "x/cliffy@v1.0.0-rc.3/prompt/mo
 import { existsSync } from "std/fs/exists.ts"
 import { yaml } from "@run/compat/report.ts"
 import { Logger } from "@engine/utils/log.ts"
-import emojis from "https://unpkg.com/emoji.json@15.1.0/emoji.json" assert { type: "json" }
+import emojis from "https://unpkg.com/emoji.json@15.1.0/emoji.json" with { type: "json" }
 
 /** Base path for component templates */
 const base = `${dir.source}/run/create/templates`

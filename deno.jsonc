@@ -1,6 +1,9 @@
 {
-  "name": "metrics",
+  "name": "@metrics/metrics",
   "version": "4.0.0",
+  "exports": {
+    ".": "./source/run/mod.ts"
+  },
   "imports": {
     "std/": "https://deno.land/std@0.205.0/",
     "x/": "https://deno.land/x/",
@@ -22,6 +25,9 @@
         "no-sparse-arrays",
         "no-sync-fn-in-async-fn",
         "no-throw-literal"
+      ],
+      "exclude": [
+        "verbatim-module-syntax"
       ]
     },
     "exclude": [
