@@ -218,7 +218,7 @@
         - assert:
             html:
               select: .lines .entry .week
-              match: /2023/
+              match: /2025/
 
 - name: supports `contributors.matching`
   plugins:
@@ -276,8 +276,8 @@
               select: .lines .entry
               count: 1=
     - processors:
-      - control.delay:
-          duration: 0.15
+        - control.delay:
+            duration: 0.15
     - lines:
         fetch:
           attempts: 1
@@ -290,5 +290,5 @@
               select: .lines .entry
               count: 0=
     - processors:
-      - control.delay:
-          duration: 0.15
+        - control.delay:
+            duration: 0.15
