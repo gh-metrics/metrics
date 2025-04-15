@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v1
+      - uses: denoland/setup-deno@v2
       - run: deno task make ${{ matrix.task }}
 
   # GitHub CodeQL analysis
@@ -38,16 +38,16 @@ jobs:
         language:
           - typescript
     steps:
-    - uses: actions/checkout@v4
-    - uses: github/codeql-action/init@v2
-      with:
-        languages: ${{ matrix.language }}
-        config: |
-          queries:
-            - uses: security-and-quality
-          paths-ignore:
-            - source/run/serve/imported.ts
-    - uses: github/codeql-action/analyze@v2
+      - uses: actions/checkout@v4
+      - uses: github/codeql-action/init@v2
+        with:
+          languages: ${{ matrix.language }}
+          config: |
+            queries:
+              - uses: security-and-quality
+            paths-ignore:
+              - source/run/serve/imported.ts
+      - uses: github/codeql-action/analyze@v2
 
   # Build and push Docker image
   docker:
@@ -78,4 +78,4 @@ jobs:
     needs:
       - docker
     steps:
-      - uses: lowlighter/metrics@v4-dev
+      - uses: gh-metrics/metrics@v4-dev
