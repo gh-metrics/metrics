@@ -1,6 +1,6 @@
 // Imports
 import { is, parse, Processor } from "@engine/components/processor.ts"
-import { delay } from "std/async/delay.ts"
+import { delay } from "@std/async"
 
 /** Processor */
 export default class extends Processor {

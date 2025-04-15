@@ -1,15 +1,15 @@
 //Imports
 import { Internal, is } from "@engine/components/internal.ts"
 import { cli as schema, load } from "@engine/config.ts"
-import github from "y/@actions/github@5.1.1?pin=v133"
+import github from "@actions/github"
 import { latest, version } from "@engine/version.ts"
-import core from "y/@actions/core@1.10.1?pin=v133"
+import core from "@actions/core"
 import { process } from "@engine/process.ts"
 import { env } from "@engine/utils/deno/env.ts"
 import { compat } from "@run/compat/mod.ts"
 import { parse } from "@engine/utils/validation.ts"
 import { Server } from "@run/serve/server.ts"
-import { Command, EnumType } from "x/cliffy@v1.0.0-rc.3/command/mod.ts"
+import { Command, EnumType } from "@cliffy/command"
 import { create } from "@run/create/mod.ts"
 
 /** CLI */

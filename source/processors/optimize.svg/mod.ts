@@ -1,6 +1,6 @@
 // Imports
 import { Processor, state } from "@engine/components/processor.ts"
-import { optimize } from "y/svgo@3.0.2?pin=v133"
+import { optimize } from "svgo"
 import { throws } from "@engine/utils/errors.ts"
 
 /** Processor */

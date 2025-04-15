@@ -1,8 +1,8 @@
-import { mock, Status } from "@engine/utils/testing.ts"
+import { mock, STATUS_CODE } from "@engine/utils/testing.ts"
 
 export default {
   "/octocat": mock({}, () => ({
-    status: Status.OK,
+    status: STATUS_CODE.OK,
     data: new TextEncoder().encode(`
       MMM.           .MMM
       MMMMMMMMMMMMMMMMMMM
@@ -27,7 +27,7 @@ export default {
         :~==~==~==~==~~`),
   })),
   "/rate_limit": mock({}, () => ({
-    status: Status.OK,
+    status: STATUS_CODE.OK,
     data: {
       resources: {
         core: { remaining: 0, limit: 0 },

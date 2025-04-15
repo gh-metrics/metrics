@@ -1,8 +1,8 @@
 // Imports
 import { is, parse, Plugin } from "@engine/components/plugin.ts"
 import { ignored, matchPatterns, parseHandle } from "@engine/utils/github.ts"
-import { delay } from "std/async/delay.ts"
-import { Status } from "std/http/status.ts"
+import { delay } from "@std/async"
+import { STATUS_CODE } from "@std/http"
 import { Graph } from "@engine/utils/graph.ts"
 
 /** Plugin */
@@ -148,10 +148,10 @@ export default class extends Plugin {
         const { owner, name: repo } = parseHandle(name, { entity: "repository" })
         for (let i = 0; i < fetching.attempts; i++) {
           const { status, data } = await this.rest(this.api.repos.getContributorsStats, { owner, repo })
-          if (status === Status.OK) {
+          if (status === STATUS_CODE.OK) {
             return { repo: name, data }
           }
-          if (status === Status.NoContent as typeof status) {
+          if (status === STATUS_CODE.NoContent as typeof status) {
             this.log.debug(`${name} is empty`)
             return { repo: name, data: [] }
           }

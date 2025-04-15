@@ -3,11 +3,11 @@
 import { is, parse } from "@engine/utils/validation.ts"
 import { Logger } from "@engine/utils/log.ts"
 import * as dir from "@engine/paths.ts"
-import { toFileUrl } from "std/path/to_file_url.ts"
-import { bgBrightBlack, bgYellow, black, brightCyan, cyan } from "std/fmt/colors.ts"
-import chai from "y/chai@4.3.10?pin=v133"
-import chaiSubset from "y/chai-subset@1.6.0?pin=v133"
-import chaiAsPromised from "y/chai-as-promised@7.1.1?pin=v133"
+import { toFileUrl } from "@std/path"
+import { bgBrightBlack, bgYellow, black, brightCyan, cyan } from "@std/fmt/colors"
+import chai from "chai"
+import chaiSubset from "chai-subset"
+import chaiAsPromised from "chai-as-promised"
 
 /** Logger */
 export const log = new Logger(import.meta)
@@ -46,6 +46,6 @@ export type test = any
 // Exports
 export { MetricsError, throws } from "@engine/utils/errors.ts"
 export { is, MetricsValidationError } from "@engine/utils/validation.ts"
-export { Status } from "std/http/status.ts"
-export { faker } from "y/@faker-js/faker@8.0.2?pin=v133"
+export { STATUS_CODE, type StatusCode } from "@std/http/status"
+export { faker } from "@faker-js/faker"
 export { dir }

@@ -31,11 +31,11 @@ Create a single `rest.ts` file inside the `tests/` subdirectory.
 
 ```ts
 // tests/rest.ts
-import { mock, Status } from "@engine/utils/testing.ts"
+import { mock, STATUS_CODE } from "@engine/utils/testing.ts"
 
 export default {
   "/zen": mock({}, () => ({
-    status: Status.OK,
+    status: STATUS_CODE.OK,
     data: new TextEncoder().encode("Anything added dilutes everything else."),
   })),
 }

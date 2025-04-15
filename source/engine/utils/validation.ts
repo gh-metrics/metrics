@@ -1,7 +1,7 @@
 //Imports
-import { z as is } from "x/zod@v3.21.4/mod.ts"
-import { zodToJsonSchema } from "y/zod-to-json-schema@3.21.4?pin=v133"
-import { fromZodError } from "y/zod-validation-error@1.5.0?pin=v133"
+import { z as is } from "zod"
+import { zodToJsonSchema } from "zod-to-json-schema"
+import { fromZodError } from "zod-validation-error"
 import { MetricsError } from "@engine/utils/errors.ts"
 
 /** Validator */

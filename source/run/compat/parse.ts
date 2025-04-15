@@ -1,6 +1,6 @@
 // Imports
 import { Secret } from "@engine/utils/secret.ts"
-import * as YAML from "std/yaml/parse.ts"
+import * as YAML from "@std/yaml/parse"
 import { Report, yaml } from "@run/compat/report.ts"
 
 /** Compatibility type */

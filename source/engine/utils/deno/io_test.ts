@@ -1,6 +1,6 @@
 import { dir, expect, MetricsError, t } from "@engine/utils/testing.ts"
 import { list, read, write } from "@engine/utils/deno/io.ts"
-import { fromFileUrl } from "std/path/from_file_url.ts"
+import { fromFileUrl } from "@std/path"
 
 const uuid = crypto.randomUUID().slice(-12).toUpperCase()
 const test = {

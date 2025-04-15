@@ -1,5 +1,5 @@
 // Imports
-import { fromFileUrl } from "std/path/from_file_url.ts"
+import { fromFileUrl } from "@std/path"
 
 /** Project root path */
 export const root = fromFileUrl(new URL("../..", import.meta.url)).replaceAll("\\", "/").replace(/\/$/, "")

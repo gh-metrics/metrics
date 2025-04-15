@@ -6,19 +6,18 @@ import { read } from "@engine/utils/deno/io.ts"
 import { KV, listen } from "@engine/utils/deno/server.ts"
 import { env } from "@engine/utils/deno/env.ts"
 import { Internal } from "@engine/components/internal.ts"
-import * as YAML from "std/yaml/mod.ts"
+import * as YAML from "@std/yaml"
 import { parseHandle } from "@engine/utils/github.ts"
-import { decodeBase64 } from "std/encoding/base64.ts"
-import { serveDir, serveFile } from "std/http/file_server.ts"
-import { fromFileUrl } from "std/path/from_file_url.ts"
-import { Status } from "std/http/status.ts"
+import { decodeBase64 } from "@std/encoding"
+import { serveDir, serveFile } from "@std/http/file-server"
+import { fromFileUrl } from "@std/path"
+import { STATUS_CODE } from "@std/http"
 import { metadata } from "@engine/metadata.ts"
-import { deferred } from "std/async/deferred.ts"
-import { deepMerge } from "std/collections/deep_merge.ts"
-import { getCookies, setCookie } from "std/http/cookie.ts"
+import { deepMerge } from "@std/collections"
+import { getCookies, setCookie } from "@std/http/cookie"
 import { Secret } from "@engine/utils/secret.ts"
 import { Requests } from "@engine/components/requests.ts"
-import { App } from "y/@octokit/app@14.0.0?pin=v133"
+import { App } from "@octokit/app"
 import { client } from "@run/serve/imports.ts"
 import { Browser } from "@engine/utils/browser.ts"
 try {
@@ -106,7 +105,7 @@ export class Server extends Internal {
           }
           // Rebundle app in development mode
           case (url.pathname === "/static/app.js") && (!env.deployment): {
-            return new Response(await client(), { status: Status.OK, headers: { "content-type": "application/javascript" } })
+            return new Response(await client(), { status: STATUS_CODE.OK, headers: { "content-type": "application/javascript" } })
           }
           // Serve static files
           case url.pathname.startsWith("/static/"): {
@@ -117,23 +116,23 @@ export class Server extends Internal {
             if (!this.#metadata) {
               this.#metadata = await metadata()
             }
-            return new Response(JSON.stringify(this.#metadata), { status: Status.OK, headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify(this.#metadata), { status: STATUS_CODE.OK, headers: { "content-type": "application/json" } })
           }
           // User profile
           case this.routes.me.test(url.pathname): {
             if (!this.context.github_app) {
-              return new Response(JSON.stringify(null), { status: Status.OK, headers: { "content-type": "application/json" } })
+              return new Response(JSON.stringify(null), { status: STATUS_CODE.OK, headers: { "content-type": "application/json" } })
             }
-            if ((!session) || (!await this.#kv.has(`sessions.${session}`))) {
-              return new Response(JSON.stringify({ login: null }), { status: Status.OK, headers: { "content-type": "application/json" } })
+            if ((!session) || !(await this.#kv.has(`sessions.${session}`))) {
+              return new Response(JSON.stringify({ login: null }), { status: STATUS_CODE.OK, headers: { "content-type": "application/json" } })
             }
             const { login, avatar } = await this.#kv.get<user>(`sessions.${session}`)
-            return new Response(JSON.stringify({ login, avatar }), { status: Status.OK, headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify({ login, avatar }), { status: STATUS_CODE.OK, headers: { "content-type": "application/json" } })
           }
           // OAuth login
           case this.routes.login.test(url.pathname): {
             if (!this.context.github_app) {
-              return Response.redirect(url.origin, Status.Found)
+              return Response.redirect(url.origin, STATUS_CODE.Found)
             }
             const app = this.context.github_app
             const { action = "/" } = url.pathname.match(this.routes.login)?.groups ?? {}
@@ -142,43 +141,54 @@ export class Server extends Internal {
               case "":
               case "/": {
                 if (session && (await this.#kv.has(`sessions.${session}`))) {
-                  return Response.redirect(url.origin, Status.Found)
+                  return Response.redirect(url.origin, STATUS_CODE.Found)
                 }
-                return Response.redirect(this.#app!.oauth.getWebFlowAuthorizationUrl({ allowSignup: false }).url, Status.Found)
+                return Response.redirect(this.#app!.oauth.getWebFlowAuthorizationUrl({ allowSignup: false }).url, STATUS_CODE.Found)
               }
               // OAuth authorization process
               case "/authorize": {
                 if (session && (await this.#kv.has(`sessions.${session}`))) {
-                  return Response.redirect(url.origin, Status.Found)
+                  return Response.redirect(url.origin, STATUS_CODE.Found)
                 }
                 try {
                   const state = url.searchParams.get("state")
                   const code = url.searchParams.get("code")
-                  // @ts-ignore: upstream types are incorrects
-                  const { authentication: { token, expiresAt: expiration } } = await this.#app!.oauth.createToken({ state, code })
-                  const ttl = new Date(expiration).getTime() - Date.now()
-                  // @ts-ignore: upstream types are incorrects
-                  const { data: { user: { login, avatar_url: avatar } } } = await this.#app!.oauth.checkToken({ token })
+                  const { authentication: { token, expiresAt: expiration } } = await this.#app!.oauth.createToken(
+                    // @ts-expect-error: upstream types are incorrect
+                    { state, code },
+                  )
+                  const ttl = new Date(expiration!).getTime() - Date.now()
+                  const { data: { user: userData } } = await this.#app!.oauth.checkToken({ token })
+                  const { login, avatar_url: avatar } = userData ?? {}
+
                   if (await this.#kv.has(`sessions.login.${login}`)) {
                     log.trace(`oauth process: user ${login} was already authenticated`)
-                    return Response.redirect(url.origin, Status.Found)
+                    return Response.redirect(url.origin, STATUS_CODE.Found)
                   }
                   const user = { login, avatar, token, session: crypto.randomUUID() }
                   await this.#kv.set(`sessions.${user.session}`, user, { ttl })
                   await this.#kv.set(`sessions.login.${user.login}`, true, { ttl })
                   log.message(`oauth process: user ${login} authenticated`)
                   const headers = new Headers({ Location: url.origin })
-                  setCookie(headers, { name: "metrics_session", value: user.session, path: "/", sameSite: "None", httpOnly: true, secure: true, expires: new Date(Date.now() + 1000 * expiration) })
-                  return new Response(null, { status: Status.SeeOther, headers })
+                  setCookie(headers, {
+                    name: "metrics_session",
+                    value: user.session,
+                    path: "/",
+                    sameSite: "None",
+                    httpOnly: true,
+                    secure: true,
+                    expires: new Date(Date.now() + 1000 * Number(expiration!)),
+                  })
+                  return new Response(null, { status: STATUS_CODE.SeeOther, headers })
                 } catch (error) {
                   log.warn(error)
-                  return new Response("Bad request: Authorization process failed", { status: Status.BadRequest })
+                  return new Response("Bad request: Authorization process failed", { status: STATUS_CODE.BadRequest })
                 }
               }
               // OAuth token revocation
               case "/revoke": {
-                if ((!session) || (!await this.#kv.has(`sessions.${session}`))) {
-                  return Response.redirect(url.origin, Status.Found)
+                if (!session || !(await this.#kv.has(`sessions.${session}`))) {
+                  return Response.redirect(url.origin, STATUS_CODE.Found)
                 }
                 try {
                   const { login, token } = await this.#kv.get<user>(`sessions.${session}`)
@@ -186,15 +196,15 @@ export class Server extends Internal {
                   await this.#kv.delete(`sessions.${session}`)
                   await this.#kv.delete(`sessions.login.${login}`)
                   log.trace(`oauth process: user ${login} revoked their token`)
-                  return Response.redirect(url.origin, Status.Found)
+                  return Response.redirect(url.origin, STATUS_CODE.Found)
                 } catch (error) {
                   log.warn(error)
-                  return new Response("Bad request: Revocation process failed", { status: Status.BadRequest })
+                  return new Response("Bad request: Revocation process failed", { status: STATUS_CODE.BadRequest })
                 }
               }
               // OAuth permissions review
               case "/review": {
-                return Response.redirect(`https://github.com/settings/connections/applications/${app.client_id}`, Status.Found)
+                return Response.redirect(`https://github.com/settings/connections/applications/${app.client_id}`, STATUS_CODE.Found)
               }
             }
             break routing
@@ -212,9 +222,9 @@ export class Server extends Internal {
             try {
               Object.assign(ratelimit, await requests.ratelimit())
             } catch (error) {
-              ratelimit.error = error.status ?? Status.InternalServerError
+              ratelimit.error = error.status ?? STATUS_CODE.InternalServerError
             }
-            return new Response(JSON.stringify({ login: context.login, ...ratelimit }), { status: Status.OK, headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify({ login: context.login, ...ratelimit }), { status: STATUS_CODE.OK, headers: { "content-type": "application/json" } })
           }
           // Serve renders
           case this.routes.metrics.test(url.pathname): {
@@ -225,10 +235,10 @@ export class Server extends Internal {
             try {
               parseHandle(handle, { entity })
             } catch {
-              return new Response(`Bad request: invalid handle "${handle}"`, { status: Status.BadRequest })
+              return new Response(`Bad request: invalid handle "${handle}"`, { status: STATUS_CODE.BadRequest })
             }
             if (!handle) {
-              return new Response("Not found", { status: Status.NotFound })
+              return new Response("Not found", { status: STATUS_CODE.NotFound })
             }
             {
               const log = _log.with({ handle })
@@ -239,7 +249,7 @@ export class Server extends Internal {
                 log.trace("existing request pending, waiting for completion")
                 return pending.get(requested)!
               }
-              const promise = deferred<Response>()
+              const { promise, resolve } = Promise.withResolvers<Response>()
               pending.set(requested, promise)
               log.trace("processing request")
               try {
@@ -259,7 +269,7 @@ export class Server extends Internal {
                   log.trace(context)
                 } catch (error) {
                   log.warn(error)
-                  return promise.resolve(new Response(`Bad request: ${error}`, { status: Status.BadRequest }))!
+                  return resolve(new Response(`Bad request: ${error}`, { status: STATUS_CODE.BadRequest }))!
                 }
 
                 // Filter features and apply server configuration
@@ -272,7 +282,7 @@ export class Server extends Internal {
                   //TODO(#1576)
                 } catch (error) {
                   log.warn(error)
-                  return promise.resolve(new Response(`Bad request: ${error}`, { status: Status.BadRequest }))!
+                  return resolve(new Response(`Bad request: ${error}`, { status: STATUS_CODE.BadRequest }))!
                 }
 
                 // Load user session if available
@@ -288,7 +298,7 @@ export class Server extends Internal {
                   if (typeof this.context.limit[section]?.max === "number") {
                     //TODO(#1542)
                     if (0 > this.context.limit[section]?.max!) {
-                      return new Response("Service unavailable: server capacity is full", { status: Status.ServiceUnavailable })
+                      return new Response("Service unavailable: server capacity is full", { status: STATUS_CODE.ServiceUnavailable })
                     }
                   }
 
@@ -303,7 +313,7 @@ export class Server extends Internal {
                       log.trace(`requests ratelimit: ${current + 1} / ${limit} until ${new Date(reset).toISOString()}`)
                       if (current + 1 > limit) {
                         log.trace(`requests ratelimit: preventing further requests for "${from}" until ${new Date(reset).toISOString()}`)
-                        return new Response(`Too Many Requests: Rate limit exceeded (wait ~${Math.ceil(Math.max((reset - Date.now()) / 1000, 1))}s)`, { status: Status.TooManyRequests })
+                        return new Response(`Too Many Requests: Rate limit exceeded (wait ~${Math.ceil(Math.max((reset - Date.now()) / 1000, 1))}s)`, { status: STATUS_CODE.TooManyRequests })
                       }
                       if (init) {
                         await this.#kv.set(`requests.ratelimit.${from}`, { current: current + 1, reset }, { ttl: 1000 * duration })
@@ -334,23 +344,32 @@ export class Server extends Internal {
                 } catch (error) {
                   log.warn(error)
                   // Do not print error to users to avoid data leaks
-                  return promise.resolve(new Response("Internal Server Error: Failed to apply server configuration", { status: Status.InternalServerError }))!
+                  return resolve(
+                    new Response(
+                      "Internal Server Error: Failed to apply server configuration",
+                      { status: STATUS_CODE.InternalServerError },
+                    ),
+                  )!
                 }
 
                 // Process request
                 try {
-                  const { content = "", mime = "image/svg+xml", base64 = false } = await process(context) ?? {}
+                  const { content = "", mime = "image/svg+xml", base64 = false } = (await process(context)) ?? {}
                   const body = base64 ? decodeBase64(content) : content
                   const headers = new Headers({ "cache-control": typeof this.context.cache === "number" ? `max-age=${this.context.cache}` : "no-store" })
                   if (!body) {
-                    return promise.resolve(new Response(null, { status: Status.NoContent, headers }))!
+                    return resolve(
+                      new Response(null, { status: STATUS_CODE.NoContent, headers }),
+                    )!
                   }
                   headers.set("content-type", mime)
-                  return promise.resolve(new Response(body, { status: Status.OK, headers }))!
+                  return resolve(new Response(body, { status: STATUS_CODE.OK, headers }))!
                 } catch (error) {
                   log.warn(error)
                   // Do not print error to users to avoid data leaks
-                  return promise.resolve(new Response("Internal Server Error: Failed to process metrics", { status: Status.InternalServerError }))!
+                  return resolve(
+                    new Response("Internal Server Error: Failed to process metrics", { status: STATUS_CODE.InternalServerError }),
+                  )!
                 }
               } finally {
                 log.trace("cleaning request")
@@ -370,7 +389,7 @@ export class Server extends Internal {
           case this.routes.control.test(url.pathname): {
             const authorization = request.headers.get("authorization")
             if (!authorization) {
-              return new Response("Unauthorized", { status: Status.Unauthorized })
+              return new Response("Unauthorized", { status: STATUS_CODE.Unauthorized })
             }
             const token = authorization.replace(/^Bearer\s+/, "")
             const { action } = url.pathname.match(this.routes.control)?.groups ?? {}
@@ -378,11 +397,11 @@ export class Server extends Internal {
               // Stop instance
               case "stop": {
                 if (!this.context.control?.[token]?.[action]) {
-                  return new Response("Forbidden", { status: Status.Forbidden })
+                  return new Response("Forbidden", { status: STATUS_CODE.Forbidden })
                 }
                 this.log.info("received stop request, server will shutdown in a few seconds")
                 setTimeout(() => Deno.exit(0), 5000)
-                return new Response("Accepted", { status: Status.Accepted })
+                return new Response("Accepted", { status: STATUS_CODE.Accepted })
               }
             }
           }
@@ -390,9 +409,9 @@ export class Server extends Internal {
         break
       }
       default:
-        return new Response(`Method Not Allowed: ${request.method}`, { status: Status.MethodNotAllowed })
+        return new Response(`Method Not Allowed: ${request.method}`, { status: STATUS_CODE.MethodNotAllowed })
     }
-    return new Response("Not found", { status: Status.NotFound })
+    return new Response("Not found", { status: STATUS_CODE.NotFound })
   }
 }
 

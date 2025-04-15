@@ -5,9 +5,9 @@ import { Browser } from "@engine/utils/browser.ts"
 import { Format } from "@engine/utils/format.ts"
 import { Plugin } from "@engine/components/plugin.ts"
 import { list, read } from "@engine/utils/deno/io.ts"
-import { contentType } from "std/media_types/content_type.ts"
-import { encodeBase64 } from "std/encoding/base64.ts"
-import * as YAML from "std/yaml/stringify.ts"
+import { contentType } from "@std/media-types/content-type"
+import { encodeBase64 } from "@std/encoding"
+import * as YAML from "@std/yaml/stringify"
 
 /** Processor */
 export default class extends Processor {
@@ -75,7 +75,9 @@ export default class extends Processor {
         // Compute SVG rendered dimensions
         this.log.trace("processing svg content in browser")
         await page.setContent(Format.html(render))
-        const { processed, width, height } = await page.evaluate("dom://svg.ts")
+        const { processed, width, height } = await page.evaluate<{ processed: string; width: number; height: number }, [string]>(
+          "dom://svg.ts",
+        )
         render = processed
 
         // Convert to image

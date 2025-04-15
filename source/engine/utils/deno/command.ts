@@ -1,7 +1,7 @@
 // Imports
-import argv from "y/string-argv@0.3.1?pin=v133"
+import { parseArgsStringToArgv as argv } from "string-argv"
 import { Logger } from "@engine/utils/log.ts"
-import { TextDelimiterStream } from "std/streams/text_delimiter_stream.ts"
+import { TextDelimiterStream } from "@std/streams"
 
 /** Execute command */
 export async function command(input: string, options: { return: "stdout" | "stderr"; cwd?: string; env?: Record<PropertyKey, string>; log?: Logger }): Promise<string>

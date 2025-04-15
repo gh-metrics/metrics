@@ -1,11 +1,11 @@
 // Imports
-import rehypeStringify from "y/rehype-stringify@10.0.0?pin=v133"
-import remarkParse from "y/remark-parse@11.0.0?pin=v133"
-import remarkRehype from "y/remark-rehype@11.0.0?pin=v133"
-import remarkGfm from "y/remark-gfm@4.0.0?pin=v133"
-import { unified } from "y/unified@11.0.4?pin=v133"
+import rehypeStringify from "rehype-stringify"
+import remarkParse from "remark-parse"
+import remarkRehype from "remark-rehype"
+import remarkGfm from "remark-gfm"
+import { unified } from "unified"
 import { highlight } from "@engine/utils/language.ts"
-import { DOMParser } from "x/deno_dom@v0.1.38/deno-dom-wasm.ts"
+import { DOMParser } from "@b-fuze/deno-dom"
 import { Format } from "@engine/utils/format.ts"
 
 /** Markdown renderer (internal) */
@@ -24,7 +24,8 @@ export async function markdown(text: string, { sanitize = "svg" as false | "svg"
   // Sanitize HTML
   if (sanitize) {
     // Import needs to be dynamic as it's not supported in browsers
-    const { default: sanitizeHTML } = await import("y/sanitize-html@2.11.0?pin=v133")
+    // @ts-types="@types/sanitize-html"
+    const { default: sanitizeHTML } = await import("sanitize-html")
     switch (sanitize) {
       // SVG content
       case "svg": {

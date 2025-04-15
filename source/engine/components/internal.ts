@@ -2,7 +2,7 @@
 import { Logger } from "@engine/utils/log.ts"
 import type { internal as schema } from "@engine/config.ts"
 import { is, parse, toSchema } from "@engine/utils/validation.ts"
-import { toFileUrl } from "std/path/to_file_url.ts"
+import { toFileUrl } from "@std/path"
 import * as dir from "@engine/paths.ts"
 
 /** Internal component */

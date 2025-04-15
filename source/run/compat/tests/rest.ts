@@ -1,8 +1,8 @@
-import { is, mock, Status } from "@engine/utils/testing.ts"
+import { is, mock, STATUS_CODE } from "@engine/utils/testing.ts"
 
 export default {
   "/users/{username}": mock({ username: is.string() }, ({ username: login }) => ({
-    status: Status.OK,
+    status: STATUS_CODE.OK,
     data: {
       login,
       type: { github: "Organization" }[login] ?? "User",

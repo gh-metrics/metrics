@@ -1,10 +1,10 @@
 //Imports
 import { Logger } from "@engine/utils/log.ts"
-import { getBinary, launch } from "x/astral@0.3.2/mod.ts"
+import { Browser as AstralBrowser, connect, type EvaluateFunction, type EvaluateOptions, getBinary, launch } from "@astral/astral"
 import { env } from "@engine/utils/deno/env.ts"
 import * as dir from "@engine/paths.ts"
 import { throws } from "@engine/utils/errors.ts"
-import { delay } from "std/async/delay.ts"
+import { delay } from "@std/async"
 
 /** Browser */
 export class Browser {
@@ -29,12 +29,12 @@ export class Browser {
   readonly endpoint
 
   /** Browser instance */
-  #instance = null as null | Awaited<ReturnType<typeof launch>>
+  #instance = null as null | AstralBrowser
 
   /** Open browser instance */
   private async open() {
     if (this.endpoint) {
-      this.#instance = await launch({ wsEndpoint: this.endpoint })
+      this.#instance = await connect({ wsEndpoint: this.endpoint })
       this.log.io(`using remote browser: ${this.endpoint}`)
     } else {
       this.#instance = await launch({ args: Browser.flags, path: this.bin, cache: dir.cache })
@@ -60,7 +60,7 @@ export class Browser {
       throws("Browser has no instance attached")
     }
     const page = await this.#instance.newPage(url)
-    if ((typeof width === "number") && (typeof height === "number")) {
+    if (typeof width === "number" && typeof height === "number") {
       page.setViewportSize({ width, height })
     }
     const close = page.close.bind(page)
@@ -75,15 +75,18 @@ export class Browser {
         }
       },
       // Evaluate function
-      evaluate: (async (func: Parameters<typeof evaluate>[0], options?: Parameters<typeof evaluate>[1]) => {
+      evaluate: (async <T, R extends readonly unknown[]>(func: EvaluateFunction<T, R>, options?: EvaluateOptions<R>) => {
         try {
-          if ((typeof func === "string") && (func.startsWith("dom://"))) {
+          if (typeof func === "string" && func.startsWith("dom://")) {
             let caller = ""
-            const { prepareStackTrace } = Error
+            // deno-lint-ignore no-explicit-any
+            const { prepareStackTrace } = Error as any
             try {
-              const error = new Error()
-              Error.prepareStackTrace = (_, stack) => stack
-              const stack = (error.stack as unknown as Array<{ getFileName(): string }>)
+              const error = new Error() // deno-lint-ignore no-explicit-any
+              ;(Error as any).prepareStackTrace = (_: Error, stack: Array<{ getFileName(): string }>) => stack
+              const stack = (
+                error.stack as unknown as Array<{ getFileName(): string }>
+              )
                 .map((callsite) => callsite.getFileName())
                 .filter((file) => file)
                 .filter((file) => file !== import.meta.url)
@@ -102,7 +105,7 @@ export class Browser {
         } catch (error) {
           throws(error.text)
         }
-      }) as typeof evaluate,
+      }) satisfies typeof evaluate,
       // Set transparent background
       setTransparentBackground: async () => {
         const celestial = page.unsafelyGetCelestialBindings()
@@ -122,7 +125,7 @@ export class Browser {
 
   /** Instantiates or reuse  */
   static async page({ log, bin, width, height }: { log: Logger; bin?: string; width?: number; height?: number }) {
-    if ((Browser.shareable) && (!Browser.shared)) {
+    if (Browser.shareable && !Browser.shared) {
       Object.assign(Browser, { shared: await new Browser({ log: new Logger(import.meta, { level: "none" }), bin, endpoint: env.get("BROWSER_ENDPOINT") }).ready })
       const close = Browser.shared!.close.bind(Browser.shared)
       Browser.shared!.close = async () => {

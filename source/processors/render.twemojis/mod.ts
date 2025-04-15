@@ -1,6 +1,6 @@
 // Imports
 import { Processor, state } from "@engine/components/processor.ts"
-import { parse } from "y/@twemoji/parser@14.1.0?pin=v133"
+import { parse } from "@twemoji/parser"
 
 /** Processor */
 export default class extends Processor {

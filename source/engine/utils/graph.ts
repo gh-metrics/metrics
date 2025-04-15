@@ -1,6 +1,7 @@
 // Imports
-import * as d3 from "y/d3@7.8.5?pin=v133"
-import { DOMParser } from "y/linkedom@0.16.4?pin=v133"
+// @ts-types="@types/d3"
+import * as d3 from "d3"
+import { DOMParser } from "linkedom"
 
 /** Graph */
 export class Graph {
@@ -96,12 +97,11 @@ export class Graph {
     if (options.labels) {
       ticks = ticks.tickFormat((_, i) => `${options.labels?.[i] ?? ""}`)
     }
-    // @ts-ignore: type inference is too deep
     svg.append("g")
       .attr("transform", `translate(${margin.left},${height - margin.bottom})`)
       .call(ticks)
-      .call((g: d3select) => g.select(".domain").attr("stroke", this.config.axis.color))
-      .call((g: d3select) => g.selectAll(".tick line").attr("stroke-opacity", this.config.axis.opacity))
+      .call((g) => g.select(".domain").attr("stroke", this.config.axis.color))
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", this.config.axis.opacity))
       .selectAll("text")
       .attr("transform", "translate(-5,5) rotate(-45)")
       .style("text-anchor", "end")
@@ -112,13 +112,12 @@ export class Graph {
     const y = d3.scaleLinear()
       .domain([max, min])
       .range([margin.left, height - margin.top - margin.bottom])
-    // @ts-ignore: type inference is too deep
     svg.append("g")
       .attr("transform", `translate(${margin.left},${margin.top})`)
       .call(d3.axisRight(y).ticks(Math.round(height / 50)).tickSize(width - margin.left - margin.right))
-      .call((g: d3select) => g.select(".domain").remove())
-      .call((g: d3select) => g.selectAll(".tick line").attr("stroke-opacity", this.config.axis.opacity).attr("stroke-dasharray", "2,2"))
-      .call((g: d3select) => g.selectAll(".tick text").attr("x", 0).attr("dy", -4))
+      .call((g) => g.select(".domain").remove())
+      .call((g) => g.selectAll(".tick line").attr("stroke-opacity", this.config.axis.opacity).attr("stroke-dasharray", "2,2"))
+      .call((g) => g.selectAll(".tick text").attr("x", 0).attr("dy", -4))
       .selectAll("text")
       .style("font-size", `${this.config.axis.fontsize}px`)
       .attr("fill", this.config.axis.color)
@@ -149,7 +148,7 @@ export class Graph {
         .selectAll("g")
         .data(Object.entries(datalist).map(([name, { color = this.color(name) }]) => ({ name, color })))
         .enter()
-        .each(function (this: d3arg, d: d3data, i: number) {
+        .each(function (this, d, i) {
           d3.select(this)
             .append("rect")
             .attr("x", 0)
@@ -207,8 +206,8 @@ export class Graph {
           .data(DT)
           .join("circle")
           .attr("transform", `translate(${margin.left},${margin.top})`)
-          .attr("cx", (d: d3data) => x(+d[0]))
-          .attr("cy", (d: d3data) => y(+d[1]))
+          .attr("cx", (d) => x(+d[0]))
+          .attr("cy", (d) => y(+d[1]))
           .attr("r", this.config.points.radius)
           .attr("fill", color)
       }
@@ -228,9 +227,9 @@ export class Graph {
           .data(DT)
           .join("text")
           .attr("transform", `translate(${margin.left},${margin.top - 4})`)
-          .attr("x", (d: d3data) => x(+d[0]))
-          .attr("y", (d: d3data) => y(+Number(d[1])))
-          .text((d: d3data) => d[2])
+          .attr("x", (d) => x(+d[0]))
+          .attr("y", (d) => y(+Number(d[1])))
+          .text((d) => d[2] as number)
           .attr("fill", this.config.axis.color)
       }
     }
@@ -253,8 +252,8 @@ export class Graph {
     const K = Object.keys(datalist)
     const V = Object.values(datalist)
     const I = d3.range(K.length).filter((i) => !Number.isNaN(V[i].data))
-    const D = d3.pie().padAngle(1 / radius).sort(null).value((i) => V[+i].data)(I)
-    const labels = d3.arc().innerRadius(radius / 2).outerRadius(radius / 2)
+    const D = d3.pie<void, number>().padAngle(1 / radius).sort(null).value((i) => V[+i].data)(I)
+    const labels = d3.arc<d3.PieArcDatum<number>>().innerRadius(radius / 2).outerRadius(radius / 2)
 
     // Graph areas
     svg.append("g")
@@ -265,10 +264,10 @@ export class Graph {
       .selectAll("path")
       .data(D)
       .join("path")
-      .attr("fill", (d: d3data) => V[+d.data].color ?? this.color(K[+d.data]))
+      .attr("fill", (d) => V[+d.data].color ?? this.color(K[+d.data]))
       .attr("d", d3.arc().innerRadius(0).outerRadius(radius) as d3arg)
       .append("title")
-      .text((d: d3data) => `${K[+d.data]}\n${V[+d.data].data}`)
+      .text((d) => `${K[+d.data]}\n${V[+d.data].data}`)
 
     // Graph texts
     svg.append("g")
@@ -282,17 +281,17 @@ export class Graph {
       .selectAll("text")
       .data(D)
       .join("text")
-      .attr("transform", (d: d3data) => `translate(${labels.centroid(d)})`)
+      .attr("transform", (d) => `translate(${labels.centroid(d)})`)
       .selectAll("tspan")
-      .data((d: d3data) => {
+      .data((d) => {
         const lines = `${K[+d.data]}\n${V[+d.data].data}`.split(/\n/)
         return (d.endAngle - d.startAngle) > 0.25 ? lines : lines.slice(0, 1)
       })
       .join("tspan")
       .attr("x", 0)
-      .attr("y", (_: unknown, i: number) => `${i * 1.1}em`)
-      .attr("font-weight", (_: unknown, i: number) => i ? null : "bold")
-      .text((d: d3data) => d)
+      .attr("y", (_, i) => `${i * 1.1}em`)
+      .attr("font-weight", (_, i) => i ? null : "bold")
+      .text((d) => d)
 
     // Legend
     if (options.legend) {
@@ -303,7 +302,7 @@ export class Graph {
         .selectAll("g")
         .data(Object.keys(datalist).map(([name]) => ({ name, value: datalist[name].data, color: datalist[name].color ?? this.color(name) })))
         .enter()
-        .each(function (this: d3arg, d: d3data, i: number) {
+        .each(function (this, d, i) {
           d3.select(this)
             .append("rect")
             .attr("x", 0)
@@ -406,9 +405,6 @@ type d3arg = any
 
 /** D3 data */
 type d3data = d3arg
-
-/** D3 selection */
-type d3select = ReturnType<typeof d3.select>
 
 /** Datalist */
 type datalist<T = number> = Record<PropertyKey, {

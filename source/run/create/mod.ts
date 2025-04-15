@@ -1,14 +1,15 @@
 // Imports
-import * as ejs from "y/ejs@3.1.9?pin=v133"
+import * as ejs from "ejs"
 import { read, write } from "@engine/utils/deno/io.ts"
 import * as dir from "@engine/paths.ts"
-import { createStreaming } from "x/dprint@0.2.0/mod.ts"
-import * as JSONC from "std/jsonc/parse.ts"
-import { Checkbox, Confirm, Input, Select } from "x/cliffy@v1.0.0-rc.3/prompt/mod.ts"
-import { existsSync } from "std/fs/exists.ts"
+import { createStreaming } from "@dprint/formatter"
+import * as JSONC from "@std/jsonc/parse"
+import { Checkbox, Confirm, Input, Select } from "@cliffy/prompt"
+import { existsSync } from "@std/fs"
 import { yaml } from "@run/compat/report.ts"
 import { Logger } from "@engine/utils/log.ts"
-import emojis from "https://unpkg.com/emoji.json@15.1.0/emoji.json" with { type: "json" }
+import emojis from "emoji.json/emoji.json" with { type: "json" }
+import type { Writer, WriterSync } from "@std/io"
 
 /** Base path for component templates */
 const base = `${dir.source}/run/create/templates`
@@ -17,7 +18,7 @@ const base = `${dir.source}/run/create/templates`
 const log = new Logger(import.meta)
 
 /** Create component command */
-export async function create(context: Partial<context> & Pick<context, "type">, { confirm = true, dryrun = false, writer = Deno.stdout } = {}) {
+export async function create(context: Partial<context> & Pick<context, "type">, { confirm = true, dryrun = false, writer = Deno.stdout as Writer & WriterSync } = {}) {
   const Type = `${context.type.charAt(0).toLocaleUpperCase()}${context.type.slice(1)}`
 
   // Dryrun
@@ -244,10 +245,10 @@ async function copy(source: string, destination: string, { template = false, con
 
   // Format typescript code
   if (destination.endsWith(".ts")) {
-    const fmt = await createStreaming(fetch("https://plugins.dprint.dev/typescript-0.88.4.wasm"))
+    const fmt = await createStreaming(fetch("https://plugins.dprint.dev/typescript-0.94.0.wasm"))
     const { fmt: config } = JSONC.parse(await read("deno.jsonc")) as { fmt: Record<PropertyKey, unknown> }
     fmt.setConfig(config, { deno: true, ...config, semiColons: "asi" })
-    content = fmt.formatText(destination, content)
+    content = fmt.formatText({ filePath: destination, fileText: content })
   }
 
   // Write file

@@ -1,6 +1,6 @@
 import { Formatter } from "@engine/utils/format.ts"
 import { expect, t } from "@engine/utils/testing.ts"
-import { DOMParser } from "x/deno_dom@v0.1.38/deno-dom-wasm.ts"
+import { DOMParser } from "@b-fuze/deno-dom"
 
 const format = new Formatter({ timezone: "Europe/Paris" })
 

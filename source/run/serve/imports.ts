@@ -1,12 +1,11 @@
 // Imports
-import { expandGlob } from "std/fs/expand_glob.ts"
-import { relative } from "std/path/relative.ts"
-import { fromFileUrl } from "std/path/from_file_url.ts"
+import { expandGlob } from "@std/fs"
+import { fromFileUrl, relative } from "@std/path"
 import { read, write } from "@engine/utils/deno/io.ts"
-import { dirname } from "std/path/dirname.ts"
+import { dirname } from "@std/path"
 import { Logger } from "@engine/utils/log.ts"
-import { bundle } from "x/emit@0.31.1/mod.ts"
-import * as JSONC from "std/jsonc/parse.ts"
+import { bundle } from "@deno/emit"
+import * as JSONC from "@std/jsonc/parse"
 
 if (import.meta.main) {
   const log = new Logger(import.meta)

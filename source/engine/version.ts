@@ -1,9 +1,8 @@
 // Imports
 import { read } from "@engine/utils/deno/io.ts"
-import * as JSONC from "std/jsonc/parse.ts"
-import { basename } from "std/path/basename.ts"
-import { cmp } from "std/semver/cmp.ts"
-import { parse } from "std/semver/parse.ts"
+import * as JSONC from "@std/jsonc/parse"
+import { basename } from "@std/path"
+import { compare, parse } from "@std/semver"
 
 /** Version (internal, exported for testing purposes only) */
 export const testing = {
@@ -39,7 +38,7 @@ export async function latest(url = "https://github.com/lowlighter/metrics/releas
         latest = `${latest}.0`
       }
     }
-    if (cmp(parse(latest), ">", parse(version.number))) {
+    if (compare(parse(latest), parse(version.number)) === 1) {
       return latest
     }
   } catch {

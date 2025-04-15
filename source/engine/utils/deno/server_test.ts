@@ -1,6 +1,6 @@
 import { dir, expect, MetricsError, t } from "@engine/utils/testing.ts"
 import { KV, listen } from "@engine/utils/deno/server.ts"
-import { delay } from "std/async/delay.ts"
+import { delay } from "@std/async"
 
 const uuid = crypto.randomUUID().slice(-12).toUpperCase()
 const test = {

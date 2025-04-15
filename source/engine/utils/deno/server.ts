@@ -3,7 +3,7 @@
 import { throws } from "@engine/utils/errors.ts"
 
 /** Port listener */
-export function listen(options: Deno.ServeOptions, handler: Deno.ServeHandler) {
+export function listen(options: Deno.ServeTcpOptions | (Deno.ServeTcpOptions & Deno.TlsCertifiedKeyPem), handler: Deno.ServeHandler) {
   return Deno.serve({ ...options, onListen: () => void null }, handler)
 }
 

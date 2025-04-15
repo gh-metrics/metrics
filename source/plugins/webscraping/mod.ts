@@ -2,9 +2,9 @@
 /// <reference lib="dom" />
 import { is, parse, Plugin } from "@engine/components/plugin.ts"
 import { Browser } from "@engine/utils/browser.ts"
-import { delay } from "std/async/delay.ts"
+import { delay } from "@std/async"
 import { resize } from "x/deno_image@0.0.4/mod.ts"
-import { encodeBase64 } from "std/encoding/base64.ts"
+import { encodeBase64 } from "@std/encoding"
 
 /** Plugin */
 export default class extends Plugin {
@@ -67,7 +67,10 @@ export default class extends Plugin {
       const result = { content: "", title: await page.evaluate("dom://title.ts") }
       switch (mode) {
         case "image": {
-          const { x, y, width, height } = await page.evaluate("dom://image.ts", { args: [selector] })
+          const { x, y, width, height } = await page.evaluate<{ x: number; y: number; width: number; height: number }, [string]>(
+            "dom://image.ts",
+            { args: [selector] },
+          )
           if (!background) {
             await page.setTransparentBackground()
           }

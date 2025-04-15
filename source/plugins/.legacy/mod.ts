@@ -4,7 +4,7 @@ import { Logger } from "@engine/utils/log.ts"
 import { command } from "@engine/utils/deno/command.ts"
 import { throws } from "@engine/utils/errors.ts"
 import { read } from "@engine/utils/deno/io.ts"
-import { encodeBase64 } from "std/encoding/base64.ts"
+import { encodeBase64 } from "@std/encoding"
 
 /** v3.x official templates */
 export const templates = ["classic", "repository", "terminal", "markdown"]
@@ -96,7 +96,7 @@ export default class extends Plugin {
         this.log.warn(`ignoring ${key}: cannot be overriden in this context`)
         continue
       }
-      if ((key in context.inherited) || (context.editable.some((regex) => regex.test(key)))) {
+      if (key in context.inherited || context.editable.some((regex) => regex.test(key))) {
         this.log.trace(`registering: ${key}=${value}`)
         context.inputs[key] = value
         continue

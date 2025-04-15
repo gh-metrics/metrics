@@ -1,6 +1,6 @@
 //Imports
 import { throws } from "@engine/utils/errors.ts"
-import { globToRegExp } from "std/path/glob.ts"
+import { globToRegExp } from "@std/path/posix"
 
 /** Regexs (nb: don't be overly restrictive as GitHub will perform the validation anyways)*/
 const regex = {
@@ -61,7 +61,7 @@ export function matchPatterns(patterns: string | string[], value: unknown) {
   let match = false
   for (const pattern of [patterns].flat(Infinity) as string[]) {
     const negate = pattern.startsWith("!")
-    const regex = globToRegExp(pattern.replace(/^!/, ""), { extended: true, globstar: true, caseInsensitive: true, os: "linux" })
+    const regex = globToRegExp(pattern.replace(/^!/, ""), { extended: true, globstar: true, caseInsensitive: true })
     if (regex.test(`${value}`)) {
       match = !negate
     }

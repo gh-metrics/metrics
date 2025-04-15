@@ -1,6 +1,7 @@
 // Imports
 import { Processor, state } from "@engine/components/processor.ts"
 // @ts-ignore: json import
+// deno-lint-ignore no-external-import
 import imported from "https://api.github.com/emojis" with { type: "json" }
 const gemojis = imported as Record<PropertyKey, string>
 

@@ -1,11 +1,11 @@
 // Imports
 import { is, parse, Processor, state } from "@engine/components/processor.ts"
-import { extension } from "std/media_types/extension.ts"
-import { decodeBase64, encodeBase64 } from "std/encoding/base64.ts"
+import { extension } from "@std/media-types"
+import { decodeBase64, encodeBase64 } from "@std/encoding/base64"
 import { parseHandle } from "@engine/utils/github.ts"
-import github from "y/@actions/github@5.1.1?pin=v133"
+import github from "@actions/github"
 import { throws } from "@engine/utils/errors.ts"
-import { delay } from "std/async/delay.ts"
+import { delay } from "@std/async"
 
 /** Processor */
 export default class _ extends Processor {

@@ -1,6 +1,6 @@
 // Imports
-import { bgWhite, black, brightGreen, brightRed, brightYellow, cyan, gray, stripAnsiCode, white, yellow } from "std/fmt/colors.ts"
-import * as YAML from "std/yaml/stringify.ts"
+import { bgWhite, black, brightGreen, brightRed, brightYellow, cyan, gray, stripAnsiCode, white, yellow } from "@std/fmt/colors"
+import * as YAML from "@std/yaml/stringify"
 import { markdown } from "@engine/utils/markdown.ts"
 import { Secret } from "@engine/utils/secret.ts"
 

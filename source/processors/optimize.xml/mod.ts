@@ -1,6 +1,6 @@
 // Imports
 import { Processor, state } from "@engine/components/processor.ts"
-import xmlFormat from "y/xml-formatter@3.5.0?pin=v133"
+import xmlFormat from "xml-formatter"
 
 /** Processor */
 export default class extends Processor {
@@ -22,6 +22,7 @@ export default class extends Processor {
   /** Action */
   protected async action(state: state) {
     const result = await this.piped(state)
+    // @ts-expect-error -- chrisbottin/xml-formatter#72
     result.content = xmlFormat(result.content, { indentation: "  ", collapseContent: true, ignoredPaths: [] })
   }
 }

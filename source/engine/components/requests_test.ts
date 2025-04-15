@@ -1,7 +1,7 @@
 import { Requests } from "@engine/components/requests.ts"
-import { dir, expect, Status, t, test } from "@engine/utils/testing.ts"
+import { dir, expect, STATUS_CODE, t, test } from "@engine/utils/testing.ts"
 import { Secret } from "@engine/utils/secret.ts"
-import { dirname } from "std/path/dirname.ts"
+import { dirname } from "@std/path"
 
 const options = { logs: "none", mock: true, api: "https://api.github.com", timezone: "Europe/Paris", token: new Secret(null) } as test
 const requests = new Requests(import.meta, options)
@@ -15,7 +15,7 @@ Deno.test(t(import.meta, "`.rest()` handles paginated queries"), { permissions: 
 })
 
 Deno.test(t(import.meta, "`.rest()` can mock queries when present"), { permissions: { read: [dir.source] } }, async () => {
-  await expect(requests.rest(requests.api.meta.getOctocat)).to.be.eventually.containSubset({ status: Status.OK }).and.to.include.keys("data")
+  await expect(requests.rest(requests.api.meta.getOctocat)).to.be.eventually.containSubset({ status: STATUS_CODE.OK }).and.to.include.keys("data")
 })
 
 Deno.test(t(import.meta, "`.rest()` fallbacks on net when mock is invalid"), { permissions: "none" }, async () => {

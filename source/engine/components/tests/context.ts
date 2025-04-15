@@ -1,6 +1,6 @@
 //Imports
 import { dir, test } from "@engine/utils/testing.ts"
-import { deepMerge } from "std/collections/deep_merge.ts"
+import { deepMerge } from "@std/collections"
 import { Browser } from "@engine/utils/browser.ts"
 import { Logger } from "@engine/utils/log.ts"
 import { Component } from "@engine/components/component.ts"
@@ -42,7 +42,9 @@ export function setup(_: unknown) {
 }
 
 /** Compute required permissions for components testing */
-export async function getPermissions(test: Awaited<ReturnType<typeof Component["prototype"]["tests"]>>[0]) {
+export async function getPermissions(
+  test: Awaited<ReturnType<(typeof Component)["prototype"]["tests"]>>[0],
+) {
   // Aggregate permissions from all plugins and processors
   const requested = new Set<string>()
   const plugins = new Set<string>()
@@ -59,15 +61,26 @@ export async function getPermissions(test: Awaited<ReturnType<typeof Component["
       }
     }
   }
-  await Promise.all([...plugins].map((id) => Plugin.load({ id }).then((plugin) => plugin.permissions.forEach((permission) => requested.add(permission)))))
-  await Promise.all([...processors].map((id) => Processor.load({ id }).then((processor) => processor.permissions.forEach((permission) => requested.add(permission)))))
+  await Promise.all(
+    [...plugins].map((id) => Plugin.load({ id }).then((plugin) => plugin.permissions.forEach((permission) => requested.add(permission)))),
+  )
+  await Promise.all(
+    [...processors].map((id) => Processor.load({ id }).then((processor) => processor.permissions.forEach((permission) => requested.add(permission)))),
+  )
 
   // Compute permissions
   const permissions = {
     read: [dir.source, dir.cache],
-    env: [...requested].filter((permission) => permission.startsWith("env:")).map((permission) => permission.replace("env:", "")),
-    net: [...requested].filter((permission) => permission.startsWith("net:")).map((permission) => permission.replace("net:", "")),
-    run: [...requested].filter((permission) => permission.startsWith("run:")).map((permission) => permission.replace("run:", "")).filter((bin) => !["chrome"].includes(bin)),
+    env: [...requested]
+      .filter((permission) => permission.startsWith("env:"))
+      .map((permission) => permission.replace("env:", "")),
+    net: [...requested]
+      .filter((permission) => permission.startsWith("net:"))
+      .map((permission) => permission.replace("net:", "")),
+    run: [...requested]
+      .filter((permission) => permission.startsWith("run:"))
+      .map((permission) => permission.replace("run:", ""))
+      .filter((bin) => !["chrome"].includes(bin)),
   } as test
   if (requested.has("net:all")) {
     permissions.net = "inherit"
@@ -88,10 +101,16 @@ export async function getPermissions(test: Awaited<ReturnType<typeof Component["
     )
   }
   if (requested.has("write:tmp")) {
-    Object.assign(permissions, deepMerge(permissions, { write: [env.get("TMP")] }))
+    Object.assign(
+      permissions,
+      deepMerge(permissions, { write: [env.get("TMP")] }),
+    )
   }
   if (requested.has("read:tmp")) {
-    Object.assign(permissions, deepMerge(permissions, { read: [env.get("TMP")] }))
+    Object.assign(
+      permissions,
+      deepMerge(permissions, { read: [env.get("TMP")] }),
+    )
   }
   if (requested.has("write:all")) {
     Object.assign(permissions, deepMerge(permissions, { write: [dir.test] }))

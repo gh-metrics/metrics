@@ -1,11 +1,11 @@
 // Imports
 import { is, parse, Processor, state } from "@engine/components/processor.ts"
-import { DOMParser } from "x/deno_dom@v0.1.38/deno-dom-wasm.ts"
+import { DOMParser } from "@b-fuze/deno-dom"
 import { Format } from "@engine/utils/format.ts"
 import { resize } from "x/deno_image@0.0.4/mod.ts"
-import { contentType } from "std/media_types/mod.ts"
-import { extname } from "std/path/extname.ts"
-import { encodeBase64 } from "std/encoding/base64.ts"
+import { contentType } from "@std/media-types"
+import { extname } from "@std/path"
+import { encodeBase64 } from "@std/encoding"
 
 /** Fallback */
 const fallback = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOcOnfpfwAGfgLYttYINwAAAABJRU5ErkJggg=="

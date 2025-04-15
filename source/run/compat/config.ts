@@ -1,6 +1,6 @@
 // Imports
 import { Report, yaml } from "@run/compat/report.ts"
-import { deepMerge } from "std/collections/deep_merge.ts"
+import { deepMerge } from "@std/collections"
 
 /** Compatibility config */
 export class Config {

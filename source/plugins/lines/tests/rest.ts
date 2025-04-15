@@ -1,16 +1,16 @@
-import { faker, is, log, mock, Status } from "@engine/utils/testing.ts"
+import { faker, is, log, mock, STATUS_CODE, StatusCode } from "@engine/utils/testing.ts"
 
 let available = false
 let timeout = NaN
 
 export default {
   "/repos/{owner}/{repo}/stats/contributors": mock({ owner: is.string(), repo: is.string() }, ({ owner, repo }) => {
-    let status = Status.OK
+    let status: StatusCode = STATUS_CODE.OK
     if (repo === "empty") {
-      status = Status.NoContent
+      status = STATUS_CODE.NoContent
     }
     if (repo === "retry") {
-      status = available ? Status.OK : Status.Accepted
+      status = available ? STATUS_CODE.OK : STATUS_CODE.Accepted
       available = true
       clearTimeout(timeout)
       timeout = setTimeout(() => {

@@ -914,7 +914,7 @@ export async function compat(
       // Pull request
       case inputs.output_action.startsWith("pull-request"): {
         let github = {} as compat
-        await import("y/@actions/github@6.0.0?pin=v133").then((imported) => github = imported.default).catch(() => null)
+        await import("@actions/github").then((imported) => github = imported.default).catch(() => null)
         snippet = {
           config: {
             plugins: [{

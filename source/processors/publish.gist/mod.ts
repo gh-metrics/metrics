@@ -1,7 +1,7 @@
 // Imports
 import { is, parse, Processor, state } from "@engine/components/processor.ts"
-import { extension } from "std/media_types/extension.ts"
-import { decodeBase64 } from "std/encoding/base64.ts"
+import { extension } from "@std/media-types"
+import { decodeBase64 } from "@std/encoding"
 
 /** Processor */
 export default class extends Processor {

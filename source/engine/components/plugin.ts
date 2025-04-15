@@ -2,13 +2,13 @@
 import { Component, is, parse, state } from "@engine/components/component.ts"
 import { list, read } from "@engine/utils/deno/io.ts"
 import { plugin as schema, plugin_nameless } from "@engine/config.ts"
-import * as ejs from "y/ejs@3.1.9?pin=v133"
+import * as ejs from "ejs"
 import { Requests } from "@engine/components/requests.ts"
 import { Formatter } from "@engine/utils/format.ts"
-import { basename } from "std/path/basename.ts"
+import { basename } from "@std/path"
 import { Processor } from "@engine/components/processor.ts"
 import { throws } from "@engine/utils/errors.ts"
-import { RequestInterface } from "y/@octokit/types@11.1.0?pin=v133"
+import { RequestInterface } from "@octokit/types"
 
 /** Plugin */
 export abstract class Plugin extends Component {
@@ -59,7 +59,7 @@ export abstract class Plugin extends Component {
     const name = this.context.template!
     const path = name.startsWith("metrics://") ? new URL(name) : new URL(`templates/${name}.ejs`, this.meta.url)
     const template = await read(path)
-    const { data: args = {} } = await this.inputs.safeParseAsync(this.context.args) as { data?: Record<PropertyKey, unknown> }
+    const { data: args = {} } = (await this.inputs.safeParseAsync(this.context.args)) as { data?: Record<PropertyKey, unknown> }
     this.log.debug(`rendering template: ${name}`)
     return ejs.render(
       template,
@@ -80,7 +80,7 @@ export abstract class Plugin extends Component {
 
   /** Is supported ? */
   protected supported() {
-    if ((this.supports.length) && (!this.supports.includes(this.context.entity))) {
+    if (this.supports.length && !this.supports.includes(this.context.entity)) {
       throws(`${this.id} not supported for ${this.context.entity}`, { unrecoverable: true })
     }
   }
@@ -117,12 +117,16 @@ export abstract class Plugin extends Component {
 
   /** List templates */
   async templates() {
-    return [...await list(`${(this.constructor as typeof Plugin).path}/${this.id}/templates/*.ejs`)].map((ejs) => basename(ejs).replace(/\.ejs$/, ""))
+    return [
+      ...(await list(
+        `${(this.constructor as typeof Plugin).path}/${this.id}/templates/*.ejs`,
+      )),
+    ].map((ejs) => basename(ejs).replace(/\.ejs$/, ""))
   }
 
   /** List plugins */
   static async list() {
-    return [...await list(`${this.path}/**/mod.ts`)].map((mod) => mod.replace(/\/mod\.ts$/, ""))
+    return [...(await list(`${this.path}/**/mod.ts`))].map((mod) => mod.replace(/\/mod\.ts$/, ""))
   }
 
   /** Run component statically */
@@ -134,7 +138,7 @@ export abstract class Plugin extends Component {
     if (!context.id) {
       context.id = Plugin.nameless
     }
-    return await super.run({ state, context: context as typeof context & { id: string } }) as unknown as ReturnType<Plugin["run"]>
+    return (await super.run({ state, context: context as typeof context & { id: string } })) as unknown as ReturnType<Plugin["run"]>
   }
 
   /** Load component statically */
@@ -142,7 +146,7 @@ export abstract class Plugin extends Component {
     if (!context.id) {
       context.id = Plugin.nameless
     }
-    return await super.load(context) as Plugin
+    return (await super.load(context)) as Plugin
   }
 
   /** Plugins root path */

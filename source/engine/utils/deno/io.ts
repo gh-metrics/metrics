@@ -1,20 +1,19 @@
 //Imports
-import { ensureDir } from "std/fs/ensure_dir.ts"
-import { expandGlob, expandGlobSync } from "std/fs/expand_glob.ts"
+import { ensureDir, expandGlob, expandGlobSync } from "@std/fs"
 import { throws } from "@engine/utils/errors.ts"
-import { dirname } from "std/path/dirname.ts"
+import { dirname } from "@std/path"
 import * as dir from "@engine/paths.ts"
 
 /** Read file */
 export function read(path: string | URL, options: { sync: true }): string
 export function read(path: string | URL, options?: { sync?: false }): Promise<string>
 export function read(path: string | URL, { sync = false } = {}) {
-  if ((typeof path === "string") && (path.startsWith("metrics://"))) {
+  if (typeof path === "string" && path.startsWith("metrics://")) {
     path = path.replace("metrics:/", dir.source)
-  } else if ((path instanceof URL) && (path.protocol === "metrics:")) {
+  } else if (path instanceof URL && path.protocol === "metrics:") {
     path = path.href.replace("metrics:/", dir.source)
   }
-  if ((typeof path === "string") && (path.startsWith("data:"))) {
+  if (typeof path === "string" && path.startsWith("data:")) {
     if (sync) {
       throws("Unsupported action: synchronous read")
     }

@@ -1,7 +1,7 @@
 // Imports
-import { Octokit } from "y/@octokit/rest@20.0.1?pin=v133"
-import { paginateGraphql } from "y/@octokit/plugin-paginate-graphql@4.0.0?pin=v133"
-import type { RequestInterface } from "y/@octokit/types@11.1.0?pin=v133"
+import { Octokit } from "@octokit/rest"
+import { paginateGraphQL } from "@octokit/plugin-paginate-graphql"
+import type { RequestInterface } from "@octokit/types"
 import { Internal, is } from "@engine/components/internal.ts"
 import { read } from "@engine/utils/deno/io.ts"
 import type { requests as schema } from "@engine/config.ts"
@@ -20,7 +20,7 @@ export class Requests extends Internal {
   constructor(meta: typeof Requests["meta"], context: Requests["context"]) {
     super(context)
     Object.assign(this, { meta })
-    this.octokit = new (Octokit.plugin(paginateGraphql))({
+    this.octokit = new (Octokit.plugin(paginateGraphQL))({
       userAgent: `metrics/${version}`,
       auth: this.context.token?.read(),
       timeZone: this.context.timezone,
