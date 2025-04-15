@@ -31,7 +31,7 @@ export abstract class Component extends Internal {
   /** Inputs */
   abstract readonly inputs: Validator
 
-  /** Ouputs */
+  /** Outputs */
   abstract readonly outputs: Validator
 
   /** Scopes */

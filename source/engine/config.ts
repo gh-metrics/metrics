@@ -260,7 +260,7 @@ function merge(...objects: unknown[]) {
   return result
 }
 
-/** Syntaxic sugar for components that allows the use of one extra dictionnary as identifier and args */
+/** Syntaxic sugar for components that allows the use of one extra dictionary as identifier and args */
 export function sugar(value: unknown, _keys: "processor" | "plugin") {
   const keys = Array.isArray(_keys) ? _keys : { processor: _processor_keys, plugin: _plugin_keys }[_keys]
   if ((!value) || (typeof value !== "object") || ("id" in value)) {

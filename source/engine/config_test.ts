@@ -62,7 +62,7 @@ Deno.test(t(import.meta, "`parse(config)` honors default preset"), { permissions
       },
     },
   }
-  Deno.test(t(import.meta, "`parse(config)` honors named presets with default preset overriden by named preset"), { permissions: "none" }, async () => {
+  Deno.test(t(import.meta, "`parse(config)` honors named presets with default preset overridden by named preset"), { permissions: "none" }, async () => {
     await expect(parse(config, { presets, plugins: [{ id: "foo", preset: "A" }] })).to.be.fulfilled.and.eventually.containSubset({
       plugins: [
         {
@@ -84,7 +84,7 @@ Deno.test(t(import.meta, "`parse(config)` honors default preset"), { permissions
       ],
     })
   })
-  Deno.test(t(import.meta, "`parse(config)` honors named presets with named preset overriden by another named preset"), { permissions: "none" }, async () => {
+  Deno.test(t(import.meta, "`parse(config)` honors named presets with named preset overridden by another named preset"), { permissions: "none" }, async () => {
     await expect(parse(config, { presets, plugins: [{ id: "foo", preset: "A", processors: [{ id: "bar", preset: "B" }] }] })).to.be.fulfilled.and.eventually.containSubset({
       plugins: [
         {

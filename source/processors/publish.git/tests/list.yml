@@ -28,7 +28,7 @@
             commit: {}
             filepath: file-unchanged
 
-- name: creates branch when comitting on a branch that does not exist yet
+- name: creates branch when committing on a branch that does not exist yet
   plugins:
     - processors:
         - inject.content:
@@ -39,7 +39,7 @@
               message: test
               to: branch-unexisting
 
-- name: errors when comitting on a branch that does not exist yet but base branch does not exist either
+- name: errors when committing on a branch that does not exist yet but base branch does not exist either
   plugins:
     - processors:
         - inject.content:
