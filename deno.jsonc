@@ -112,7 +112,7 @@
         "deno task make get:browser &&",
         "export CHROME_BIN=$(deno task make get:browser) &&",
         "export CACHE_DIRECTORY=$(deno task make get:cache) &&",
-        "deno run source/run/mod.ts $<*>"
+        "deno run --allow-import source/run/mod.ts $<*>"
       ],
       "deno": {
         "run": {
