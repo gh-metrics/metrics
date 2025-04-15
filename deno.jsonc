@@ -124,21 +124,17 @@
               "127.0.0.1",
               "localhost",
               // Packages
-              "esm.sh",
-              "deno.land/x",
-              "deno.land/std",
-              "plugins.dprint.dev/typescript-0.94.0.wasm",
-              "raw.githubusercontent.com/github-linguist/linguist/master/lib/linguist/languages.yml",
+              "deno.land",
+              "plugins.dprint.dev",
+              "raw.githubusercontent.com",
               // GitHub API
               "api.github.com",
               // Github OAuth
-              "github.com/login/oauth",
+              "github.com",
               // plugins/rss
-              "news.ycombinator.com/rss",
-              // processors/render.gemojis
-              "api.github.com/emojis",
+              "news.ycombinator.com",
               // processors/render.twemojis
-              "cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets"
+              "cdn.jsdelivr.net"
             ],
             "run": [
               "docker",
@@ -146,14 +142,12 @@
             ],
             "read": [
               "$PWD",
-              "$TMP",
               "$CACHE_DIRECTORY",
               ".cache",
               "deno.jsonc",
               "metrics.config.yml"
             ],
             "write": [
-              "$TMP",
               "$HOME/.config/chromium/SingletonLock"
             ],
             "env": true
@@ -186,15 +180,17 @@
               "127.0.0.1",
               "localhost",
               // Packages
-              "esm.sh",
-              "deno.land/x",
-              "deno.land/std",
-              "plugins.dprint.dev/typescript-0.94.0.wasm",
-              "raw.githubusercontent.com/github-linguist/linguist/master/lib/linguist/languages.yml",
-              // processors/render.gemojis
-              "api.github.com/emojis",
+              "deno.land",
+              "plugins.dprint.dev",
+              "raw.githubusercontent.com",
+              // GitHub API
+              "api.github.com",
+              // Github OAuth
+              "github.com",
+              // plugins/rss
+              "news.ycombinator.com",
               // processors/render.twemojis
-              "cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets",
+              "cdn.jsdelivr.net",
               // Testing
               "example.com",
               "loremflickr.com",
@@ -209,13 +205,11 @@
             ],
             "read": [
               "$PWD",
-              "$TMP",
               ".cache"
             ],
             "write": [
               ".test",
               ".cache",
-              "$TMP",
               "$HOME/.config/chromium/SingletonLock"
             ],
             "env": true

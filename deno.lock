@@ -2300,6 +2300,7 @@
   },
   "remote": {
     "https://api.github.com/emojis": "b38dd9954a42f2863e2b0cc82058575187f6a7b5a1c0db19ed984fbc50d0a480",
+    "https://deno.land/x/cache_dir@0.2.0/mod.ts": "89ac1bc4d8f1c52fde192e0470d0597fa156ecf2b53d7fe162a11fd365c79920",
     "https://deno.land/x/deno_image@0.0.4/deps.ts": "ab0d77ff6a832f98fd47ca3eccc53c277c188768b9526743dbce76e8944ddceb",
     "https://deno.land/x/deno_image@0.0.4/index.ts": "53a1ad6d0d1bfc158b2f4d774077e691d7384540bc93db74254ad32106982b7f",
     "https://deno.land/x/deno_image@0.0.4/lib/decoders/fast-png/PNGDecoder.ts": "9ab11e0e4081ae9beec33bc9fff2343d0cacd9f97e7493f8ecaa836b3855b4e6",
