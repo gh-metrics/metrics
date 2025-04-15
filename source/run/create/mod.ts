@@ -164,7 +164,7 @@ export async function create(context: Partial<context> & Pick<context, "type">, 
       { name: "Use fetch API", value: "fetch" },
       { name: "Use web scraping", value: "webscraping" },
       Checkbox.separator("──── Other features ────".padEnd(36, "─")),
-      { name: "Add additional documentation directory", value: "docs"}
+      { name: "Add additional documentation directory", value: "docs" },
     ],
   })
   context.use = Object.fromEntries(use.map((key: string) => [key, true]))
@@ -272,6 +272,6 @@ type context = {
     rest?: boolean
     fetch?: boolean
     webscraping?: boolean
-    docs?:boolean
+    docs?: boolean
   }
 }

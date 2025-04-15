@@ -103,18 +103,22 @@ export function yaml(content: Record<PropertyKey, unknown>, { inline = false, co
     lines.push(line)
   }
   const result = lines.join("\n")
-  if (!colors)
+  if (!colors) {
     return stripAnsiCode(result)
+  }
   return result
 }
 
 /** Copy record while cleaning out secrets */
-function copy(value:unknown):unknown {
-  if (value instanceof Secret)
+function copy(value: unknown): unknown {
+  if (value instanceof Secret) {
     return "${{ github.token }}"
-  if (Array.isArray(value))
+  }
+  if (Array.isArray(value)) {
     return value.map(copy)
-  if ((value)&&(typeof value === "object"))
+  }
+  if (value && (typeof value === "object")) {
     return Object.fromEntries(Object.entries(value).map(([key, value]) => [key, copy(value)]))
+  }
   return value
 }

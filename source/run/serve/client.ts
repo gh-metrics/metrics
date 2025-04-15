@@ -43,8 +43,8 @@ class App {
     log.info("fetching data")
     Object.assign(this.data, await fetch("/metadata").then((response) => response.json()))
     await Promise.all([
-      fetch("/me").then(async response => this.data.user = await response.json()),
-      fetch("/ratelimit").then(async response => this.data.ratelimit = await response.json()),
+      fetch("/me").then(async (response) => this.data.user = await response.json()),
+      fetch("/ratelimit").then(async (response) => this.data.ratelimit = await response.json()),
     ])
     this.data.dev = dev
     // deno-lint-ignore no-explicit-any
@@ -69,8 +69,8 @@ class App {
   }
 
   /** Render and highlight YAML */
-  yaml(content:string|Record<PropertyKey, unknown>) {
-    return highlight("yaml", typeof content === "string" ? content : yaml(content, {colors:false})).code
+  yaml(content: string | Record<PropertyKey, unknown>) {
+    return highlight("yaml", typeof content === "string" ? content : yaml(content, { colors: false })).code
   }
 
   /** Format key path into human-readable format */
@@ -82,37 +82,48 @@ class App {
   // deno-lint-ignore no-explicit-any
   getPlaceholder(input: any) {
     const override = /\((?:(?:e\.g\.)|(?:placeholder:)) `([\s\S]+)`\)/
-    if (override.test(input.description))
+    if (override.test(input.description)) {
       return input.description.match(override)?.[1] ?? ""
+    }
     return `${this.getDefaultValue(input)}`
   }
 
   /** Return default value for given input */
   // deno-lint-ignore no-explicit-any
   getDefaultValue(input: any) {
-    if (input.type === "null")
+    if (input.type === "null") {
       return null
-    if ((input.type === "string")&&(input.const))
+    }
+    if ((input.type === "string") && (input.const)) {
       return input.const
-    if ("default" in input)
+    }
+    if ("default" in input) {
       return input.default
-    if ((input.type === "number")||(input.type === "integer")) {
-      if ("minimum" in input)
+    }
+    if ((input.type === "number") || (input.type === "integer")) {
+      if ("minimum" in input) {
         return input.minimum
-      if ("exclusiveMinimum" in input)
+      }
+      if ("exclusiveMinimum" in input) {
         return input.exclusiveMinimum + 1
-      if ("maximum" in input)
+      }
+      if ("maximum" in input) {
         return input.maximum
-      if ("exclusiveMaximum" in input)
+      }
+      if ("exclusiveMaximum" in input) {
         return input.exclusiveMaximum - 1
+      }
       return input.minimum ?? input.maximum ?? 0
     }
-    if (input.type === "boolean")
+    if (input.type === "boolean") {
       return false
-    if (input.type === "string")
+    }
+    if (input.type === "string") {
       return ""
-    if (input.type === "object")
+    }
+    if (input.type === "object") {
       return {}
+    }
   }
 
   /** Find index of default value for given input */
@@ -121,13 +132,15 @@ class App {
     const value = this.getDefaultValue(inputs)
     for (const input of inputs.anyOf) {
       if (value === null) {
-        if (input.type === "null")
+        if (input.type === "null") {
           return inputs.anyOf.indexOf(input)
+        }
         continue
       }
       // deno-lint-ignore valid-typeof
-      if (input.type === typeof value)
+      if (input.type === typeof value) {
         return inputs.anyOf.indexOf(input)
+      }
     }
     return -1
   }
@@ -159,7 +172,7 @@ class App {
   }
 
   /** Update compat config (internal) */
-  private async _updateCompatConfig(current: { status: string; input:string; config: Record<PropertyKey, unknown>|null; messages: string; }) {
+  private async _updateCompatConfig(current: { status: string; input: string; config: Record<PropertyKey, unknown> | null; messages: string }) {
     if (!current.input) {
       current.status = "empty"
       current.messages = ""
@@ -177,7 +190,7 @@ class App {
       current.status = "invalid"
       return
     }
-    const {content, report} = await compat(value, { log: null, use: { requests: false } })
+    const { content, report } = await compat(value, { log: null, use: { requests: false } })
     current.status = "valid"
     current.messages = await report.html()
     current.config = content
@@ -185,8 +198,6 @@ class App {
 
   /** Update compat config */
   readonly updateCompatConfig = debounce((options: Parameters<typeof this._updateCompatConfig>[0]) => this._updateCompatConfig(options), 1500)
-
-
 
   /** Render plugin */
   // deno-lint-ignore no-unused-vars
@@ -204,7 +215,6 @@ class App {
     }
     return url*/
   }
-
 }
 
 // Initialize app

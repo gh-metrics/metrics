@@ -190,7 +190,7 @@ export async function compat(
   }
 
   // Markdown
-  if ((inputs.markdown)&&(inputs.config_output.includes("markdown"))) {
+  if ((inputs.markdown) && (inputs.config_output.includes("markdown"))) {
     // TODO(#1574)
     // markdown
     // markdown_cache
