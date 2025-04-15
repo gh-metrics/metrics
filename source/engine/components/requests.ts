@@ -2,7 +2,7 @@
 import { Octokit } from "@octokit/rest"
 import { paginateGraphQL } from "@octokit/plugin-paginate-graphql"
 import type { RequestInterface } from "@octokit/types"
-import { Internal, is } from "@engine/components/internal.ts"
+import { Internal, type is } from "@engine/components/internal.ts"
 import { read } from "@engine/utils/deno/io.ts"
 import type { requests as schema } from "@engine/config.ts"
 import { version } from "@engine/version.ts"

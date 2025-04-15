@@ -1,6 +1,6 @@
 //Imports
 import { Logger } from "@engine/utils/log.ts"
-import { Browser as AstralBrowser, connect, type EvaluateFunction, type EvaluateOptions, getBinary, launch } from "@astral/astral"
+import { type Browser as AstralBrowser, connect, type EvaluateFunction, type EvaluateOptions, getBinary, launch } from "@astral/astral"
 import { env } from "@engine/utils/deno/env.ts"
 import * as dir from "@engine/paths.ts"
 import { throws } from "@engine/utils/errors.ts"

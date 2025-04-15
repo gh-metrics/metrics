@@ -1,5 +1,5 @@
-import { expect, t, test } from "@engine/utils/testing.ts"
-import { channel, Logger } from "@engine/utils/log.ts"
+import { expect, t, type test } from "@engine/utils/testing.ts"
+import { type channel, Logger } from "@engine/utils/log.ts"
 
 export class DevNull {
   readonly messages = [] as unknown[]

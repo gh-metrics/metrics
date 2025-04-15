@@ -1,7 +1,7 @@
 //Imports
 import { server as schema, webrequest } from "@engine/config.ts"
 import { process } from "@engine/process.ts"
-import { is, parse } from "@engine/utils/validation.ts"
+import { type is, parse } from "@engine/utils/validation.ts"
 import { read } from "@engine/utils/deno/io.ts"
 import { KV, listen } from "@engine/utils/deno/server.ts"
 import { env } from "@engine/utils/deno/env.ts"

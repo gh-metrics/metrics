@@ -1,5 +1,5 @@
 // Imports
-import { Processor, state } from "@engine/components/processor.ts"
+import { Processor, type state } from "@engine/components/processor.ts"
 import { PurgeCSS } from "purgecss"
 import { DOMParser } from "@b-fuze/deno-dom"
 import { Format } from "@engine/utils/format.ts"

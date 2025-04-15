@@ -1,5 +1,5 @@
 import { Requests } from "@engine/components/requests.ts"
-import { dir, expect, STATUS_CODE, t, test } from "@engine/utils/testing.ts"
+import { dir, expect, STATUS_CODE, t, type test } from "@engine/utils/testing.ts"
 import { Secret } from "@engine/utils/secret.ts"
 import { dirname } from "@std/path"
 

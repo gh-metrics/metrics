@@ -1,5 +1,5 @@
 import { Internal } from "@engine/components/internal.ts"
-import { expect, t, test } from "@engine/utils/testing.ts"
+import { expect, t, type test } from "@engine/utils/testing.ts"
 
 class InternalTest extends Internal {
   protected static readonly meta = import.meta

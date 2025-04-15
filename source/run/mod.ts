@@ -1,5 +1,5 @@
 //Imports
-import { Internal, is } from "@engine/components/internal.ts"
+import { Internal, type is } from "@engine/components/internal.ts"
 import { cli as schema, load } from "@engine/config.ts"
 import github from "@actions/github"
 import { latest, version } from "@engine/version.ts"

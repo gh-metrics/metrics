@@ -1,6 +1,6 @@
 // Imports
 /// <reference lib="dom" />
-import { is, parse, Processor, state } from "@engine/components/processor.ts"
+import { is, parse, Processor, type state } from "@engine/components/processor.ts"
 import { Browser } from "@engine/utils/browser.ts"
 import { Format } from "@engine/utils/format.ts"
 

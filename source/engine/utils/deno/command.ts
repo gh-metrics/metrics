@@ -1,6 +1,6 @@
 // Imports
 import { parseArgsStringToArgv as argv } from "string-argv"
-import { Logger } from "@engine/utils/log.ts"
+import type { Logger } from "@engine/utils/log.ts"
 import { TextDelimiterStream } from "@std/streams"
 
 /** Execute command */

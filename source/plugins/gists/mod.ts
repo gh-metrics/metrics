@@ -1,5 +1,5 @@
 // Imports
-import { is, parse, Plugin, state } from "@engine/components/plugin.ts"
+import { is, parse, Plugin, type state } from "@engine/components/plugin.ts"
 
 /** Plugin */
 export default class extends Plugin {

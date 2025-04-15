@@ -1,4 +1,4 @@
-import { expect, t, test } from "@engine/utils/testing.ts"
+import { expect, t, type test } from "@engine/utils/testing.ts"
 import { compat as _compat } from "@run/compat/mod.ts"
 import { Secret } from "@engine/utils/secret.ts"
 

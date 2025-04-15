@@ -81,9 +81,6 @@
         "no-sync-fn-in-async-fn",
         "no-throw-literal",
         "no-external-import"
-      ],
-      "exclude": [
-        "verbatim-module-syntax"
       ]
     },
     "exclude": [
@@ -102,7 +99,8 @@
   },
   "compilerOptions": {
     "noImplicitOverride": false,
-    "useUnknownInCatchVariables": false
+    "useUnknownInCatchVariables": false,
+    "verbatimModuleSyntax": true
   },
   "tasks": {
     "make": "deno run --allow-env --allow-read --allow-write=.deno-make.json --allow-run=deno https://deno.land/x/make@1.2.0/mod.ts $0"

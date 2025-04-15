@@ -1,6 +1,6 @@
 // Imports
-import { Processor, state } from "@engine/components/processor.ts"
-import { default as octicons, IconName } from "@primer/octicons"
+import { Processor, type state } from "@engine/components/processor.ts"
+import { default as octicons, type IconName } from "@primer/octicons"
 
 /** Processor */
 export default class extends Processor {

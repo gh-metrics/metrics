@@ -1,7 +1,7 @@
 // Imports
 import { DOMParser } from "@b-fuze/deno-dom/wasm"
 import { Format } from "@engine/utils/format.ts"
-import { is, parse, Processor, state } from "@engine/components/processor.ts"
+import { is, parse, Processor, type state } from "@engine/components/processor.ts"
 import { expect } from "@engine/utils/testing.ts"
 import { throws } from "@engine/utils/errors.ts"
 

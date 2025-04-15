@@ -3,7 +3,7 @@
 import Alpine from "alpinejs"
 import * as YAML from "@std/yaml/parse"
 import type { webrequest } from "@engine/config.ts"
-import { is } from "@engine/utils/validation.ts"
+import type { is } from "@engine/utils/validation.ts"
 import { Logger } from "@engine/utils/log.ts"
 import { debounce } from "@std/async"
 import { markdown } from "@engine/utils/markdown.ts"

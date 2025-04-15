@@ -1,9 +1,9 @@
 //Imports
-import { dir, test } from "@engine/utils/testing.ts"
+import { dir, type test } from "@engine/utils/testing.ts"
 import { deepMerge } from "@std/collections"
 import { Browser } from "@engine/utils/browser.ts"
 import { Logger } from "@engine/utils/log.ts"
-import { Component } from "@engine/components/component.ts"
+import type { Component } from "@engine/components/component.ts"
 import { Plugin } from "@engine/components/plugin.ts"
 import { Processor } from "@engine/components/processor.ts"
 import { sugar } from "@engine/config.ts"

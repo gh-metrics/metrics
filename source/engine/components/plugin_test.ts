@@ -1,4 +1,4 @@
-import { dir, expect, is, MetricsError, t, test } from "@engine/utils/testing.ts"
+import { dir, expect, is, MetricsError, t, type test } from "@engine/utils/testing.ts"
 import { config, getPermissions, Plugin, setup } from "@engine/components/tests/context.ts"
 import { deepMerge } from "@std/collections"
 import { process } from "@engine/process.ts"

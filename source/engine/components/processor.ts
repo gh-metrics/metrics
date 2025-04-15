@@ -1,5 +1,5 @@
 // Imports
-import { Component, is, parse, state } from "@engine/components/component.ts"
+import { Component, is, parse, type state } from "@engine/components/component.ts"
 import type { processor as schema } from "@engine/config.ts"
 import { list } from "@engine/utils/deno/io.ts"
 import type { Plugin } from "@engine/components/plugin.ts"

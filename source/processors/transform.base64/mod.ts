@@ -1,5 +1,5 @@
 // Imports
-import { is, parse, Processor, state } from "@engine/components/processor.ts"
+import { is, parse, Processor, type state } from "@engine/components/processor.ts"
 import { DOMParser } from "@b-fuze/deno-dom"
 import { Format } from "@engine/utils/format.ts"
 import { resize } from "x/deno_image@0.0.4/mod.ts"

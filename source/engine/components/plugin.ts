@@ -1,14 +1,14 @@
 // Imports
-import { Component, is, parse, state } from "@engine/components/component.ts"
+import { Component, is, parse, type state } from "@engine/components/component.ts"
 import { list, read } from "@engine/utils/deno/io.ts"
-import { plugin as schema, plugin_nameless } from "@engine/config.ts"
+import { type plugin as schema, plugin_nameless } from "@engine/config.ts"
 import * as ejs from "ejs"
 import { Requests } from "@engine/components/requests.ts"
 import { Formatter } from "@engine/utils/format.ts"
 import { basename } from "@std/path"
 import { Processor } from "@engine/components/processor.ts"
 import { throws } from "@engine/utils/errors.ts"
-import { RequestInterface } from "@octokit/types"
+import type { RequestInterface } from "@octokit/types"
 
 /** Plugin */
 export abstract class Plugin extends Component {

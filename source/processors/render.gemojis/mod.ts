@@ -1,5 +1,5 @@
 // Imports
-import { Processor, state } from "@engine/components/processor.ts"
+import { Processor, type state } from "@engine/components/processor.ts"
 // @ts-ignore: json import
 // deno-lint-ignore no-external-import
 import imported from "https://api.github.com/emojis" with { type: "json" }
