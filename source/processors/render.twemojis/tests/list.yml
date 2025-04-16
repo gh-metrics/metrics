@@ -1,0 +1,10 @@
+- name: transforms emoji to twemojis
+  plugins:
+    - processors:
+        - inject.content:
+            content: 🦕
+        - render.twemojis:
+        - assert:
+            html:
+              select: svg.twemoji
+              count: 1=

@@ -1,0 +1,32 @@
+- name: supports `entity:"user"`
+  plugins:
+    - introduction:
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .introduction .text
+              match: octocat
+
+- name: supports `entity:"organization"`
+  plugins:
+    - introduction:
+      handle: github
+      entity: organization
+      processors:
+        - assert:
+            html:
+              select: .introduction .text
+              match: github
+
+- name: supports `entity:"repository"`
+  plugins:
+    - introduction:
+      handle: octocat/hello-world
+      entity: repository
+      processors:
+        - assert:
+            html:
+              select: .introduction .text
+              match: octocat/hello-world

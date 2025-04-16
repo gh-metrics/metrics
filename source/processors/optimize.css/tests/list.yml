@@ -1,0 +1,49 @@
+- name: can optimize css
+  plugins:
+    - processors:
+      - inject.content:
+          content: |
+            <svg>
+              <foreignObject>
+                <span class="a">Hello</span>
+                <span>World</span>
+                <style data-optimizable="true">
+                  .a { color: red; }
+                  .b { color: blue; }
+                </style>
+              </foreignObject>
+            </svg>
+      - optimize.css:
+      - assert:
+          html:
+            select: svg style
+            match: /\.a\{.*\}/i
+      - assert:
+          html:
+            select: svg style
+            match: /!/\.b\{.*\}/i
+
+- name: does not edit non-optimizable styles
+  plugins:
+    - processors:
+      - inject.content:
+          content: |
+            <svg>
+              <foreignObject>
+                <span class="a">Hello</span>
+                <span>World</span>
+                <style>
+                  .a { color: red; }
+                  .b { color: blue; }
+                </style>
+              </foreignObject>
+            </svg>
+      - optimize.css:
+      - assert:
+          html:
+            select: svg style
+            match: /\.a { color:\ red; \}/i
+      - assert:
+          html:
+            select: svg style
+            match: /\.b \{ color:\ blue; \}/i

@@ -1,0 +1,21 @@
+- name: supports `feed`
+  plugins:
+    - rss:
+        feed: https://metrics.test/rss
+        limit: 1
+      processors:
+        - assert:
+            html:
+              select: .rss .entry
+              count: 1=
+
+- name: supports `limit:null`
+  plugins:
+    - rss:
+        feed: https://metrics.test/rss
+        limit: null
+      processors:
+        - assert:
+            html:
+              select: .rss .entry
+              count: 1>=

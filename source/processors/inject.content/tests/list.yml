@@ -1,0 +1,18 @@
+- name: can inject raw content
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - assert:
+          html:
+            select: main
+            match: hello world
+
+- name: can change mime type
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+          mime: text/plain
+      - assert:
+          mime: text/plain

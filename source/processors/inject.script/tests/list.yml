@@ -1,0 +1,25 @@
+- name: can inject and execute raw script
+  plugins:
+    - processors:
+      - inject.content:
+          content: <span class="test"></span>
+      - inject.script:
+          script: |
+            document.querySelector(".test").textContent = "hello world";
+      - assert:
+          html:
+            select: .test
+            match: hello world
+
+- name: throws on invalid script
+  plugins:
+    - processors:
+      - inject.content:
+          content: <span class="test"></span>
+      - inject.script:
+          script: |
+            throw new Error("expected error")
+        fatal: false
+        logs: none
+      - assert:
+          error: /expected error/i

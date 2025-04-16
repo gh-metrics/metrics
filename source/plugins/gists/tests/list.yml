@@ -1,0 +1,42 @@
+- name: supports `visibility`
+  plugins:
+    - gists:
+        visibility: public
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .gists .title
+              match: /10 gists/i
+    - gists:
+        visibility: all
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .gists .title
+              match: /20 gists/i
+
+- name: supports `forks`
+  plugins:
+    - gists:
+        forks: true
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .gists .title
+              match: /including \d+ forks?/i
+    - gists:
+        forks: false
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .gists .title
+              match: /!/including \d+ forks?/i
+

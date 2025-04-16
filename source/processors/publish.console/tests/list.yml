@@ -1,0 +1,19 @@
+- name: can log text
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - optimize.css:
+      - render.content:
+          format: svg
+      - publish.console:
+
+- name: can log images (in base64)
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - optimize.css:
+      - render.content:
+          format: png
+      - publish.console:

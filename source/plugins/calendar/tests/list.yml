@@ -1,0 +1,179 @@
+- name: supports `range:"last-180-days"`
+  plugins:
+    - calendar:
+        view: isometric
+        range: last-180-days
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .year .day
+              count: 180~1
+    - calendar:
+        view: top-down
+        range: last-180-days
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .year .day
+              count: 180~1
+
+- name: supports `range:"last-365-days"`
+  plugins:
+    - calendar:
+        view: isometric
+        range: last-365-days
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .year .day
+              count: 365~1
+    - calendar:
+        view: top-down
+        range: last-365-days
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .year .day
+              count: 365~1
+
+- name: supports `range:"current-year"`
+  plugins:
+    - calendar:
+        range: current-year
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .title sub
+              match: /1 jan (\d+) to \d+ \w+ \1/i
+
+- name: supports `range` with specific year
+  plugins:
+    - calendar:
+        range: 2020
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .title sub
+              match: /1 jan 2020 to 31 dec 2020/i
+    - calendar:
+        range: 1970
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1=
+        - assert:
+            html:
+              select: .calendar .title sub
+              match: /1 jan 1970 to 31 dec 1970/i
+
+- name: supports `range.from` and `range.to` with specific years
+  plugins:
+    - calendar:
+        range:
+          from: 2019
+          to: 2020
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 2=
+        - assert:
+            html:
+              select: .calendar .title sub
+              match: /1 jan 2019 to 31 dec 2020/i
+
+- name: supports `range` relative years
+  plugins:
+    - calendar:
+        range:
+          from: -1
+          to: current-year
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 2=
+    - calendar:
+        range:
+          from: -1
+          to: 2020
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 2=
+        - assert:
+            html:
+              select: .calendar .title sub
+              match: /1 jan 2019 to 31 dec 2020/i
+
+- name: supports `range:"registration"`
+  plugins:
+    - calendar:
+        range:
+          from: registration
+          to: current-year
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar .year
+              count: 1>=
+
+- name: supports `colors` schemes
+  plugins:
+    - calendar:
+        view: top-down
+        colors: halloween
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar svg.render [fill^="var"]
+              match: /fill="var\(--calendar-halloween-L\d\)"/
+              raw: true
+    - calendar:
+        view: isometric
+        colors: winter
+      handle: octocat
+      processors:
+        - assert:
+            html:
+              select: .calendar svg.render [fill^="var"]
+              match: /fill="var\(--calendar-winter-L\d\)"/
+              raw: true

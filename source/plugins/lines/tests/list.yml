@@ -1,0 +1,294 @@
+- name: supports `display.sections`
+  plugins:
+    - lines:
+        display:
+          sections: graph
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .graph
+              count: 1=
+        - assert:
+            html:
+              select: .lines .entry
+              count: 0=
+    - lines:
+        display:
+          sections: repositories
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .graph
+              count: 0=
+        - assert:
+            html:
+              select: .lines .entry
+              count: 1>=
+
+- name: supports `display.repositories`
+  plugins:
+    - lines:
+        display:
+          repositories:
+            limit: 1
+            details: true
+            sort: stargazers
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              count: 1=
+        - assert:
+            html:
+              select: .lines .entry .week
+              count: 1>=
+
+- name: supports `repositories.affiliations`
+  plugins:
+    - lines:
+        repositories:
+          affiliations: owner
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: octocat/public-repo
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/(user|org)\//
+    - lines:
+        repositories:
+          affiliations: collaborator
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: user/public-repo
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/(octocat|org)\//
+    - lines:
+        repositories:
+          affiliations: organization_member
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: org/public-repo
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/(octocat|user)\//
+    - lines:
+        repositories:
+          affiliations: [owner, collaborator, organization_member]
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /(octocat|user|org)\/public-repo/
+
+- name: supports `repository.visibility`
+  plugins:
+    - lines:
+        repositories:
+          visibility: all
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /(public|private)-repo/
+    - lines:
+        repositories:
+          visibility: public
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/private-repo/
+
+- name: supports `repositories.archived`
+  plugins:
+    - lines:
+        repositories:
+          archived: true
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /(?:archived-repo)?/
+    - lines:
+        repositories:
+          archived: false
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/archived-repo/
+
+- name: supports `repository.forked`
+  plugins:
+    - lines:
+        repositories:
+          forked: true
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /(?:forked-repo)?/
+    - lines:
+        repositories:
+          forked: false
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/forked-repo/
+
+- name: supports `repository.matching`
+  plugins:
+    - lines:
+        repositories:
+          matching: octocat/*
+          affiliations: [owner, collaborator, organization_member]
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /octocat\//
+        - assert:
+            html:
+              select: .lines .entry .repo
+              match: /!/(user|org)\//
+
+- name: supports `history.limit`
+  plugins:
+    - lines:
+        history:
+          limit: null
+        display:
+          repositories:
+            details: true
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .week
+              match: /2025/
+    - lines:
+        history:
+          limit: 1
+        display:
+          repositories:
+            details: true
+      handle: octocat
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .week
+              match: /2025/
+
+- name: supports `contributors.matching`
+  plugins:
+    - lines:
+        contributors:
+          matching: octocat
+        display:
+          repositories:
+            details: true
+      handle: octocat/public-repo
+      entity: repository
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .user
+              count: 1=
+              match: octocat
+    - lines:
+        contributors:
+          matching: "*"
+          limit: null
+        display:
+          repositories:
+            details: true
+      handle: octocat/public-repo
+      entity: repository
+      processors:
+        - assert:
+            html:
+              select: .lines .entry .user
+              count: 1>
+
+- name: supports empty repositories
+  plugins:
+    - lines:
+      handle: empty
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry
+              count: 1=
+
+- name: supports `fetch.attempts` and `fetch.delay`
+  plugins:
+    - lines:
+        fetch:
+          attempts: 2
+          delay: 0.05
+      handle: retry
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry
+              count: 1=
+    - processors:
+        - control.delay:
+            duration: 0.15
+    - lines:
+        fetch:
+          attempts: 1
+          delay: 0
+      handle: retry
+      entity: user
+      processors:
+        - assert:
+            html:
+              select: .lines .entry
+              count: 0=
+    - processors:
+        - control.delay:
+            duration: 0.15

@@ -1,0 +1,217 @@
+/** Classic template */
+:root {
+  --color-primary: #777777;
+  --color-title: #0366d6;
+  --color-link: #54aeff;
+  --color-error: #d32f39;
+  --color-warning: #c25d19;
+  --color-svg: #959da5;
+  --color-svg-alpha-background: #959da515;
+  --color-label-alpha-background: #54aeff20;
+  --color-error-background: #ffebe9;
+  --color-warning-background: #fff8c5;
+  --calendar-default-L0: #ebedf0;
+  --calendar-default-L1: #9be9a8;
+  --calendar-default-L2: #40c463;
+  --calendar-default-L3: #30a14e;
+  --calendar-default-L4: #216e39;
+  --calendar-halloween-L0: #ebedf0;
+  --calendar-halloween-L1: #ffee4a;
+  --calendar-halloween-L2: #ffc501;
+  --calendar-halloween-L3: #fe9600;
+  --calendar-halloween-L4: #03001c;
+  --calendar-winter-L0: #ebedf0;
+  --calendar-winter-L1: #0a3069;
+  --calendar-winter-L2: #0969da;
+  --calendar-winter-L3: #54aeff;
+  --calendar-winter-L4: #b6e3ff;
+  --diff-addition: #3fb950;
+  --diff-deletion: #ff6a69;
+  --diff-neutral: rgba(158, 167, 179, 0.4);
+  --diff-neutral-border: rgba(158, 167, 179, 0.1);
+
+  --code-background: #0d1117;
+  --code-color: #c9d1d9;
+}
+
+svg {
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+/** Section */
+section {
+  margin: 4px;
+}
+
+/** Title */
+.title {
+  margin: 8px 0 2px;
+  color: var(--color-title);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+}
+.title.main {
+  font-size: 20px;
+  font-weight: bold;
+}
+.title.sub {
+  font-size: 14px;
+}
+.title > svg {
+  margin: 0 4px;
+  flex-shrink: 0;
+  fill: var(--color-title);
+}
+.title > sub {
+  font-size: 11px;
+  margin-left: 4px;
+  margin-bottom: -8px;
+  font-style: italic;
+}
+
+/** Errors and warnings */
+.error, .warning {
+  margin-bottom: 4px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+}
+.error {
+  color: var(--color-error);
+  border-color: var(--color-error);
+  background-color: var(--color-error-background);
+}
+.warning {
+  color: var(--color-warning);
+  border-color: var(--color-warning);
+  background-color: var(--color-warning-background);
+}
+.error > span, .warning > span {
+  white-space: pre-line;
+}
+.error > svg, .warning > svg {
+  margin-right: 4px;
+}
+.error > svg {
+  fill: var(--color-error);
+}
+.warning > svg {
+  fill: var(--color-warning);
+}
+
+/** Body */
+.body {
+  display: flex;
+}
+
+/** Display content in columns */
+.columns {
+  display: flex;
+  width: 100%;
+}
+.columns.reverse {
+  flex-direction: row-reverse;
+}
+.columns > aside {
+  width: 50%;
+  flex: 1 1 0;
+}
+
+/** Display content in rows */
+.rows {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.rows.reverse {
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+.rows > aside {
+  width: 100%;
+  flex: 1 1 0;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.avatar {
+  height: 1.5em;
+  width: 1.5em;
+  border-radius: 50%;
+  margin: 0 4px;
+}
+
+/** Field */
+.field {
+  display: flex;
+  margin-bottom: 2px;
+}
+.field > svg {
+  margin: 2px 4px 0;
+  fill: var(--color-svg);
+  flex-shrink: 0;
+}
+
+
+/** Markdown */
+.markdown .link {
+  color: var(--color-link);
+}
+.markdown code {
+  background-color: var(--color-svg-alpha-background);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+.markdown pre {
+  background-color: var(--code-background);
+  color: var(--code-color);
+  padding: 8px;
+  border-radius: 8px;
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+.markdown pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.markdown p, .markdown pre {
+  margin: 0;
+  margin-bottom: 8px;
+}
+.markdown code .hljs-comment {
+  color: #8b949e;
+}
+.markdown code .hljs-keyword {
+  color: #ff7b72;
+}
+.markdown code .hljs-string {
+  color: #a5d6ff;
+}
+.markdown code .hljs-attr {
+  color: #79c0ff;
+}
+.markdown code .hljs-title {
+  color: #d2a8ff;
+}
+.markdown code .hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16;
+}
+.markdown code .hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c;
+}
+
+.twemoji, .gemoji, .octicon {
+  height: 1em;
+  width: 1em;
+  margin-bottom: -.125em;
+}

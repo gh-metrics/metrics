@@ -1,0 +1,49 @@
+- name: supports `mode:image`
+  plugins:
+    - webscraping:
+        url: https://metrics.test
+        select: img
+        mode: image
+      processors:
+        - assert:
+            html:
+              select: .webscraping .title
+              match: example
+        - assert:
+            html:
+              select: .webscraping img
+              count: 1=
+
+- name: supports `mode:text`
+  plugins:
+    - webscraping:
+        url: https://metrics.test
+        select: blockquote
+        mode: text
+        wait: 0.001
+      processors:
+        - assert:
+            html:
+              select: .webscraping .title
+              match: example
+        - assert:
+            html:
+              select: .webscraping
+              match: hello world
+
+- name: supports `background:false`
+  plugins:
+    - webscraping:
+        url: https://metrics.test
+        select: blockquote
+        mode: image
+        background: false
+      processors:
+        - assert:
+            html:
+              select: .webscraping .title
+              match: example
+        - assert:
+            html:
+              select: .webscraping img
+              count: 1=

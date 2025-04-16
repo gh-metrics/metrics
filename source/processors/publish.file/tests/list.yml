@@ -1,0 +1,19 @@
+- name: can write text files
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - render.content:
+          format: svg
+      - publish.file:
+          filepath: .test/publish.file.*
+
+- name: can write image files
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - render.content:
+          format: png
+      - publish.file:
+          filepath: .test/publish.file.*

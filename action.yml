@@ -1,0 +1,45 @@
+name: Metrics embed
+author: lowlighter
+description: An infographics generator with 40+ plugins and 300+ options to display stats about your GitHub account!
+branding:
+  icon: user-check
+  color: gray-dark
+
+inputs:
+  docker_image:
+    description: Docker image to use
+    default: ghcr.io/gh-metrics/metrics:v4
+    required: true
+  config:
+    description: Configuration file
+    default: metrics.config.yml
+    required: true
+
+outputs:
+  result:
+    description: Result of the action
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v3
+    - uses: denoland/setup-deno@v1
+    - shell: bash
+      env:
+        INPUTS: ${{ toJson(inputs) }}
+      run: |
+        echo "::group::Metrics docker image setup"
+        echo "GitHub action: $(echo '${{ github.action }}' | tr '_' '/')"
+        cd ${{ github.action_path }}
+        DOCKER_IMAGE="${{ inputs.docker_image }}"
+        if [ -f "$DOCKER_IMAGE" ]; then
+          DOCKER_LOCAL=metrics:local
+          echo "Using local docker image: $DOCKER_IMAGE"
+          deno task make docker --tag $DOCKER_LOCAL --file $DOCKER_IMAGE
+          DOCKER_IMAGE=$DOCKER_LOCAL
+        else
+          echo "Pulling remote docker image: $DOCKER_IMAGE"
+          docker pull $DOCKER_IMAGE
+        fi
+        echo "::endgroup::"
+        docker run --tty --env-file <(env | grep -E 'GITHUB|CI|TZ') --env INPUTS --rm --volume ${{ github.workspace }}:/workspace --volume /metrics_renders:/metrics_renders $DOCKER_IMAGE run

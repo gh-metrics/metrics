@@ -1,0 +1,37 @@
+- name: can render github octicons
+  plugins:
+    - processors:
+        - inject.content:
+            content: ":octicon-copilot:"
+        - render.octicons:
+        - assert:
+            html:
+              select: svg.octicon
+              count: 1=
+              match: height="16"
+              raw: true
+
+- name: can render github octicons with size
+  plugins:
+    - processors:
+      - inject.content:
+          content: ":octicon-copilot-24:"
+      - render.octicons:
+      - assert:
+          html:
+            select: svg.octicon
+            count: 1=
+            match: height="24"
+            raw: true
+
+- name: does not render invalid octicons
+  plugins:
+    - processors:
+      - inject.content:
+          content: ":octicon-__invalid__:"
+      - render.octicons:
+      - assert:
+          html:
+            select: svg.octicon
+            count: 0=
+            match: ":octicon-__invalid__:"

@@ -1,0 +1,36 @@
+- name: supports `version`
+  plugins:
+    - .legacy:
+        version: v3.34
+      token: MOCKED_TOKEN
+      handle: octocat
+      logs: none
+      processors:
+        - assert:
+            html:
+              select: .legacy img
+              count: 1=
+    - .legacy:
+        version: v3.99
+      handle: octocat
+      fatal: false
+      logs: none
+      processors:
+        - assert:
+            error: /failed to execute metrics/i
+
+- name: supports `inputs`
+  plugins:
+    - .legacy:
+        inputs:
+          use_prebuilt_image: false
+          dryrun: true
+          base: header
+      token: MOCKED_TOKEN
+      handle: octocat
+      logs: none
+      processors:
+        - assert:
+            html:
+              select: .legacy img
+              count: 1=

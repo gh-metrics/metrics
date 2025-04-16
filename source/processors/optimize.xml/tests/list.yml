@@ -1,0 +1,22 @@
+- name: can optimize xml
+  plugins:
+    - processors:
+      - inject.content:
+          content: <span></span>
+      - optimize.xml:
+      - assert:
+          html:
+            select: main
+            match: /<span><.span>/i
+            raw: true
+
+- name: throws on invalid xml
+  plugins:
+    - processors:
+      - inject.content:
+          content: <!-- comment
+      - optimize.xml:
+        fatal: false
+        logs: none
+      - assert:
+          error: /failed to parse XML/i

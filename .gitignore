@@ -1,7 +1,12 @@
+.deno-make.json
+.cache
 .coverage
+.env
+.secrets
 .test
+.kv
+.kv-*
 node_modules
 metrics.config.yml
-
-# TODO(@lowlighter): remove after migration
-.legacy
+settings.json
+source/run/serve/static/app.js

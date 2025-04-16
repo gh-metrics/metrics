@@ -1,0 +1,156 @@
+- name: can commit text files
+  plugins:
+    - processors:
+        - inject.content:
+            content: <svg></svg>
+        - publish.git:
+            repository: octocat/test
+            commit: {}
+
+- name: can commit images files
+  plugins:
+    - processors:
+        - inject.content:
+            content: <span>foo</span>
+        - render.content:
+            format: png
+        - publish.git:
+            repository: octocat/test
+            commit: {}
+
+- name: is noop when committing content that is the same
+  plugins:
+    - processors:
+        - inject.content:
+            content: <svg></svg>
+        - publish.git:
+            repository: octocat/test
+            commit: {}
+            filepath: file-unchanged
+
+- name: creates branch when committing on a branch that does not exist yet
+  plugins:
+    - processors:
+        - inject.content:
+            content: <svg></svg>
+        - publish.git:
+            repository: octocat/test
+            commit:
+              message: test
+              to: branch-unexisting
+
+- name: errors when committing on a branch that does not exist yet but base branch does not exist either
+  plugins:
+    - processors:
+        - inject.content:
+            content: hello world
+        - publish.git:
+            repository: octocat/test
+            commit:
+              message: test
+              to: metrics
+              base: branch-unexisting
+          fatal: false
+          logs: none
+        - assert:
+            error: /base branch .* does not exist/i
+
+- name: can create pull request
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: metrics
+              to: main
+
+- name: is noop when pull request already exists
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: metrics-already-exists
+              to: main
+
+- name: is noop when pull request has no changes
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: metrics-unchanged
+              to: main
+
+- name: errors when creating a pull request from a non-existing branch
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: branch-unexisting
+              to: main
+          fatal: false
+          logs: none
+        - assert:
+            error: /head ref must be a branch/i
+
+- name: can find back pull request to merge and perform merge
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: branch-already-exists
+              merge: commit
+              checks:
+                delay: 0.05
+        - control.delay:
+            duration: 0.15
+
+- name: errors when pull request to merge is conflicting
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: branch-already-exists-conflicting
+              merge: commit
+          fatal: false
+          logs: none
+        - assert:
+            error: /state is conflicting, cannot merge/i
+
+- name: errors when more than one pull request to merge is found
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: branch-already-exists-multiple-results
+              merge: commit
+          fatal: false
+          logs: none
+        - assert:
+            error: /found more than one matching pull request/i
+
+- name: errors when more no pull request to merge is found
+  plugins:
+    - processors:
+        - publish.git:
+            repository: octocat/test
+            commit: false
+            pullrequest:
+              from: branch-already-exists-no-results
+              merge: commit
+          fatal: false
+          logs: none
+        - assert:
+            error: /could not find back pull request/i

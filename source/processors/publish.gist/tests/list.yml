@@ -1,0 +1,21 @@
+- name: can publish text files
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - render.content:
+          format: svg
+      - publish.gist:
+          gist: 1234567890abcdef
+          filename: test.*
+
+- name: can publish image files
+  plugins:
+    - processors:
+      - inject.content:
+          content: hello world
+      - render.content:
+          format: png
+      - publish.gist:
+          gist: 1234567890abcdef
+          filename: test.*
