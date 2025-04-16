@@ -13,7 +13,7 @@ RUN apk add --update --no-cache sudo \
 # Install licensed
 RUN apk add --no-cache ruby \
   && apk add --no-cache --virtual .licensed ruby-dev make cmake g++ heimdal-dev \
-  && gem install licensed \
+  && gem install -N licensed \
   && apk del .licensed \
   && licensed --version
 

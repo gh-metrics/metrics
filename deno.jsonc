@@ -226,11 +226,11 @@
         }
       }
     },
-    "cache": {
-      "description": "📦 Cache dependencies",
+    "install": {
+      "description": "📦 Install dependencies",
       "task": [
         "rm -rf deno.lock &&",
-        "deno cache source/run/**/*.ts"
+        "deno install"
       ],
       "deno": {
         "cache": {
