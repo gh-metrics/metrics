@@ -1,5 +1,5 @@
 # Metrics docker image
-FROM alpine:3.18
+FROM index.docker.io/library/alpine:3.21@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
 RUN apk upgrade --no-cache --available
 
 # Install sudo
@@ -29,7 +29,7 @@ RUN apk add --update --no-cache docker-cli \
 # Install deno
 ENV DENO_INSTALL /
 ENV DENO_NO_UPDATE_CHECK true
-ENV DENO_VERSION 1.38.3
+ENV DENO_VERSION 2.2.10
 ENV GLIBC_VERSION 2.34-r0
 RUN apk add --no-cache --virtual .deno curl wget unzip \
   && wget --no-hsts --quiet --output-document /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
@@ -43,7 +43,7 @@ RUN apk add --no-cache --virtual .deno curl wget unzip \
   && (echo "export LANG=$LANG" > /etc/profile.d/locale.sh) \
   && rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk glibc-i18n-${GLIBC_VERSION}.apk \
   && apk del glibc-i18n \
-  && (curl -fsSL https://deno.land/x/install/install.sh | sh) \
+  && (curl -fsSL https://deno.land/install.sh | sh) \
   && apk del .deno \
   && deno upgrade --version ${DENO_VERSION} \
   && deno --version
