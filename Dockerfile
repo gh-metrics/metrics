@@ -1,5 +1,5 @@
 # Metrics docker image
-FROM index.docker.io/library/alpine:3.21@sha256:a8560b36e8b8210634f77d9f7f9efd7ffa463e380b75e2e74aff4511df3ef88c
+FROM index.docker.io/denoland/deno:2.2.10@sha256:7820b532b724f9283c8962de1cb2d3a7d31f5abc622c3a41ecb4c3d6b9111229
 RUN apk upgrade --no-cache --available
 
 # Install sudo
@@ -26,31 +26,8 @@ RUN apk add --update --no-cache docker-cli \
   && addgroup docker \
   && docker --version
 
-# Install deno
-ENV DENO_INSTALL /
-ENV DENO_NO_UPDATE_CHECK true
-ENV DENO_VERSION 2.2.10
-ENV GLIBC_VERSION 2.34-r0
-RUN apk add --no-cache --virtual .deno curl wget unzip \
-  && wget --no-hsts --quiet --output-document /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-  && wget --no-hsts --quiet https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
-  && wget --no-hsts --quiet https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-bin-${GLIBC_VERSION}.apk \
-  && wget --no-hsts --quiet https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-i18n-${GLIBC_VERSION}.apk \
-  && mv /etc/nsswitch.conf /etc/nsswitch.conf.bak \
-  && apk add --no-cache --force-overwrite glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk glibc-i18n-${GLIBC_VERSION}.apk \
-  && mv /etc/nsswitch.conf.bak /etc/nsswitch.conf \
-  && (/usr/glibc-compat/bin/localedef --force --inputfile POSIX --charmap UTF-8 "$LANG" || true) \
-  && (echo "export LANG=$LANG" > /etc/profile.d/locale.sh) \
-  && rm /etc/apk/keys/sgerrand.rsa.pub glibc-${GLIBC_VERSION}.apk glibc-bin-${GLIBC_VERSION}.apk glibc-i18n-${GLIBC_VERSION}.apk \
-  && apk del glibc-i18n \
-  && (curl -fsSL https://deno.land/install.sh | sh) \
-  && apk del .deno \
-  && deno upgrade --version ${DENO_VERSION} \
-  && deno --version
-
 # Install lighthouse
-RUN apk add --no-cache npm \
-  && npm install --global lighthouse \
+RUN deno install --global npm:lighthouse \
   && lighthouse --version
 
 # General configuration
