@@ -1,5 +1,5 @@
 # Metrics docker image
-FROM index.docker.io/denoland/deno:2.2.10@sha256:7820b532b724f9283c8962de1cb2d3a7d31f5abc622c3a41ecb4c3d6b9111229
+FROM index.docker.io/denoland/deno:alpine-2.2.10@sha256:6b0da61a2318747a0390ebce31fb93fc61cbc31e01de18bb9182932c070b2441
 RUN apk upgrade --no-cache --available
 
 # Install sudo
