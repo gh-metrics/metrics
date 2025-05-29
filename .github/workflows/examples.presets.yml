@@ -7,10 +7,10 @@ on:
 jobs:
   examples:
     runs-on: ubuntu-latest
-    if: "github.repository == 'lowlighter/metrics'"
+    if: github.repository == 'lowlighter/metrics'
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3
         with:
           fetch-depth: 0
       - name: Setup NodeJS
@@ -23,5 +23,3 @@ jobs:
         run: npm run presets -- publish
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
-
