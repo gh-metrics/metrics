@@ -19,8 +19,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Indepth analysis</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.indepth.svg" alt=""></img></details>
-      <details><summary>Contributions in organizations only</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.svg" alt=""></img></details>
+      <details open><summary>Indepth analysis</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.indepth.svg" alt=""></img></details>
+      <details><summary>Contributions in organizations only</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -152,7 +152,7 @@ For each of the above, a badge is awarded. Its color and progress depends of the
 <!--examples-->
 ```yaml
 name: Contributions
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.notable.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -162,7 +162,7 @@ with:
 ```
 ```yaml
 name: Indepth analysis
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.notable.indepth.svg
   token: ${{ secrets.METRICS_TOKEN }}

@@ -42,7 +42,7 @@ echo "Image tag: $METRICS_TAG"
 
 # Image name
 # Official action
-if [[ $METRICS_SOURCE == "lowlighter" ]]; then
+if [[ $METRICS_SOURCE == "gh-metrics" ]]; then
   # Use registry with pre-built images
   if [[ ! $METRICS_USE_PREBUILT_IMAGE =~ ^([Ff]alse|[Oo]ff|[Nn]o|0)$ ]]; then
     # Is released version
@@ -54,7 +54,7 @@ if [[ $METRICS_SOURCE == "lowlighter" ]]; then
       METRICS_TAG="$METRICS_TAG-beta"
       echo "Image tag (updated): $METRICS_TAG"
     fi
-    METRICS_IMAGE=ghcr.io/lowlighter/metrics:$METRICS_TAG
+    METRICS_IMAGE=ghcr.io/gh-metrics/metrics:$METRICS_TAG
     echo "Using pre-built version $METRICS_TAG, will pull docker image from GitHub registry"
     if ! docker image pull $METRICS_IMAGE; then
       echo "Failed to fetch docker image from GitHub registry, will rebuild it locally"

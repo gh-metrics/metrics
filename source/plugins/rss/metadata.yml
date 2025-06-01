@@ -3,7 +3,7 @@ category: social
 description: |
   This plugin displays news from a given RSS feed.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.rss.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.rss.svg
 index: 7
 supports:
   - user

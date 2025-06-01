@@ -20,8 +20,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>With icons</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.icons.svg" alt=""></img></details>
-      <details open><summary>With labels</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.svg" alt=""></img></details>
+      <details open><summary>With icons</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.icons.svg" alt=""></img></details>
+      <details open><summary>With labels</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -105,7 +105,7 @@ All product and company names are trademarks™ or registered® trademarks of th
 <!--examples-->
 ```yaml
 name: Labels
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.topics.svg
   token: NOT_NEEDED
@@ -116,7 +116,7 @@ with:
 ```
 ```yaml
 name: Icons
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.topics.icons.svg
   token: NOT_NEEDED

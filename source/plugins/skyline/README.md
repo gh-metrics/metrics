@@ -23,8 +23,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>GitHub Skyline</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.skyline.svg" alt=""></img></details>
-      <details><summary>GitHub City</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.skyline.city.svg" alt=""></img></details>
+      <details open><summary>GitHub Skyline</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.skyline.svg" alt=""></img></details>
+      <details><summary>GitHub City</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.skyline.city.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -143,7 +143,7 @@ Using this mode significantly increase file size as each frame is encoded separa
 <!--examples-->
 ```yaml
 name: GitHub Skyline
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.skyline.svg
   token: NOT_NEEDED
@@ -156,7 +156,7 @@ with:
 ```
 ```yaml
 name: GitHub City
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.skyline.city.svg
   token: NOT_NEEDED

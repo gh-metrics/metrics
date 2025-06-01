@@ -19,7 +19,7 @@ describe("Check file changes (checkout your files if needed)", () => {
       ".github/workflows/examples.yml",
       ".github/readme/partials/documentation/compatibility.md",
     ])("%s", async file => expect((await diff()).includes(file)).toBe(false)))
-  if (!["lowlighter"].includes(process.env.PR_AUTHOR)) {
+  if (!["gh-metrics"].includes(process.env.PR_AUTHOR)) {
     describe("Repository level files were not modified", () =>
       void test.each([
         ".github/config/*",
@@ -44,5 +44,5 @@ describe("Check file changes (checkout your files if needed)", () => {
 
 //Template changes
 describe("Check template changes", () => {
-  test("Use community templates instead (see https://github.com/lowlighter/metrics/tree/master/source/templates/community)", async () => void expect((await diff()).filter(edited => /^sources[/]templates[/]/.test(edited) && /^source[/]templates[/](?:classic|terminal|markdown|repository|community)[/][\s\S]*$/.test(edited)).length).toBe(0))
+  test("Use community templates instead (see https://github.com/gh-metrics/metrics/tree/master/source/templates/community)", async () => void expect((await diff()).filter(edited => /^sources[/]templates[/]/.test(edited) && /^source[/]templates[/](?:classic|terminal|markdown|repository|community)[/][\s\S]*$/.test(edited)).length).toBe(0))
 })

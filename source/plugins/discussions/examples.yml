@@ -1,5 +1,5 @@
 - name: GitHub Discussions
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.discussions.svg
     token: ${{ secrets.METRICS_TOKEN }}

@@ -28,4 +28,4 @@
   </tr><% } %>
 </table>
 
-*Note: **markdown template** can actually render any kind of SVG metrics using [`embed` function](https://github.com/lowlighter/metrics/blob/master/source/templates/markdown/example.md#embedding-svg-metrics)*
+*Note: **markdown template** can actually render any kind of SVG metrics using [`embed` function](https://github.com/gh-metrics/metrics/blob/master/source/templates/markdown/example.md#embedding-svg-metrics)*

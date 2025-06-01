@@ -1,19 +1,19 @@
 - name: Using a community template
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: ${{ secrets.METRICS_TOKEN }}
     template: "@classic"
-    setup_community_templates: "lowlighter/metrics@master:classic"
+    setup_community_templates: "gh-metrics/metrics@master:classic"
   test:
     modes:
       - action
 
 - name: Using a trusted community template
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: ${{ secrets.METRICS_TOKEN }}
     template: "@terminal"
-    setup_community_templates: "lowlighter/metrics@master:terminal+trust"
+    setup_community_templates: "gh-metrics/metrics@master:terminal+trust"
   test:
     modes:
       - action

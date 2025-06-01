@@ -4,7 +4,7 @@
   <tr><th colspan="2"><h3>🥠 Fortune</h3></th></tr>
   <tr><td colspan="2" align="center"><p>This plugins displays a random fortune message</p>
 </td></tr>
-<tr><th>Authors</th><td><a href="https://github.com/lowlighter">@lowlighter</a></td></tr>
+<tr><th>Authors</th><td><a href="https://github.com/gh-metrics">@gh-metrics</a></td></tr>
   <tr>
     <th rowspan="3">Supported features<br><sub><a href="metadata.yml">→ Full specification</a></sub></th>
     <td><a href="/source/templates/classic/README.md"><code>📗 Classic template</code></a></td>
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -49,7 +49,7 @@
 <!--examples-->
 ```yaml
 name: Fortune
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.fortune.svg
   token: NOT_NEEDED

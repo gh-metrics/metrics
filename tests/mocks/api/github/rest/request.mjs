@@ -17,11 +17,11 @@ export default async function({faker}, target, that, args) {
     })
   }
   //Commit content
-  if (/^https:..api.github.com.repos.lowlighter.metrics.commits.MOCKED_SHA/.test(url)) {
+  if (/^https:..api.github.com.repos.gh-metrics.metrics.commits.MOCKED_SHA/.test(url)) {
     console.debug(`metrics/compute/mocks > mocking rest api result > rest.request ${url}`)
     return ({
       status: 200,
-      url: "https://api.github.com/repos/lowlighter/metrics/commits/MOCKED_SHA",
+      url: "https://api.github.com/repos/gh-metrics/metrics/commits/MOCKED_SHA",
       data: {
         sha: "MOCKED_SHA",
         commit: {
@@ -35,7 +35,7 @@ export default async function({faker}, target, that, args) {
             email: faker.internet.email(),
             date: `${faker.date.recent({days: 7})}`,
           },
-          url: "https://api.github.com/repos/lowlighter/metrics/commits/MOCKED_SHA",
+          url: "https://api.github.com/repos/gh-metrics/metrics/commits/MOCKED_SHA",
         },
         author: {
           login: faker.internet.userName(),

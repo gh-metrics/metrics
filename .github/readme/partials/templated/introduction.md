@@ -119,7 +119,7 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   <tr>
     <td align="center" colspan="2">
       <b>Power user?</b><br>
-      <a href="https://github.com/lowlighter/metrics/fork">Fork this repository</a> and edit HTML, CSS, JS and <a href="https://github.com/mde/ejs">EJS</a> for even more customization!
+      <a href="https://github.com/gh-metrics/metrics/fork">Fork this repository</a> and edit HTML, CSS, JS and <a href="https://github.com/mde/ejs">EJS</a> for even more customization!
     </td>
   </tr>
 </table>

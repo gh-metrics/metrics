@@ -1,5 +1,5 @@
 - name: Organization
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.organization.svg
     user: github
@@ -7,7 +7,7 @@
     base: header, repositories
 
 - name: Large display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.large.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -15,7 +15,7 @@
 
 - name: JSON metrics
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.example.json
     token: ${{ secrets.METRICS_TOKEN }}
@@ -23,7 +23,7 @@
 
 - name: PNG metrics
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.example.png
     token: ${{ secrets.METRICS_TOKEN }}
@@ -31,19 +31,19 @@
 
 - name: Metrics insights
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.insights.html
     token: ${{ secrets.METRICS_TOKEN }}
     config_output: insights
 
 - name: Presets
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.presets.svg
     token: ${{ secrets.METRICS_TOKEN }}
     base: header, repositories
-    config_presets: https://raw.githubusercontent.com/lowlighter/metrics/presets/lunar-red/preset.yaml
+    config_presets: https://raw.githubusercontent.com/gh-metrics/metrics/presets/lunar-red/preset.yaml
   prod:
     skip: true
   test:
@@ -51,7 +51,7 @@
       - web
 
 - name: Plugin error example
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.error.svg
     token: ${{ secrets.METRICS_TOKEN }}

@@ -19,8 +19,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Compact display</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.compact.svg" alt=""></img></details>
-      <details><summary>Detailed display</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.svg" alt=""></img></details>
+      <details open><summary>Compact display</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.compact.svg" alt=""></img></details>
+      <details><summary>Detailed display</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -129,7 +129,7 @@ All product and company names are trademarks™ or registered® trademarks of th
 <!--examples-->
 ```yaml
 name: Detailed display
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.achievements.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -140,7 +140,7 @@ with:
 ```
 ```yaml
 name: Compact display
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.achievements.compact.svg
   token: ${{ secrets.METRICS_TOKEN }}

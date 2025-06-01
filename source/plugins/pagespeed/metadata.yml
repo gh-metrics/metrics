@@ -8,9 +8,9 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with [Google PageSpeed](https://pagespeed.web.dev/).
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  +PageSpeed scores: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.svg
-  PageSpeed scores with detailed report: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.detailed.svg
-  PageSpeed scores with a website screenshot: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.screenshot.svg
+  +PageSpeed scores: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.svg
+  PageSpeed scores with detailed report: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.detailed.svg
+  PageSpeed scores with a website screenshot: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.screenshot.svg
 index: 0
 supports:
   - user

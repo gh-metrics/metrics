@@ -1,5 +1,5 @@
 - name: GitHub Skyline
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.skyline.svg
     token: NOT_NEEDED
@@ -17,7 +17,7 @@
     skip: true # Currently skyline always return 404
 
 - name: GitHub City
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.skyline.city.svg
     token: NOT_NEEDED

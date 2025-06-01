@@ -1,12 +1,12 @@
 - name: 🎟️ Follow-up of issues and pull requests - Opened on user's repositories
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_followup: 'yes'
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎟️ Follow-up of issues and pull requests - Opened by user
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_followup: 'yes'
@@ -14,7 +14,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎟️ Follow-up of issues and pull requests - Indepth analysis
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_followup: 'yes'
@@ -22,7 +22,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎟️ Follow-up of issues and pull requests - Exclude Archived
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_followup: 'yes'

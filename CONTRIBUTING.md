@@ -8,11 +8,11 @@ Be sure to read [ARCHITECTURE.md](/ARCHITECTURE.md) first to understand how `met
 
 Before working on something, ensure that it will not duplicate any active open pull requests (including drafts).
 
-It is advised to open a [`💬 discussion`](https://github.com/lowlighter/metrics/discussions) first to gather feedback about new features.
+It is advised to open a [`💬 discussion`](https://github.com/gh-metrics/metrics/discussions) first to gather feedback about new features.
 
 > ⚠️ To avoid an ever-growing backlog, inactive pull requests will be closed after 3 weeks and locked after 5 weeks.
 
-> 😅 Be positive! Even if your changes don't get merged in [lowlighter/metrics](https://github.com/lowlighter/metrics), please don't be too sad, you will always be able to run workflows directly from your fork!
+> 😅 Be positive! Even if your changes don't get merged in [gh-metrics/metrics](https://github.com/gh-metrics/metrics), please don't be too sad, you will always be able to run workflows directly from your fork!
 
 ## 🤝 Accepted contributions
 
@@ -42,7 +42,7 @@ The following contributions are accepted:
     <td>
       <ul>
         <li>Template changes are allowed with new features additions (but must remain consistent with current visuals)</li>
-        <li>New templates should use <a href="https://github.com/lowlighter/metrics/blob/master/source/templates/community/README.md">📕 Community templates</a> instead</li>
+        <li>New templates should use <a href="https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md">📕 Community templates</a> instead</li>
       </ul>
     </td>
   </tr>
@@ -53,7 +53,7 @@ The following contributions are accepted:
     <td>
       <ul>
         <li>New presets are welcomed provided they're functional and not redundant with existing presets</li>
-        <li>Note that presets are on <code><a href="https://github.com/lowlighter/metrics/tree/presets">@presets</a></code> branch</li>
+        <li>Note that presets are on <code><a href="https://github.com/gh-metrics/metrics/tree/presets">@presets</a></code> branch</li>
       </ul>
     </td>
   </tr>

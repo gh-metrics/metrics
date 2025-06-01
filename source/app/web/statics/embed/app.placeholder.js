@@ -62,7 +62,7 @@
         return await ejs.render(partial, data, {async: true, rmWhitespace: true})
       },
       //Meta-data
-      meta: {version: set.version, author: "lowlighter", generated: new Date().toGMTString().replace(/GMT$/g, "").trim()},
+      meta: {version: set.version, author: "gh-metrics", generated: new Date().toGMTString().replace(/GMT$/g, "").trim()},
       //Animated
       animated: false,
       //Display size
@@ -149,10 +149,10 @@
                   id: faker.number.int(100000000000000).toString(),
                   created_at: faker.date.recent(),
                   entities: {
-                    mentions: [{start: 22, end: 33, username: "lowlighter"}],
+                    mentions: [{start: 22, end: 33, username: "gh-metrics"}],
                   },
-                  text: 'Checkout metrics from  <span class="mention">@lowlighter</span>  !  <span class="hashtag">#GitHub</span> ',
-                  mentions: ["lowlighter"],
+                  text: 'Checkout metrics from  <span class="mention">@gh-metrics</span>  !  <span class="hashtag">#GitHub</span> ',
+                  mentions: ["gh-metrics"],
                 },
                 ...new Array(Number(options["tweets.limit"]) - 1).fill(null).map(_ => ({
                   id: faker.number.int(100000000000000).toString(),
@@ -822,7 +822,7 @@
                     issues: {
                       totalCount: faker.number.int(100),
                     },
-                    nameWithOwner: "lowlighter/metrics",
+                    nameWithOwner: "gh-metrics/metrics",
                     openGraphImageUrl: "https://repository-images.githubusercontent.com/293860197/7fd72080-496d-11eb-8fe0-238b38a0746a",
                     pullRequests: {
                       totalCount: faker.number.int(100),
@@ -870,7 +870,7 @@
                   description: !i
                     ? "📊 An image generator with 20+ metrics about your GitHub account such as activity, community, repositories, coding habits, website performances, music played, starred topics, etc. that you can put on your profile or elsewhere !"
                     : faker.lorem.sentence(),
-                  name: !i ? "lowlighter/metrics" : `${faker.lorem.word()}/${faker.lorem.word()}`,
+                  name: !i ? "gh-metrics/metrics" : `${faker.lorem.word()}/${faker.lorem.word()}`,
                 })),
               })),
             },

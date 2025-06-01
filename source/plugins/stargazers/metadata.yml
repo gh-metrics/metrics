@@ -3,9 +3,9 @@ category: github
 description: |
   This plugin displays stargazers evolution across affiliated repositories.
 examples:
-  +classic charts: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.svg
-  graph charts: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.graph.svg
-  +worldmap: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg
+  +classic charts: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.svg
+  graph charts: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.graph.svg
+  +worldmap: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg
 index: 2
 supports:
   - user

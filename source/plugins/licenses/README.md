@@ -27,8 +27,8 @@ This could result in compromised server!</p>
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Permissions, limitations and conditions</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
-      <details open><summary>Licenses overview</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
+      <details open><summary>Permissions, limitations and conditions</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
+      <details open><summary>Licenses overview</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -134,7 +134,7 @@ with:
 ```
 ```yaml
 name: Licenses with open-source ratio graphs
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.licenses.ratio.svg
   token: ${{ secrets.METRICS_TOKEN }}

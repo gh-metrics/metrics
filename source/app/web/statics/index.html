@@ -5,7 +5,7 @@
     <title>Metrics</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="An image generator with 20+ metrics about your GitHub account such as activity, community, repositories, coding habits, website performances, music played, starred topics, etc. that you can put on your profile or elsewhere !">
-    <meta name="author" content="lowlighter">
+    <meta name="author" content="gh-metrics">
     <meta property="og:image" content="/.opengraph.png">
     <link rel="icon" href="/.favicon.png">
     <link rel="stylesheet" href="/.css/style.vars.css?v=3.34">
@@ -83,14 +83,14 @@
                 Please wait until {{ rlreset }} to generate metrics again.
               </div>
               <small :class="{'error-text':(!requests.rest.remaining)||(!requests.graphql.remaining)}">Remaining GitHub requests<span v-if="requests.login"> for {{ requests.login }}</span>: {{ requests.rest.remaining }} REST / {{ requests.graphql.remaining }} GraphQL / {{ requests.search.remaining }} search</small>
-              <small>Send feedback on <a href="https://github.com/lowlighter/metrics/discussions" target="_blank">GitHub discussions</a>!</small>
+              <small>Send feedback on <a href="https://github.com/gh-metrics/metrics/discussions" target="_blank">GitHub discussions</a>!</small>
             </div>
           </div>
         </section>
 
         <footer>
-          <a href="https://github.com/lowlighter/metrics">Repository</a>
-          <a href="https://github.com/lowlighter/metrics/blob/master/LICENSE">License</a>
+          <a href="https://github.com/gh-metrics/metrics">Repository</a>
+          <a href="https://github.com/gh-metrics/metrics/blob/master/LICENSE">License</a>
           <a href="https://github.com/marketplace/actions/metrics-embed">GitHub Action</a>
           <span v-if="hosted">Hosted with ❤️ by <a :href="hosted.link">{{ hosted.by }}</a></span>
         </footer>

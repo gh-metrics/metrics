@@ -1,6 +1,6 @@
 # 📊 Metrics [<img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=280144&theme=dark" alt="" align="right" width="190" height="41">](https://www.producthunt.com/posts/github-metrics?utm_source=badge-featured&utm_medium=badge&utm_source=badge-github-metrics)
 
-[![Continuous integration](https://github.com/lowlighter/metrics/actions/workflows/ci.yml/badge.svg)](https://github.com/lowlighter/metrics/actions/workflows/ci.yml)
+[![Continuous integration](https://github.com/gh-metrics/metrics/actions/workflows/ci.yml/badge.svg)](https://github.com/gh-metrics/metrics/actions/workflows/ci.yml)
 
 Generate metrics that can be embedded everywhere, including your GitHub profile readme! Supports users, organizations, and even repositories!
 
@@ -11,10 +11,10 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
     <td align="center">
-<img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.classic.svg" alt=""></img>
+<img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.classic.svg" alt=""></img>
 </td>
 <td align="center">
-<img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.organization.svg" alt=""></img>
+<img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.organization.svg" alt=""></img>
 </td>
   </tr>
   <tr>
@@ -28,15 +28,15 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Full year calendar</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.isocalendar.fullyear.svg" alt=""></img></details>
-        <details><summary>Half year calendar</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.isocalendar.svg" alt=""></img></details>
+        <details open><summary>Full year calendar</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.isocalendar.fullyear.svg" alt=""></img></details>
+        <details><summary>Half year calendar</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.isocalendar.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Indepth analysis (clone and analyze repositories)</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.indepth.svg" alt=""></img></details>
-        <details open><summary>Recently used (analyze recent activity events)</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.recent.svg" alt=""></img></details>
-        <details><summary>Default algorithm</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.svg" alt=""></img></details>
-        <details><summary>Default algorithm (with details)</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.details.svg" alt=""></img></details>
+        <details open><summary>Indepth analysis (clone and analyze repositories)</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.indepth.svg" alt=""></img></details>
+        <details open><summary>Recently used (analyze recent activity events)</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.recent.svg" alt=""></img></details>
+        <details><summary>Default algorithm</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.svg" alt=""></img></details>
+        <details><summary>Default algorithm (with details)</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.details.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -46,14 +46,14 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Classic charts</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.svg" alt=""></img></details>
-        <details><summary>Graph charts</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.graph.svg" alt=""></img></details>
-        <details open><summary>Worldmap</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg" alt=""></img></details>
+        <details open><summary>Classic charts</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.svg" alt=""></img></details>
+        <details><summary>Graph charts</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.graph.svg" alt=""></img></details>
+        <details open><summary>Worldmap</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Repositories and diff history</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.lines.history.svg" alt=""></img></details>
-        <details><summary>Compact display in base plugin</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.lines.svg" alt=""></img></details>
+        <details open><summary>Repositories and diff history</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.lines.history.svg" alt=""></img></details>
+        <details><summary>Compact display in base plugin</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.lines.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -63,12 +63,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>With icons</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.icons.svg" alt=""></img></details>
-        <details open><summary>With labels</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.svg" alt=""></img></details>
+        <details open><summary>With icons</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.icons.svg" alt=""></img></details>
+        <details open><summary>With labels</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stars.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stars.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -78,13 +78,13 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Permissions, limitations and conditions</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
-        <details open><summary>Licenses overview</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
+        <details open><summary>Permissions, limitations and conditions</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
+        <details open><summary>Licenses overview</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Recent activity charts</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.habits.charts.svg" alt=""></img></details>
-        <details open><summary>Mildly interesting facts</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.habits.facts.svg" alt=""></img></details>
+        <details open><summary>Recent activity charts</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.habits.charts.svg" alt=""></img></details>
+        <details open><summary>Mildly interesting facts</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.habits.facts.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -94,14 +94,14 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>By contribution types</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.contributors.categories.svg" alt=""></img></details>
-        <details><summary>By number of contributions</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.contributors.contributions.svg" alt=""></img></details>
+        <details open><summary>By contribution types</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.contributors.categories.svg" alt=""></img></details>
+        <details><summary>By number of contributions</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.contributors.contributions.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Indepth analysis</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.indepth.svg" alt=""></img></details>
-        <details><summary>Created on a user's repositories</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.svg" alt=""></img></details>
-        <details><summary>Created by a user</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.user.svg" alt=""></img></details>
+        <details open><summary>Indepth analysis</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.indepth.svg" alt=""></img></details>
+        <details><summary>Created on a user's repositories</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.svg" alt=""></img></details>
+        <details><summary>Created by a user</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.user.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -111,12 +111,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.reactions.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.reactions.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Related to a user</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.people.followers.svg" alt=""></img></details>
-        <details><summary>Related to a repository</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.people.repository.svg" alt=""></img></details>
+        <details open><summary>Related to a user</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.people.followers.svg" alt=""></img></details>
+        <details><summary>Related to a repository</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.people.repository.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -126,12 +126,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.sponsorships.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.sponsorships.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>GitHub sponsors card</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.sponsors.svg" alt=""></img></details>
-        <details><summary>GitHub sponsors full introduction</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.sponsors.full.svg" alt=""></img></details>
+        <details open><summary>GitHub sponsors card</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.sponsors.svg" alt=""></img></details>
+        <details><summary>GitHub sponsors full introduction</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.sponsors.full.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -141,12 +141,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Featured</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.repositories.svg" alt=""></img></details>
-        <details><summary>Pinned</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.repositories.pinned.svg" alt=""></img></details>
+        <details open><summary>Featured</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.repositories.svg" alt=""></img></details>
+        <details><summary>Pinned</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.repositories.pinned.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.discussions.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.discussions.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -156,13 +156,13 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Repositories from star lists</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.starlists.svg" alt=""></img></details>
-        <details open><summary>Languages from star lists</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.starlists.languages.svg" alt=""></img></details>
+        <details open><summary>Repositories from star lists</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.starlists.svg" alt=""></img></details>
+        <details open><summary>Languages from star lists</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.starlists.languages.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details><summary>Current year</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.svg" alt=""></img></details>
-        <details open><summary>Full history</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.full.svg" alt=""></img></details>
+        <details><summary>Current year</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.svg" alt=""></img></details>
+        <details open><summary>Full history</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.full.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -172,13 +172,13 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Compact display</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.compact.svg" alt=""></img></details>
-        <details><summary>Detailed display</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.svg" alt=""></img></details>
+        <details open><summary>Compact display</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.compact.svg" alt=""></img></details>
+        <details><summary>Detailed display</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Indepth analysis</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.indepth.svg" alt=""></img></details>
-        <details><summary>Contributions in organizations only</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.svg" alt=""></img></details>
+        <details open><summary>Indepth analysis</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.indepth.svg" alt=""></img></details>
+        <details><summary>Contributions in organizations only</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -188,11 +188,11 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.activity.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.activity.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.traffic.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.traffic.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -202,11 +202,11 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.code.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.code.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.gists.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.gists.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -216,12 +216,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>For a user or an organization</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.introduction.svg" alt=""></img></details>
-        <details><summary>For a repository</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.introduction.repository.svg" alt=""></img></details>
+        <details open><summary>For a user or an organization</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.introduction.svg" alt=""></img></details>
+        <details><summary>For a repository</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.introduction.repository.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -231,14 +231,14 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>GitHub Skyline</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.skyline.svg" alt=""></img></details>
-        <details><summary>GitHub City</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.skyline.city.svg" alt=""></img></details>
+        <details open><summary>GitHub Skyline</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.skyline.svg" alt=""></img></details>
+        <details><summary>GitHub City</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.skyline.city.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>PageSpeed scores</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.svg" alt=""></img></details>
-        <details><summary>PageSpeed scores with detailed report</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.detailed.svg" alt=""></img></details>
-        <details><summary>PageSpeed scores with a website screenshot</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.pagespeed.screenshot.svg" alt=""></img></details>
+        <details open><summary>PageSpeed scores</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.svg" alt=""></img></details>
+        <details><summary>PageSpeed scores with detailed report</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.detailed.svg" alt=""></img></details>
+        <details><summary>PageSpeed scores with a website screenshot</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.pagespeed.screenshot.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -248,13 +248,13 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stackoverflow.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stackoverflow.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>For anime watchers</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.anilist.svg" alt=""></img></details>
-        <details><summary>For manga readers</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.anilist.manga.svg" alt=""></img></details>
-        <details open><summary>For waifus simp</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.anilist.characters.svg" alt=""></img></details>
+        <details open><summary>For anime watchers</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.anilist.svg" alt=""></img></details>
+        <details><summary>For manga readers</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.anilist.manga.svg" alt=""></img></details>
+        <details open><summary>For waifus simp</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.anilist.characters.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -264,13 +264,13 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <details open><summary>Random tracks from a playlist</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.music.playlist.svg" alt=""></img></details>
-        <details open><summary>Recently listened</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.music.recent.svg" alt=""></img></details>
+        <details open><summary>Random tracks from a playlist</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.music.playlist.svg" alt=""></img></details>
+        <details open><summary>Recently listened</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.music.recent.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Latest posts width description and cover image</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.full.svg" alt=""></img></details>
-        <details><summary>Latest posts</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.svg" alt=""></img></details>
+        <details open><summary>Latest posts width description and cover image</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.full.svg" alt=""></img></details>
+        <details><summary>Latest posts</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -280,11 +280,11 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.rss.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.rss.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.wakatime.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.wakatime.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -294,12 +294,12 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.leetcode.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.leetcode.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <details open><summary>Recently played games</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.svg" alt=""></img></details>
-        <details><summary>Profile and detailed game history</summary><img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.full.svg" alt=""></img></details>
+        <details open><summary>Recently played games</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.svg" alt=""></img></details>
+        <details><summary>Profile and detailed game history</summary><img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.full.svg" alt=""></img></details>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -309,15 +309,15 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
     </th>
   </tr>
   <tr>
-    <th><a href="source/plugins/community/16personalities/README.md">🧠 16personalities</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/16personalities/README.md">🧠 16personalities</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.16personalities.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.16personalities.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
-    <th><a href="source/plugins/community/chess/README.md">♟️ Chess</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/chess/README.md">♟️ Chess</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.chess.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.chess.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
@@ -329,9 +329,9 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
         <img width="900" height="1" alt="">
       </details>
     </th>
-    <th><a href="source/plugins/community/fortune/README.md">🥠 Fortune</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/fortune/README.md">🥠 Fortune</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
@@ -351,23 +351,23 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
     </th>
   </tr>
   <tr>
-    <th><a href="source/plugins/community/screenshot/README.md">📸 Website screenshot</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/screenshot/README.md">📸 Website screenshot</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.screenshot.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.screenshot.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
-    <th><a href="source/plugins/community/splatoon/README.md">🦑 Splatoon</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/splatoon/README.md">🦑 Splatoon</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
   </tr>
   <tr>
-    <th><a href="source/plugins/community/stock/README.md">💹 Stock prices</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup>
+    <th><a href="source/plugins/community/stock/README.md">💹 Stock prices</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup>
       <details><summary>Render example</summary>
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </details>
     </th>
@@ -385,11 +385,11 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.classic.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.classic.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.repository.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.repository.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -399,11 +399,11 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   </tr>
   <tr>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.terminal.svg" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.terminal.svg" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
         <td  align="center">
-        <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.markdown.png" alt=""></img>
+        <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.markdown.png" alt=""></img>
         <img width="900" height="1" alt="">
       </td>
   </tr>
@@ -437,7 +437,7 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
   <tr>
     <td align="center" colspan="2">
       <b>Power user?</b><br>
-      <a href="https://github.com/lowlighter/metrics/fork">Fork this repository</a> and edit HTML, CSS, JS and <a href="https://github.com/mde/ejs">EJS</a> for even more customization!
+      <a href="https://github.com/gh-metrics/metrics/fork">Fork this repository</a> and edit HTML, CSS, JS and <a href="https://github.com/mde/ejs">EJS</a> for even more customization!
     </td>
   </tr>
 </table>
@@ -446,7 +446,7 @@ Generate metrics that can be embedded everywhere, including your GitHub profile 
 # 📚 Documentation
 
 
-> <sup>*⚠️ This is the documentation of **v3.35-beta** (`@master`/`@main` branches) which includes [unreleased features](https://github.com/lowlighter/metrics/compare/latest...master) planned for next release. See documentation for current released version [**v3.34** (`@latest` branch) here](https://github.com/lowlighter/metrics/blob/latest/README.md).* </sup>
+> <sup>*⚠️ This is the documentation of **v3.35-beta** (`@master`/`@main` branches) which includes [unreleased features](https://github.com/gh-metrics/metrics/compare/latest...master) planned for next release. See documentation for current released version [**v3.34** (`@latest` branch) here](https://github.com/gh-metrics/metrics/blob/latest/README.md).* </sup>
 
 
 
@@ -535,15 +535,15 @@ Plugins provide additional content and lets you customize rendered metrics.
 
 **🎲 Maintained by community**
 * **[Community plugins](/source/plugins/community/README.md)**
-  * [🧠 16personalities <sub>`16personalities`</sub>](/source/plugins/community/16personalities/README.md) by [@lowlighter](https://github.com/lowlighter)
-  * [♟️ Chess <sub>`chess`</sub>](/source/plugins/community/chess/README.md) by [@lowlighter](https://github.com/lowlighter)
+  * [🧠 16personalities <sub>`16personalities`</sub>](/source/plugins/community/16personalities/README.md) by [@gh-metrics](https://github.com/gh-metrics)
+  * [♟️ Chess <sub>`chess`</sub>](/source/plugins/community/chess/README.md) by [@gh-metrics](https://github.com/gh-metrics)
   * [🪙 Crypto <sub>`crypto`</sub>](/source/plugins/community/crypto/README.md) by [@dajneem23](https://github.com/dajneem23)
-  * [🥠 Fortune <sub>`fortune`</sub>](/source/plugins/community/fortune/README.md) by [@lowlighter](https://github.com/lowlighter)
+  * [🥠 Fortune <sub>`fortune`</sub>](/source/plugins/community/fortune/README.md) by [@gh-metrics](https://github.com/gh-metrics)
   * [💉 Nightscout <sub>`nightscout`</sub>](/source/plugins/community/nightscout/README.md) by [@legoandmars](https://github.com/legoandmars)
   * [💩 PoopMap plugin <sub>`poopmap`</sub>](/source/plugins/community/poopmap/README.md) by [@matievisthekat](https://github.com/matievisthekat)
-  * [📸 Website screenshot <sub>`screenshot`</sub>](/source/plugins/community/screenshot/README.md) by [@lowlighter](https://github.com/lowlighter)
-  * [🦑 Splatoon <sub>`splatoon`</sub>](/source/plugins/community/splatoon/README.md) by [@lowlighter](https://github.com/lowlighter)
-  * [💹 Stock prices <sub>`stock`</sub>](/source/plugins/community/stock/README.md) by [@lowlighter](https://github.com/lowlighter)
+  * [📸 Website screenshot <sub>`screenshot`</sub>](/source/plugins/community/screenshot/README.md) by [@gh-metrics](https://github.com/gh-metrics)
+  * [🦑 Splatoon <sub>`splatoon`</sub>](/source/plugins/community/splatoon/README.md) by [@gh-metrics](https://github.com/gh-metrics)
+  * [💹 Stock prices <sub>`stock`</sub>](/source/plugins/community/stock/README.md) by [@gh-metrics](https://github.com/gh-metrics)
 
 
 ## 💪 Contributing
@@ -559,16 +559,16 @@ If you are interested in contributing, the following resources may interest you:
   * [📖 GitHub Rest API](https://docs.github.com/en/rest)
   * [📖 GitHub Octicons](https://github.com/primer/octicons)
 
-Use [`💬 discussions`](https://github.com/lowlighter/metrics/discussions) for feedback, new features suggestions, bugs reports or to request help for installation.
+Use [`💬 discussions`](https://github.com/gh-metrics/metrics/discussions) for feedback, new features suggestions, bugs reports or to request help for installation.
 
 
 ## 📜 License
 
 ```
 MIT License
-Copyright (c) 2020-present lowlighter
+Copyright (c) 2020-present gh-metrics
 ```
 
-![Sponsors](https://github.com/lowlighter/metrics/blob/examples/metrics.sponsors.svg)
+![Sponsors](https://github.com/gh-metrics/metrics/blob/examples/metrics.sponsors.svg)
 
 

@@ -1,5 +1,5 @@
 - name: 🧱 Core - Organization
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     user: github
     token: MOCKED_TOKEN
@@ -7,7 +7,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🧱 Core - Large display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     config_display: large
@@ -15,7 +15,7 @@
     verify: 'yes'
 - name: 🧱 Core - JSON metrics
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     config_output: json
@@ -23,7 +23,7 @@
     verify: 'yes'
 - name: 🧱 Core - PNG metrics
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     config_output: png
@@ -31,19 +31,19 @@
     verify: 'yes'
 - name: 🧱 Core - Metrics insights
   if: ${{ success() || failure() }}
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     config_output: insights
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🧱 Core - Presets
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     base: header, repositories
     config_presets: >-
-      https://raw.githubusercontent.com/lowlighter/metrics/presets/lunar-red/preset.yaml
+      https://raw.githubusercontent.com/gh-metrics/metrics/presets/lunar-red/preset.yaml
     use_mocked_data: 'yes'
     verify: 'yes'
   modes:

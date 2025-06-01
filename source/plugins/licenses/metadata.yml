@@ -8,8 +8,8 @@ notes: |
   > 💣 This plugin **SHOULD NOT** be enabled on web instances, since it allows raw command injection.
   > This could result in compromised server!
 examples:
-  +permissions, limitations and conditions: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.svg
-  +licenses overview: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.ratio.svg
+  +permissions, limitations and conditions: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.svg
+  +licenses overview: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.ratio.svg
 index: 6
 supports:
   - repository

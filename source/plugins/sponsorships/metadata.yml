@@ -3,7 +3,7 @@ category: github
 description: |
   This plugin displays sponsorships funded through [GitHub sponsors](https://github.com/sponsors/).
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.sponsorships.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.sponsorships.svg
 index: 12
 supports:
   - user

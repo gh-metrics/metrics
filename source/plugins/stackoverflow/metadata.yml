@@ -6,7 +6,7 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with [Stack Overflow](https://stackoverflow.com/).
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stackoverflow.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stackoverflow.svg
 index: 3
 supports:
   - user

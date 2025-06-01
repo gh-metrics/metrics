@@ -5,7 +5,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
     user: {
       repository: {
         licenseInfo: {spdxId: "MIT", name: "MIT License", nickname: null, key: "mit"},
-        url: "https://github.com/lowlighter/metrics",
+        url: "https://github.com/gh-metrics/metrics",
         databaseId: 293860197,
       },
     },

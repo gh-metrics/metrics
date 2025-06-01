@@ -2,8 +2,8 @@ name: 🗃️ Base content
 category: core
 description:
 examples:
-  default1: https://github.com/lowlighter/metrics/blob/examples/metrics.classic.svg
-  default2: https://github.com/lowlighter/metrics/blob/examples/metrics.organization.svg
+  default1: https://github.com/gh-metrics/metrics/blob/examples/metrics.classic.svg
+  default2: https://github.com/gh-metrics/metrics/blob/examples/metrics.organization.svg
 supports:
   - user
   - organization
@@ -140,6 +140,6 @@ inputs:
     type: array
     format: comma-separated
     default: .user.login
-    example: lowlighter, lowlighter@users.noreply.github.com
+    example: gh-metrics, gh-metrics@users.noreply.github.com
     global: yes
     preset: no

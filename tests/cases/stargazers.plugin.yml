@@ -1,12 +1,12 @@
 - name: ✨ Stargazers - Using classic charts
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_stargazers: 'yes'
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: ✨ Stargazers - Using graph charts
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_stargazers: 'yes'
@@ -14,7 +14,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: ✨ Stargazers - With worldmap
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_stargazers: 'yes'

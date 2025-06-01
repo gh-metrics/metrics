@@ -20,14 +20,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lowlighter/metrics.git"
+    "url": "git+https://github.com/gh-metrics/metrics.git"
   },
-  "author": "lowlighter",
+  "author": "gh-metrics",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lowlighter/metrics/issues"
+    "url": "https://github.com/gh-metrics/metrics/issues"
   },
-  "homepage": "https://github.com/lowlighter/metrics#readme",
+  "homepage": "https://github.com/gh-metrics/metrics#readme",
   "dependencies": {
     "@actions/core": "^1.10.1",
     "@actions/github": "^5.1.1",

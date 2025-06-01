@@ -1,5 +1,5 @@
 - name: 👨‍💻 Lines of code changed - Compact display in base plugin
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     base: repositories
@@ -8,7 +8,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 👨‍💻 Lines of code changed - Repositories and diff history
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_lines: 'yes'
@@ -19,6 +19,6 @@
     repositories_skipped: |
       @use.patterns
       */*
-      +lowlighter/metrics
+      +gh-metrics/metrics
     use_mocked_data: 'yes'
     verify: 'yes'

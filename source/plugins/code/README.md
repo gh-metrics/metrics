@@ -25,7 +25,7 @@ Use at your own risk, <em>metrics</em> and its authors cannot be held responsibl
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.code.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.code.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -130,7 +130,7 @@ Use at your own risk, <em>metrics</em> and its authors cannot be held responsibl
 <!--examples-->
 ```yaml
 name: JavaScript or TypeScript snippet of the day
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.code.svg
   token: ${{ secrets.METRICS_TOKEN }}
