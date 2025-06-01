@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Setup metrics
@@ -36,7 +36,7 @@ jobs:
     needs: [ lint ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Format code with dprint
         run: |
           npm install -g dprint
@@ -58,11 +58,11 @@ jobs:
     needs: [ lint ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup CodeQL
-        uses: github/codeql-action/init@v2
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
           config-file: ./.github/config/codeql.yml
       - name: Analyze code
-        uses: github/codeql-action/analyze@v2
+        uses: github/codeql-action/analyze@v3

@@ -97,7 +97,7 @@ jobs:
       cancel-in-progress: false
     steps:
     - name: apply spelling updates
-      uses: check-spelling/check-spelling@v0.0.20
+      uses: check-spelling/check-spelling@v0.0.25
       with:
         experimental_apply_changes_via_bot: ${{ github.repository_owner != 'gh-metrics' && 1 || 0 }}
         checkout: true

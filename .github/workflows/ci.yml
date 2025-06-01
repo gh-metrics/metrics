@@ -20,7 +20,7 @@ jobs:
     if: always() && (needs.build-test-analyze.result == 'success' || needs.build-test-analyze.result == 'skipped')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Checkout master
@@ -47,11 +47,11 @@ jobs:
     needs: [ format ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Pull changes
@@ -70,11 +70,11 @@ jobs:
     needs: [ update-indexes ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Pull
@@ -93,7 +93,7 @@ jobs:
     needs: [ update-indexes ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Login to GitHub registry
         run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Build docker image
@@ -178,7 +178,7 @@ jobs:
     if: contains(github.event.head_commit.message, '[release]')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Login to GitHub registry
         run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
       - name: Pull docker image (master)
@@ -203,11 +203,11 @@ jobs:
     needs: [ docker-release ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Setup metrics
@@ -256,9 +256,9 @@ jobs:
     needs: [ action-latest-test, deploy-latest ]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup NodeJS
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Setup metrics

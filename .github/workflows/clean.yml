@@ -13,7 +13,7 @@ jobs:
     continue-on-error: true
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run script
         run: ./delete_ghcr_dangling_images.sh gh-metrics metrics
         working-directory: .github/actions/ghcr-clean
