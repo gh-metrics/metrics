@@ -1,5 +1,5 @@
 - name: ♐ Random code snippet - JavaScript or TypeScript snippet of the day
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_code: 'yes'

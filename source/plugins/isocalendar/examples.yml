@@ -1,5 +1,5 @@
 - name: Half-year calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.isocalendar.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -7,7 +7,7 @@
     plugin_isocalendar: yes
 
 - name: Full-year calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.isocalendar.fullyear.svg
     token: ${{ secrets.METRICS_TOKEN }}

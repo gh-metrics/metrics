@@ -1,12 +1,12 @@
 - name: 📆 Commit calendar - Current year calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_calendar: 'yes'
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 📆 Commit calendar - Full history calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_calendar: 'yes'

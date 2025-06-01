@@ -29,7 +29,7 @@ export default async function metadata({log = true, diff = false} = {}) {
   //Diff with latest version
   if (diff) {
     try {
-      previous = yaml.load(await fetch("https://raw.githubusercontent.com/lowlighter/metrics/latest/action.yml").then(response => response.text()))
+      previous = yaml.load(await fetch("https://raw.githubusercontent.com/gh-metrics/metrics/latest/action.yml").then(response => response.text()))
     }
     catch (error) {
       logger(error)

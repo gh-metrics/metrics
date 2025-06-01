@@ -1,5 +1,5 @@
 - name: 💡 Coding habits and activity - Mildly interesting facts
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_habits: 'yes'
@@ -9,7 +9,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 💡 Coding habits and activity - Recent activity charts
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_habits: 'yes'

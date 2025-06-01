@@ -116,15 +116,15 @@
       oauth: false,
       docs: {
         overview: {
-          link: "https://github.com/lowlighter/metrics#-documentation",
+          link: "https://github.com/gh-metrics/metrics#-documentation",
           name: "Complete documentation",
         },
         markdown: {
-          link: "https://github.com/lowlighter/metrics/blob/master/.github/readme/partials/documentation/setup/shared.md",
+          link: "https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/shared.md",
           name: "Setup using the shared instance",
         },
         action: {
-          link: "https://github.com/lowlighter/metrics/blob/master/.github/readme/partials/documentation/setup/action.md",
+          link: "https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md",
           name: "Setup using GitHub Action on a profile repository",
         },
       },
@@ -232,7 +232,7 @@
       //GitHub action auto-generated code
       action() {
         return [
-          `# Visit https://github.com/lowlighter/metrics#-documentation for full reference`,
+          `# Visit https://github.com/gh-metrics/metrics#-documentation for full reference`,
           `name: Metrics`,
           `on:`,
           `  # Schedule updates (each hour)`,
@@ -246,7 +246,7 @@
           `    permissions:`,
           `      contents: write`,
           `    steps:`,
-          `      - uses: lowlighter/metrics@latest`,
+          `      - uses: gh-metrics/metrics@latest`,
           `        with:`,
           ...(this.scopes.size
             ? [

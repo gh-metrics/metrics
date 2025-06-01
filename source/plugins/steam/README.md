@@ -19,8 +19,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Recently played games</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.svg" alt=""></img></details>
-      <details><summary>Profile and detailed game history</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.full.svg" alt=""></img></details>
+      <details open><summary>Recently played games</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.svg" alt=""></img></details>
+      <details><summary>Profile and detailed game history</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.full.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -164,7 +164,7 @@ To retrieve your Steam ID, access your user account on [store.steampowered.com/a
 <!--examples-->
 ```yaml
 name: Recently played games
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.steam.svg
   token: NOT_NEEDED
@@ -178,7 +178,7 @@ with:
 ```
 ```yaml
 name: Profile and detailed game history
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.steam.full.svg
   token: NOT_NEEDED

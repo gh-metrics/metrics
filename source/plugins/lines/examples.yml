@@ -1,5 +1,5 @@
 - name: Compact display in base plugin
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.lines.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -8,7 +8,7 @@
     plugin_lines_delay: 30
 
 - name: Repositories and diff history
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.lines.history.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -21,4 +21,4 @@
     repositories_skipped: |
       @use.patterns
       */*
-      +lowlighter/metrics
+      +gh-metrics/metrics

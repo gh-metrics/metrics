@@ -1,5 +1,5 @@
 - name: Recently played games
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.steam.svg
     token: NOT_NEEDED
@@ -16,7 +16,7 @@
       use_mocked_data: yes
 
 - name: Profile and detailed game history
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.steam.full.svg
     token: NOT_NEEDED

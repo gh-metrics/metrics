@@ -1,5 +1,5 @@
 - name: 🧑‍🤝‍🧑 People - Followers
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_people: 'yes'
@@ -7,7 +7,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🧑‍🤝‍🧑 People - Contributors and sponsors
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     template: repository

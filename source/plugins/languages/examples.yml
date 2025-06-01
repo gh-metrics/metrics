@@ -1,5 +1,5 @@
 - name: Most used
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.languages.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -9,7 +9,7 @@
     plugin_languages_limit: 4
 
 - name: Most used (with details)
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.languages.details.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -20,7 +20,7 @@
     plugin_languages_limit: 4
 
 - name: Recently used
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.languages.recent.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -32,7 +32,7 @@
     plugin_languages_limit: 4
 
 - name: Indepth analysis
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.languages.indepth.svg
     token: ${{ secrets.METRICS_TOKEN }}

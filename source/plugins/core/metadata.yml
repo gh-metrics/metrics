@@ -152,7 +152,7 @@ inputs:
     description: |
       Community templates to setup
 
-      See [community templates guide](https://github.com/lowlighter/metrics/blob/master/source/templates/community/README.md) for more informations
+      See [community templates guide](https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md) for more informations
     type: array
     format: comma-separated
     default: ""
@@ -164,7 +164,7 @@ inputs:
       Template
 
       Community templates must be prefixed by at sign (`@`)
-      See [list of supported templates](https://github.com/lowlighter/metrics/blob/master/README.md#%EF%B8%8F-templates)
+      See [list of supported templates](https://github.com/gh-metrics/metrics/blob/master/README.md#%EF%B8%8F-templates)
     type: string
     default: classic
 
@@ -301,7 +301,7 @@ inputs:
       - `regular`: 480px width
       - `large`: 960px width (may not be supported by all templates)
       - `columns`: Full width with auto-sizing (two columns for desktops, and one column for mobile)
-        - known issue: https://github.com/lowlighter/metrics/issues/374
+        - known issue: https://github.com/gh-metrics/metrics/issues/374
     type: string
     default: regular
     values:
@@ -493,7 +493,7 @@ inputs:
 
   use_prebuilt_image:
     description: |
-      Use pre-built docker image from [GitHub container registry](https://github.com/lowlighter/metrics/pkgs/container/metrics)
+      Use pre-built docker image from [GitHub container registry](https://github.com/gh-metrics/metrics/pkgs/container/metrics)
 
       It allows to save build time and make job significantly faster, and there is almost no reason to disable this settings.
       This option has no effects on forks (images will always be rebuilt from Dockerfile)

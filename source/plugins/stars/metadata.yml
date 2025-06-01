@@ -3,7 +3,7 @@ category: github
 description: |
   This plugin displays recently starred repositories.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stars.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stars.svg
 index: 5
 supports:
   - user

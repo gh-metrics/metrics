@@ -3,21 +3,21 @@
   <tr><th colspan="2"><h3>🎲 Community plugins</h3></th></tr>
   <tr><td colspan="2" align="center">Additional plugins maintained by community for even more features!</td></tr>
   <tr>
-    <th><a href="/source/plugins/community/16personalities/README.md">🧠 16personalities</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
-    <th><a href="/source/plugins/community/chess/README.md">♟️ Chess</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
+    <th><a href="/source/plugins/community/16personalities/README.md">🧠 16personalities</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
+    <th><a href="/source/plugins/community/chess/README.md">♟️ Chess</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
   </tr>
   <tr>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.16personalities.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.16personalities.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.chess.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.chess.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>  <tr>
     <th><a href="/source/plugins/community/crypto/README.md">🪙 Crypto</a><br><sup>by <a href="https://github.com/dajneem23">@dajneem23</a></sup></th>
-    <th><a href="/source/plugins/community/fortune/README.md">🥠 Fortune</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
+    <th><a href="/source/plugins/community/fortune/README.md">🥠 Fortune</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
   </tr>
   <tr>
     <td  align="center">
@@ -25,7 +25,7 @@
       <img width="900" height="1" alt="">
     </td>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.fortune.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>  <tr>
@@ -42,25 +42,25 @@
       <img width="900" height="1" alt="">
     </td>
   </tr>  <tr>
-    <th><a href="/source/plugins/community/screenshot/README.md">📸 Website screenshot</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
-    <th><a href="/source/plugins/community/splatoon/README.md">🦑 Splatoon</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
+    <th><a href="/source/plugins/community/screenshot/README.md">📸 Website screenshot</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
+    <th><a href="/source/plugins/community/splatoon/README.md">🦑 Splatoon</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
   </tr>
   <tr>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.screenshot.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.screenshot.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>  <tr>
-    <th><a href="/source/plugins/community/stock/README.md">💹 Stock prices</a><br><sup>by <a href="https://github.com/lowlighter">@lowlighter</a></sup></th>
+    <th><a href="/source/plugins/community/stock/README.md">💹 Stock prices</a><br><sup>by <a href="https://github.com/gh-metrics">@gh-metrics</a></sup></th>
     <th></th>
   </tr>
   <tr>
     <td  align="center">
-      <img alt="" width="400" src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
+      <img alt="" width="400" src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
 <td align="center"><img width="900" height="1" alt=""></td>
@@ -98,7 +98,7 @@ Please respect the following guidelines:
 
 To create a new plugin, clone and setup this repository first:
 ```shell
-git clone https://github.com/lowlighter/metrics.git
+git clone https://github.com/gh-metrics/metrics.git
 cd metrics/
 npm install
 ```
@@ -356,7 +356,7 @@ Workflow examples from `examples.yml` are used as unit testing and to auto-gener
 It uses the same syntax as GitHub action and looks like below:
 ```yml
 - name: Test name
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.{name}.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -429,7 +429,7 @@ You're almost done, review the following checklist before submitting a pull requ
 - [x] I am ready!
   - [x] Checkout any generated files (in fact, don't run `npm run build`)
   - [x] Commit and push your changes (commits are squashed, no need to rebase)
-  - [x] Open a new [pull request](https://github.com/lowlighter/metrics/pulls)
+  - [x] Open a new [pull request](https://github.com/gh-metrics/metrics/pulls)
   - [x] Post a screenshot or a render in the pull request so it can be previewed
 
 > 💡 A pull request **will need** to have passing builds and an example screenshot if you want to get it merged.

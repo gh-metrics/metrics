@@ -1,7 +1,7 @@
 - name: >-
     🌸 Anilist watch list and reading list - Favorites anime and currently
     watching
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_anilist: 'yes'
@@ -13,7 +13,7 @@
 - name: >-
     🌸 Anilist watch list and reading list - Favorites manga and currently
     reading
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_anilist: 'yes'
@@ -23,7 +23,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🌸 Anilist watch list and reading list - Favorites characters
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_anilist: 'yes'

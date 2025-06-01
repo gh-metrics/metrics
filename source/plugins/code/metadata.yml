@@ -7,7 +7,7 @@ notes: |
   > If you work with sensitive data or company code, it is advised to keep this plugin disabled.
   > Use at your own risk, *metrics* and its authors cannot be held responsible for any resulting code leaks.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.code.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.code.svg
 index: 23
 supports:
   - user

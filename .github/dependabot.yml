@@ -10,7 +10,7 @@ updates:
     pull-request-branch-name:
       separator: "-"
     reviewers:
-      - lowlighter
+      - gh-metrics
     commit-message:
       prefix: "chore(deps)"
     ignore:

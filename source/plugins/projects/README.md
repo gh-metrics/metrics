@@ -19,7 +19,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -113,10 +113,10 @@ Be sure to tick `Track project progress` in project settings to display a progre
 
 *Example: include a project repository*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_projects: yes
-    plugin_projects_repositories: lowlighter/metrics/projects/1
+    plugin_projects_repositories: gh-metrics/metrics/projects/1
 ```
 
 ## ℹ️ Examples workflows
@@ -124,13 +124,13 @@ Be sure to tick `Track project progress` in project settings to display a progre
 <!--examples-->
 ```yaml
 name: Project from a repository
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.projects.svg
   token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
   base: ""
   plugin_projects: yes
-  plugin_projects_repositories: lowlighter/metrics/projects/1
+  plugin_projects_repositories: gh-metrics/metrics/projects/1
   plugin_projects_descriptions: yes
 
 ```

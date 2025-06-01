@@ -6,9 +6,9 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with [16personalities](https://www.16personalities.com).
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.16personalities.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.16personalities.svg
 authors:
-  - lowlighter
+  - gh-metrics
 supports:
   - user
 scopes: []

@@ -42,7 +42,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Run script
-        run: ./delete_workflows.sh lowlighter/metrics
+        run: ./delete_workflows.sh gh-metrics/metrics
         working-directory: .github/actions/ghcr-clean
         env:
           GITHUB_TOKEN: ${{ github.token }}

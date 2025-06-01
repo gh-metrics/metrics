@@ -1,5 +1,5 @@
 - name: Repositories traffic
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.traffic.svg
     token: ${{ secrets.METRICS_TOKEN }}

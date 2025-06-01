@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin can display commit calendar across several years.
 examples:
-  current year: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.svg
-  +full history: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.full.svg
+  current year: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.svg
+  +full history: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.full.svg
 index: 17
 supports:
   - user

@@ -1,5 +1,5 @@
 query AchievementsMetrics {
- 	repository(owner: "lowlighter", name: "metrics") {
+ 	repository(owner: "gh-metrics", name: "metrics") {
     viewerHasStarred
   }
   viewer {
