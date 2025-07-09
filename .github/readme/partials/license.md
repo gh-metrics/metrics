@@ -2,6 +2,7 @@
 
 ```
 MIT License
+Copyright (c) 2020-present lowlighter
 Copyright (c) 2020-present gh-metrics
 ```
 
