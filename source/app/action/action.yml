@@ -12,7 +12,7 @@ inputs:
 # ====================================================================================
 # Action metadata
 name: Metrics embed
-author: lowlighter
+author: gh-metrics
 description: An infographics generator with 40+ plugins and 300+ options to display stats about your GitHub account!
 branding:
   icon: user-check

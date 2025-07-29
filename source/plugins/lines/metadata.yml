@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays the number of lines of code added and removed across repositories.
 examples:
-  +Repositories and diff history: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.lines.history.svg
-  Compact display in base plugin: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.lines.svg
+  +Repositories and diff history: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.lines.history.svg
+  Compact display in base plugin: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.lines.svg
 index: 3
 supports:
   - user

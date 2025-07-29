@@ -3,7 +3,7 @@ category: github
 description: |
   This plugin displays overall user reactions on recent issues, comments and discussions.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.reactions.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.reactions.svg
 index: 10
 supports:
   - user

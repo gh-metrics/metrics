@@ -1,5 +1,5 @@
 - name: Sponsors goal
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.sponsors.svg
     token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
@@ -9,7 +9,7 @@
     plugin_sponsors_past: yes
 
 - name: Sponsors introduction
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.sponsors.full.svg
     token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}

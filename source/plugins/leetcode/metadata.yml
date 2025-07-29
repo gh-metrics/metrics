@@ -6,7 +6,7 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with [LeetCode](https://leetcode.com).
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.leetcode.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.leetcode.svg
 index: 9
 supports:
   - user

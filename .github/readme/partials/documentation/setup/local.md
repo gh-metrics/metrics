@@ -9,7 +9,7 @@ A machine with a recent version of [NodeJS](https://nodejs.org) is required (see
 Run the following command to clone this repository and install dependencies.
 
 ```shell
-git clone https://github.com/lowlighter/metrics.git
+git clone https://github.com/gh-metrics/metrics.git
 cd metrics/
 npm install
 cp settings.example.json settings.json

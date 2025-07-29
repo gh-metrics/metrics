@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays coding habits based on recent activity, such as active hours and languages recently used.
 examples:
-  +recent activity charts: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.habits.charts.svg
-  +mildly interesting facts: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.habits.facts.svg
+  +recent activity charts: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.habits.charts.svg
+  +mildly interesting facts: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.habits.facts.svg
 index: 7
 supports:
   - user

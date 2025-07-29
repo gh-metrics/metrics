@@ -50,7 +50,7 @@ jobs:
       id: spelling
       uses: check-spelling/check-spelling@v0.0.24
       with:
-        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'lowlighter' && 1 || 0 }}
+        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'gh-metrics' && 1 || 0 }}
         suppress_push_for_open_pull_request: 1
         checkout: true
         post_comment: 0
@@ -83,7 +83,7 @@ jobs:
       with:
         checkout: true
         task: ${{ needs.spelling.outputs.followup }}
-        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'lowlighter' && 1 || 0 }}
+        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'gh-metrics' && 1 || 0 }}
 
   update:
     name: Update PR
@@ -92,7 +92,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     if: ${{
-        github.repository_owner != 'lowlighter' &&
+        github.repository_owner != 'gh-metrics' &&
         github.event_name == 'issue_comment' &&
         github.event.issue.pull_request &&
         contains(github.event.comment.body, '@check-spelling-bot apply')
@@ -104,6 +104,6 @@ jobs:
     - name: apply spelling updates
       uses: check-spelling/check-spelling@v0.0.24
       with:
-        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'lowlighter' && 1 || 0 }}
+        experimental_apply_changes_via_bot: ${{ github.repository_owner != 'gh-metrics' && 1 || 0 }}
         checkout: true
         ssh_key: "${{ secrets.CHECK_SPELLING }}"

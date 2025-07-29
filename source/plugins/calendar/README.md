@@ -19,8 +19,8 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details><summary>Current year</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.svg" alt=""></img></details>
-      <details open><summary>Full history</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.calendar.full.svg" alt=""></img></details>
+      <details><summary>Current year</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.svg" alt=""></img></details>
+      <details open><summary>Full history</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.calendar.full.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -72,7 +72,7 @@ All product and company names are trademarks™ or registered® trademarks of th
 <!--examples-->
 ```yaml
 name: Current year calendar
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.calendar.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -82,7 +82,7 @@ with:
 ```
 ```yaml
 name: Full history calendar
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.calendar.full.svg
   token: ${{ secrets.METRICS_TOKEN }}

@@ -13,7 +13,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
             issues: {
               totalCount: faker.number.int(100),
             },
-            nameWithOwner: "lowlighter/metrics",
+            nameWithOwner: "gh-metrics/metrics",
             openGraphImageUrl: "https://repository-images.githubusercontent.com/293860197/7fd72080-496d-11eb-8fe0-238b38a0746a",
             pullRequests: {
               totalCount: faker.number.int(100),

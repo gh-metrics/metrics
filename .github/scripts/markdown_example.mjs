@@ -12,7 +12,7 @@ const page = await browser.newPage()
 
 //Select markdown example and take screenshot
 await page.setViewport({width: 600, height: 600})
-await page.goto("https://github.com/lowlighter/metrics/blob/examples/metrics.markdown.md")
+await page.goto("https://github.com/gh-metrics/metrics/blob/examples/metrics.markdown.md")
 await page.waitForSelector("article.markdown-body")
 await new Promise(solve => setTimeout(solve, 4000))
 const clip = await page.evaluate(() => {

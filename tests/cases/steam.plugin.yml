@@ -1,5 +1,5 @@
 - name: 🕹️ Steam - Recently played games
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_steam_token: MOCKED_TOKEN
@@ -10,7 +10,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🕹️ Steam - Profile and detailed game history
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_steam_token: MOCKED_TOKEN

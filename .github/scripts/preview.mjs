@@ -77,7 +77,7 @@ fs.copyFile(paths.join(__node_modules, "clipboard/dist/clipboard.min.js"), paths
 //Meta
 fs.writeFile(paths.join(__preview, ".modes"), JSON.stringify(["embed", "insights"]))
 fs.writeFile(paths.join(__preview, ".version"), JSON.stringify(`${conf.package.version}-preview`))
-fs.writeFile(paths.join(__preview, ".hosted"), JSON.stringify({by: "metrics", link: "https://github.com/lowlighter/metrics"}))
+fs.writeFile(paths.join(__preview, ".hosted"), JSON.stringify({by: "metrics", link: "https://github.com/gh-metrics/metrics"}))
 //Embed
 {
   const __web_embed = paths.join(paths.join(__web, "embed"))

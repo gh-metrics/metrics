@@ -1,5 +1,5 @@
 - name: 🎼 Music activity and suggestions - Apple Music - Random track from playlist
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -8,7 +8,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Spotify - Random track from playlist
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -16,7 +16,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Spotify - Recently listed
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -27,7 +27,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Spotify - Top tracks
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -39,7 +39,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Spotify - Top artists
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -53,7 +53,7 @@
 - name: >-
     🎼 Music activity and suggestions - Youtube Music - Random track from
     playlist
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music: 'yes'
@@ -62,7 +62,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Youtube Music - Recently listed
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music_token: SAPISID=MOCKED_COOKIE; OTHER_PARAM=OTHER_VALUE;
@@ -72,7 +72,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🎼 Music activity and suggestions - Last.fm  - Recently listed
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_music_token: MOCKED_TOKEN

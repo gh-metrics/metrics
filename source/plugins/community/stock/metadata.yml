@@ -3,9 +3,9 @@ category: community
 description: |
   This plugin displays the stock market price of a given company.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stock.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stock.svg
 authors:
-  - lowlighter
+  - gh-metrics
 supports:
   - user
   - organization

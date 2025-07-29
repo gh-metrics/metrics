@@ -20,7 +20,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.wakatime.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.wakatime.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -170,7 +170,7 @@ Then setup [WakaTime plugins](https://wakatime.com/plugins) to be ready to go!
 <!--examples-->
 ```yaml
 name: WakaTime
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.wakatime.svg
   token: NOT_NEEDED

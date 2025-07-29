@@ -6,9 +6,9 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with any of the supported provider.
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.chess.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.chess.svg
 authors:
-  - lowlighter
+  - gh-metrics
 supports:
   - user
   - organization

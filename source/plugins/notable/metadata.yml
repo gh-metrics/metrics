@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays badges for notable contributions on repositories.
 examples:
-  +indepth analysis: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.indepth.svg
-  contributions in organizations only: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.notable.svg
+  +indepth analysis: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.indepth.svg
+  contributions in organizations only: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.notable.svg
 index: 20
 supports:
   - user

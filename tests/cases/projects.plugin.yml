@@ -1,9 +1,9 @@
 - name: 🗂️ GitHub projects - Project from a repository
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_projects: 'yes'
-    plugin_projects_repositories: lowlighter/metrics/projects/1
+    plugin_projects_repositories: gh-metrics/metrics/projects/1
     plugin_projects_descriptions: 'yes'
     use_mocked_data: 'yes'
     verify: 'yes'

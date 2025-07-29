@@ -1,5 +1,5 @@
 - name: Detailed display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.achievements.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -10,7 +10,7 @@
     timeout: 1800000
 
 - name: Compact display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.achievements.compact.svg
     token: ${{ secrets.METRICS_TOKEN }}

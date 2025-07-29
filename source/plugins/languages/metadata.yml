@@ -3,10 +3,10 @@ category: github
 description: |
   This plugin can display which languages you use across all repositories you contributed to.
 examples:
-  +indepth analysis (clone and analyze repositories): https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.indepth.svg
-  +recently used (analyze recent activity events): https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.recent.svg
-  default algorithm: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.svg
-  default algorithm (with details): https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.details.svg
+  +indepth analysis (clone and analyze repositories): https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.indepth.svg
+  +recently used (analyze recent activity events): https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.recent.svg
+  default algorithm: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.svg
+  default algorithm (with details): https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.details.svg
 index: 1
 supports:
   - user
@@ -126,9 +126,9 @@ inputs:
       Specify a list of additional repositories to analyze.
 
       Below are the supported syntax formats:
-      - `owner/repo` (e.g. `lowlighter/metrics`)
-      - `owner/repo@branch` (e.g. `lowlighter/metrics@main`)
-      - `owner/repo@branch:commits` (e.g. `lowlighter/metrics@main:v1.0..v1.1`)
+      - `owner/repo` (e.g. `gh-metrics/metrics`)
+      - `owner/repo@branch` (e.g. `gh-metrics/metrics@main`)
+      - `owner/repo@branch:commits` (e.g. `gh-metrics/metrics@main:v1.0..v1.1`)
         - See [`git rev-list`](https://git-scm.com/docs/git-rev-list#_description) documentation for more information about `commits` syntax
 
       It is possible to specify repositories that are not hosted on [github.com](https://github.com) by passing a full url instead.
@@ -138,7 +138,7 @@ inputs:
     type: array
     format: comma-separated
     default: ""
-    example: lowlighter/metrics, lowlighter/metrics@main, lowlighter/metrics@latest:v1.0..v1.1
+    example: gh-metrics/metrics, gh-metrics/metrics@main, gh-metrics/metrics@latest:v1.0..v1.1
 
   plugin_languages_analysis_timeout:
     description: |

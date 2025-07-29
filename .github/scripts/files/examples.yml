@@ -40,7 +40,7 @@ jobs:
 
   examples:
     runs-on: ubuntu-latest
-    if: "github.repository == 'lowlighter/metrics'"
+    if: "github.repository == 'gh-metrics/metrics'"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -54,7 +54,7 @@ jobs:
       - name: Screenshot markdown example
         if: ${{ success() || failure() }}
         run: |
-          docker run --rm --entrypoint="" --volume=/tmp:/tmp ghcr.io/lowlighter/metrics:master node /metrics/.github/scripts/markdown_example.mjs
+          docker run --rm --entrypoint="" --volume=/tmp:/tmp ghcr.io/gh-metrics/metrics:master node /metrics/.github/scripts/markdown_example.mjs
           sudo mv /tmp/metrics.markdown.png /metrics_renders/
       - name: Publish examples
         if: ${{ success() || failure() }}
@@ -71,13 +71,13 @@ jobs:
           git push --force
 
 # ======================================================================================
-# Special job used to render lowlighter/metrics repository assets
+# Special job used to render gh-metrics/metrics repository assets
 # ======================================================================================
 
   repository:
     runs-on: ubuntu-latest
     needs: [ examples ]
-    if: "github.repository == 'lowlighter/metrics'"
+    if: "github.repository == 'gh-metrics/metrics'"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -88,13 +88,13 @@ jobs:
 
       - name: Contributors
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
+        uses: gh-metrics/metrics@master
         with:
           filename: metrics.contributors.svg
           token: ${{ secrets.METRICS_TOKEN }}
           base: ""
           template: repository
-          user: lowlighter
+          user: gh-metrics
           repo: metrics
           plugin_people: yes
           plugin_people_types: contributors
@@ -104,12 +104,12 @@ jobs:
           delay: 120
       - name: Sponsors
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
+        uses: gh-metrics/metrics@master
         with:
           filename: metrics.sponsors.svg
           token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
           base: ""
-          user: lowlighter
+          user: gh-metrics
           plugin_sponsors: yes
           plugin_sponsors_past: yes
           plugin_sponsors_sections: list
@@ -120,13 +120,13 @@ jobs:
           delay: 120
       - name: Licenses
         if: ${{ success() || failure() }}
-        uses: lowlighter/metrics@master
+        uses: gh-metrics/metrics@master
         with:
           filename: metrics.licenses.svg
           token: ${{ secrets.METRICS_TOKEN }}
           base: ""
           template: repository
-          user: lowlighter
+          user: gh-metrics
           repo: metrics
           plugin_licenses: yes
           plugin_licenses_setup: npm ci

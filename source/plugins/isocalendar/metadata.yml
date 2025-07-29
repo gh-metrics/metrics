@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays an isometric view of a user commit calendar along with a few additional statistics like current streak and average number of commit per day.
 examples:
-  +full year calendar: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.isocalendar.fullyear.svg
-  half year calendar: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.isocalendar.svg
+  +full year calendar: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.isocalendar.fullyear.svg
+  half year calendar: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.isocalendar.svg
 index: 0
 supports:
   - user

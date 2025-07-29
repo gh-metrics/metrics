@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays several highlights about what an account has achieved on GitHub.
 examples:
-  +compact display: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.compact.svg
-  detailed display: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.achievements.svg
+  +compact display: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.compact.svg
+  detailed display: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.achievements.svg
 index: 19
 supports:
   - user

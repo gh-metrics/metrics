@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin can display relationships with users, such as followers, sponsors, contributors, stargazers, watchers, members, etc.
 examples:
-  +related to a user: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.people.followers.svg
-  related to a repository: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.people.repository.svg
+  +related to a user: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.people.followers.svg
+  related to a repository: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.people.repository.svg
 index: 11
 supports:
   - user

@@ -16,8 +16,8 @@
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Latest posts width description and cover image</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.full.svg" alt=""></img></details>
-      <details><summary>Latest posts</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.svg" alt=""></img></details>
+      <details open><summary>Latest posts width description and cover image</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.full.svg" alt=""></img></details>
+      <details><summary>Latest posts</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -107,7 +107,7 @@
 <!--examples-->
 ```yaml
 name: Recent posts
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.posts.svg
   token: NOT_NEEDED
@@ -118,7 +118,7 @@ with:
 ```
 ```yaml
 name: Recent posts with descriptions and cover images
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.posts.full.svg
   token: NOT_NEEDED

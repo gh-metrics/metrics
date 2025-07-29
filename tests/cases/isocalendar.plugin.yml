@@ -1,12 +1,12 @@
 - name: 📅 Isometric commit calendar - Half-year calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_isocalendar: 'yes'
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 📅 Isometric commit calendar - Full-year calendar
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_isocalendar: 'yes'

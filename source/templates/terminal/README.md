@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.terminal.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.terminal.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -28,7 +28,7 @@
 <!--examples-->
 ```yaml
 name: Example
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   template: terminal
   filename: metrics.terminal.svg

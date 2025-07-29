@@ -4,7 +4,7 @@
   <tr><th colspan="2"><h3>💹 Stock prices</h3></th></tr>
   <tr><td colspan="2" align="center"><p>This plugin displays the stock market price of a given company.</p>
 </td></tr>
-<tr><th>Authors</th><td><a href="https://github.com/lowlighter">@lowlighter</a></td></tr>
+<tr><th>Authors</th><td><a href="https://github.com/gh-metrics">@gh-metrics</a></td></tr>
   <tr>
     <th rowspan="3">Supported features<br><sub><a href="metadata.yml">→ Full specification</a></sub></th>
     <td><a href="/source/templates/classic/README.md"><code>📗 Classic template</code></a> <a href="/source/templates/repository/README.md"><code>📘 Repository template</code></a></td>
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stock.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -123,7 +123,7 @@ Create a [RapidAPI account](https://rapidapi.com) and subscribe to [Yahoo Financ
 <!--examples-->
 ```yaml
 name: Stock prices from Tesla
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.stock.svg
   token: NOT_NEEDED

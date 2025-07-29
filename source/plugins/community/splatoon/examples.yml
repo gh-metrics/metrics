@@ -1,5 +1,5 @@
 - name: Splatnet data
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.splatoon.svg
     token: NOT_NEEDED
@@ -12,7 +12,7 @@
     skip: true
 
 - name: Splatnet data with stat.ink integration
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.splatoon.svg
     token: NOT_NEEDED

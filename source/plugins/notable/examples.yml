@@ -1,5 +1,5 @@
 - name: Contributions
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.notable.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -7,7 +7,7 @@
     plugin_notable: yes
 
 - name: Indepth analysis
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.notable.indepth.svg
     token: ${{ secrets.METRICS_TOKEN }}

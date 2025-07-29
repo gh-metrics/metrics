@@ -1,5 +1,5 @@
 - name: Organization introduction
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.introduction.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -11,7 +11,7 @@
       token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
 
 - name: Repository introduction
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.introduction.repository.svg
     token: ${{ secrets.METRICS_TOKEN }}

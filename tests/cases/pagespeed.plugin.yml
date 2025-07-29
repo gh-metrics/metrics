@@ -1,5 +1,5 @@
 - name: ⏱️ Google PageSpeed - Succinct report
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_pagespeed: 'yes'
@@ -8,7 +8,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: ⏱️ Google PageSpeed - Detailed report
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_pagespeed: 'yes'
@@ -18,7 +18,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: ⏱️ Google PageSpeed - Screenshot
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_pagespeed: 'yes'
@@ -28,7 +28,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: ⏱️ Google PageSpeed - Succinct report with PWA
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_pagespeed: 'yes'

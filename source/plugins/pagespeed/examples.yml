@@ -1,5 +1,5 @@
 - name: Succinct report
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.pagespeed.svg
     token: NOT_NEEDED
@@ -9,7 +9,7 @@
     plugin_pagespeed_url: https://lecoq.io
 
 - name: Detailed report
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.pagespeed.detailed.svg
     token: NOT_NEEDED
@@ -20,7 +20,7 @@
     plugin_pagespeed_url: https://lecoq.io
 
 - name: Screenshot
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.pagespeed.screenshot.svg
     token: NOT_NEEDED
@@ -31,7 +31,7 @@
     plugin_pagespeed_url: https://lecoq.io
 
 - name: Succinct report with PWA
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.pagespeed.svg
     token: NOT_NEEDED

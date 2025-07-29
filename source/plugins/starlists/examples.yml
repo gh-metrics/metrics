@@ -1,5 +1,5 @@
 - name: Featured star list
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.starlists.svg
     token: NOT_NEEDED
@@ -11,7 +11,7 @@
     timeout: 1800000
 
 - name: Featured star list languages
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.starlists.languages.svg
     token: NOT_NEEDED

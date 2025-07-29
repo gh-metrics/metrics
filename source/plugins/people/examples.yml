@@ -1,5 +1,5 @@
 - name: Followers
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.people.followers.svg
     token: ${{ secrets.METRICS_TOKEN }}
@@ -8,7 +8,7 @@
     plugin_people_types: followers
 
 - name: Contributors and sponsors
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.people.repository.svg
     token: ${{ secrets.METRICS_TOKEN }}
