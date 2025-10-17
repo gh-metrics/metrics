@@ -60,16 +60,16 @@ export class RecentAnalyzer extends Analyzer {
     }
     this.debug(`fetched ${events.length} events`)
 
-    const wanted = new Map();
+    const wanted = new Map()
     events.forEach(event => {
-      var key = `${event.repo.name}@${event.payload.ref}`
-      var item = wanted.get(key) ?? { commits: [] }
+      let key = `${event.repo.name}@${event.payload.ref}`
+      let item = wanted.get(key) ?? { commits: [] }
       item.repo = event.repo.name
       item.ref = event.payload.ref
       item.commits.push(event.payload.before)
       item.commits.push(event.payload.head)
       wanted.set(key, item)
-    });
+    })
 
     const commits = []
     for (const item of wanted.values()) {
@@ -79,7 +79,10 @@ export class RecentAnalyzer extends Analyzer {
           this.debug(`https://api.github.com/repos/${item.repo}/commits?sha=${item.ref}&per_page=20&page=${page}`)
           commits.push(
             ...(await this.rest.request(`https://api.github.com/repos/${item.repo}/commits?sha=${item.ref}&per_page=20&page=${page}`)).data
-              .map(x => { item.commits = item.commits.filter(c => c != x.sha); return x })
+              .map(x => {
+                item.commits = item.commits.filter(c => c !== x.sha)
+                return x
+              })
               .filter(({ committer }) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], { debug: false }))
               .filter(({ commit }) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
           )
@@ -93,8 +96,6 @@ export class RecentAnalyzer extends Analyzer {
         this.debug("no more page to load")
       }
     }
-
-
 
     this.debug(`fetched ${commits.length} commits`)
     this.results.latest = Math.round((new Date().getTime() - new Date(events.slice(-1).shift()?.created_at).getTime()) / (1000 * 60 * 60 * 24))
