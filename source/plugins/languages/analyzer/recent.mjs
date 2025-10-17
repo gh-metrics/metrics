@@ -72,7 +72,7 @@ export class RecentAnalyzer extends Analyzer {
     });
 
     const commits = []
-    for ([key, item] of wanted) {
+    for (const item of wanted.values()) {
       try {
         for (let page = 1; page <= pages; page++) {
           this.debug(`fetching commits page ${page}`)
