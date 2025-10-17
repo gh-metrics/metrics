@@ -100,16 +100,11 @@ export class RecentAnalyzer extends Analyzer {
     this.results.latest = Math.round((new Date().getTime() - new Date(commits.slice(-1).shift()?.created_at).getTime()) / (1000 * 60 * 60 * 24))
     this.results.commits = commits.length
 
-    commits.forEach(commit => {
-      this.debug(JSON.stringify(commit));
-    });
-    
     //Retrieve edited files and filter edited lines (those starting with +/-) from patches
     this.debug("fetching patches")
     const patches = [
       ...await Promise.allSettled(
         commits
-          .flatMap(({payload}) => payload.commits)
           .filter(({committer}) => filters.text(committer?.email, this.authoring, {debug: false}))
           .map(commit => commit.url)
           .map(async commit => (await this.rest.request(commit)).data),
@@ -118,9 +113,9 @@ export class RecentAnalyzer extends Analyzer {
       .filter(({status}) => status === "fulfilled")
       .map(({value}) => value)
       .filter(({parents}) => parents.length <= 1)
-      .map(({sha, commit: {message, committer}, verification, files}) => ({
+      .map(({ sha, commit: { message, author }, verification, files }) => ({
         sha,
-        name: `${message} (authored by ${committer.name} on ${committer.date})`,
+        name: `${message} (authored by ${author.name} on ${author.date})`,
         verified: verification?.verified ?? null,
         editions: files.map(({filename, patch = ""}) => {
           const edition = {
