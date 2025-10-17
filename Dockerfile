@@ -2,7 +2,7 @@
 FROM node:20-bookworm-slim AS base
 
 # Setup
-RUN  \
+RUN echo -n \
   # Install latest chrome dev package, fonts to support major charsets and skip chromium download on puppeteer install
   # Based on https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
   && apt-get update \
