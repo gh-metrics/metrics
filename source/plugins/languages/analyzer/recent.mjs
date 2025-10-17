@@ -76,6 +76,7 @@ export class RecentAnalyzer extends Analyzer {
       try {
         for (let page = 1; page <= pages; page++) {
           this.debug(`fetching commits page ${page}`)
+          this.debug(`https://api.github.com/repos/${item.repo}/git/commits?sha=${item.ref}&per_page=20&page=${page}`)
           commits.push(
             ...(await this.rest.request(`https://api.github.com/repos/${item.repo}/git/commits?sha=${item.ref}&per_page=20&page=${page}`)).data
               .map(x => { item.commits = item.commits.filter(c => c != x.sha); return x })
