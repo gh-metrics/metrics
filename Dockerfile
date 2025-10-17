@@ -1,12 +1,8 @@
 # Base image
-FROM node:20-bookworm-slim
-
-# Copy repository
-COPY . /metrics
-WORKDIR /metrics
+FROM node:20-bookworm-slim AS base
 
 # Setup
-RUN chmod +x /metrics/source/app/action/index.mjs \
+RUN  \
   # Install latest chrome dev package, fonts to support major charsets and skip chromium download on puppeteer install
   # Based on https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#running-puppeteer-in-docker
   && apt-get update \
@@ -24,7 +20,16 @@ RUN chmod +x /metrics/source/app/action/index.mjs \
   # Install python for node-gyp
   && apt-get install -y python3 \
   # Clean apt/lists
-  && rm -rf /var/lib/apt/lists/* \
+  && rm -rf /var/lib/apt/lists/* 
+
+
+FROM base
+
+# Copy repository
+COPY . /metrics
+WORKDIR /metrics
+
+RUN chmod +x /metrics/source/app/action/index.mjs\
   # Install node modules and rebuild indexes
   && npm ci \
   && npm run build
