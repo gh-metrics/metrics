@@ -76,9 +76,9 @@ export class RecentAnalyzer extends Analyzer {
       try {
         for (let page = 1; page <= pages; page++) {
           this.debug(`fetching commits page ${page}`)
-          this.debug(`https://api.github.com/repos/${item.repo}/git/commits?sha=${item.ref}&per_page=20&page=${page}`)
+          this.debug(`https://api.github.com/repos/${item.repo}/commits?sha=${item.ref}&per_page=20&page=${page}`)
           commits.push(
-            ...(await this.rest.request(`https://api.github.com/repos/${item.repo}/git/commits?sha=${item.ref}&per_page=20&page=${page}`)).data
+            ...(await this.rest.request(`https://api.github.com/repos/${item.repo}/commits?sha=${item.ref}&per_page=20&page=${page}`)).data
               .map(x => { item.commits = item.commits.filter(c => c != x.sha); return x })
               .filter(({ committer }) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], { debug: false }))
               .filter(({ commit }) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
