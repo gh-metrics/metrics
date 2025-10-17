@@ -97,7 +97,7 @@ export class RecentAnalyzer extends Analyzer {
 
 
     this.debug(`fetched ${commits.length} commits`)
-    this.results.latest = Math.round((new Date().getTime() - new Date(commits.slice(-1).shift()?.created_at).getTime()) / (1000 * 60 * 60 * 24))
+    this.results.latest = Math.round((new Date().getTime() - new Date(events.slice(-1).shift()?.created_at).getTime()) / (1000 * 60 * 60 * 24))
     this.results.commits = commits.length
 
     //Retrieve edited files and filter edited lines (those starting with +/-) from patches
