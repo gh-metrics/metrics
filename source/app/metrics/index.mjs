@@ -84,10 +84,7 @@ export default async function metrics({login, q}, {graphql, rest, plugins, conf,
     const errors = [...promised.filter(({result = null}) => result?.error), ...data.errors]
     if (errors.length) {
       console.debug(`metrics/compute/${login} > ${errors.length} errors !`)
-      if (die)
-        throw new Error("An error occurred during rendering, dying")
-      else
-        console.debug(util.inspect(errors, {depth: Infinity, maxStringLength: 256}))
+      console.debug(util.inspect(errors, {depth: Infinity, maxStringLength: 256}))
     }
 
     //JSON output
