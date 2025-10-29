@@ -33,24 +33,27 @@ on:
       WAKATIME_TOKEN:
         required: true
 jobs:
-
-# ======================================================================================
-# Examples renders
-# ======================================================================================
+  # ======================================================================================
+  # Examples renders
+  # ======================================================================================
 
   examples:
     runs-on: ubuntu-latest
-    if: "github.repository == 'gh-metrics/metrics'"
+
+    # Skip until I secure the workflows enough to feel comfortable minting tokens.
+    if: ${{ github.repository == 'gh-metrics/metrics' && false }}
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
 <%- steps.split("\n").map(line => `      ${line}`).join("\n") %>
-
       - name: Screenshot markdown example
         if: ${{ success() || failure() }}
         run: |
@@ -70,21 +73,22 @@ jobs:
           git commit -m "chore: update examples"
           git push --force
 
-# ======================================================================================
-# Special job used to render gh-metrics/metrics repository assets
-# ======================================================================================
+  # ======================================================================================
+  # Special job used to render gh-metrics/metrics repository assets
+  # ======================================================================================
 
   repository:
     runs-on: ubuntu-latest
-    needs: [ examples ]
-    if: "github.repository == 'gh-metrics/metrics'"
+    needs: [examples]
+
+    # Skip until I secure the workflows enough to feel comfortable minting tokens.
+    if: ${{ github.repository == 'gh-metrics/metrics' && false }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
       - name: Contributors
         if: ${{ success() || failure() }}

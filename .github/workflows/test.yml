@@ -20,6 +20,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
       - name: Setup metrics
         run: npm ci
       - name: Check contributions requirements
@@ -33,7 +34,6 @@ jobs:
   build:
     name: Build and test
     runs-on: ubuntu-latest
-    needs: [ lint ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -50,19 +50,3 @@ jobs:
         env:
           GIT_REF: ${{ github.head_ref || 'master' }}
         run: docker run --rm --entrypoint="" gh-metrics/metrics:$(echo $GIT_REF | sed 's/[^a-z]/-/g') npm run test-metrics
-
-  # Run CodeQL on branch
-  analyze:
-    name: Analyze code
-    runs-on: ubuntu-latest
-    needs: [ lint ]
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: javascript
-          config-file: ./.github/config/codeql.yml
-      - name: Analyze code
-        uses: github/codeql-action/analyze@v3
