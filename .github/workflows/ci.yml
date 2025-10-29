@@ -2,21 +2,20 @@ name: Continuous integration
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-
   # Build, test and analyze
   build-test-analyze:
     name: Build, test and analyze
-    if: "!contains(github.event.head_commit.message, '[skip test]')"
+    if: ${{ !contains(github.event.head_commit.message, '[skip test]') }}
     uses: gh-metrics/metrics/.github/workflows/test.yml@master
 
   # Format code
   format:
     name: Format code
     runs-on: ubuntu-latest
-    needs: [ build-test-analyze ]
+    needs: [build-test-analyze]
     if: always() && (needs.build-test-analyze.result == 'success' || needs.build-test-analyze.result == 'skipped')
     steps:
       - name: Checkout repository
@@ -44,7 +43,7 @@ jobs:
   update-indexes:
     name: Publish rebuilt metrics indexes
     runs-on: ubuntu-latest
-    needs: [ format ]
+    needs: [format]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -67,7 +66,7 @@ jobs:
   update-main:
     name: Rebase main on master
     runs-on: ubuntu-latest
-    needs: [ update-indexes ]
+    needs: [update-indexes]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -90,7 +89,7 @@ jobs:
   docker-master:
     name: Publish master to GitHub registry
     runs-on: ubuntu-latest
-    needs: [ update-indexes ]
+    needs: [update-indexes]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -120,7 +119,7 @@ jobs:
   deploy-master:
     name: Deploy gh-metrics/metrics@master
     runs-on: ubuntu-latest
-    needs: [ docker-master ]
+    needs: [docker-master]
     steps:
       - name: Deploy web instance
         run: "curl -X POST -H 'Authorization: ${{ secrets.WEB_DEPLOY_BETA_TOKEN }}' https://beta-metrics.lecoq.io/.control/stop"
@@ -133,7 +132,7 @@ jobs:
   action-master-test:
     name: Test gh-metrics/metrics@master
     runs-on: ubuntu-latest
-    needs: [ docker-master ]
+    needs: [docker-master]
     steps:
       - name: Run tests
         uses: gh-metrics/metrics@master
@@ -147,8 +146,10 @@ jobs:
   # Publish examples
   publish-examples:
     name: Publish examples
-    needs: [ action-master-test ]
+    needs: [action-master-test]
     uses: gh-metrics/metrics/.github/workflows/examples.yml@master
+    permissions:
+      contents: write
     secrets:
       METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
       METRICS_TOKEN_WITH_SCOPES: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -167,14 +168,14 @@ jobs:
   # Publish examples (presets)
   publish-examples-presets:
     name: Publish examples (presets)
-    needs: [ action-master-test ]
+    needs: [action-master-test]
     uses: gh-metrics/metrics/.github/workflows/examples.presets.yml@master
 
   # Build docker image from master and publish it to GitHub registry with release tag
   docker-release:
     name: Publish release to GitHub registry
     runs-on: ubuntu-latest
-    needs: [ publish-examples ]
+    needs: [publish-examples]
     if: contains(github.event.head_commit.message, '[release]')
     steps:
       - name: Checkout repository
@@ -200,7 +201,7 @@ jobs:
   update-latest:
     name: Rebase latest on master
     runs-on: ubuntu-latest
-    needs: [ docker-release ]
+    needs: [docker-release]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -222,13 +223,13 @@ jobs:
         run: git push origin latest
 
   # Test gh-metrics/metrics@latest
-  action-latest-test:
-    name: Test gh-metrics/metrics@latest
+  action-head-test:
+    name: Test gh-metrics/metrics@HEAD
     runs-on: ubuntu-latest
-    needs: [ update-latest ]
+    needs: [update-latest]
     steps:
       - name: Run tests
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@HEAD
         with:
           token: MOCKED_TOKEN
           plugins_errors_fatal: yes
@@ -240,7 +241,7 @@ jobs:
   deploy-latest:
     name: Deploy gh-metrics/metrics@latest
     runs-on: ubuntu-latest
-    needs: [ docker-release, deploy-master ]
+    needs: [docker-release, deploy-master]
     steps:
       - name: Deploy web instance
         run: "curl -X POST -H 'Authorization: ${{ secrets.WEB_DEPLOY_TOKEN }}' https://metrics.lecoq.io/.control/stop"
@@ -253,7 +254,7 @@ jobs:
   publish-release:
     name: Publish release
     runs-on: ubuntu-latest
-    needs: [ action-latest-test, deploy-latest ]
+    needs: [action-head-test, deploy-latest]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
