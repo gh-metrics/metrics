@@ -94,6 +94,8 @@ jobs:
     name: Publish master to GitHub registry
     runs-on: ubuntu-latest
     needs: [update-indexes]
+    permissions:
+      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
