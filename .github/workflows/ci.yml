@@ -44,6 +44,8 @@ jobs:
     name: Publish rebuilt metrics indexes
     runs-on: ubuntu-latest
     needs: [format]
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -67,6 +69,8 @@ jobs:
     name: Rebase main on master
     runs-on: ubuntu-latest
     needs: [update-indexes]
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
