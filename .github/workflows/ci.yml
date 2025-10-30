@@ -22,8 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout master
-        run: git checkout master
+          ref: master
       - name: Format code
         run: |
           npm install -g dprint
@@ -51,14 +50,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: master
       - name: Setup NodeJS
         uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Pull changes
-        run: |
-          git checkout master
-          git pull
+          cache: "npm"
       - name: Setup metrics
         run: npm ci
       - name: Publish rebuild metrics indexes
@@ -76,15 +73,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Pull
-        run: git pull
-      - name: Checkout main
-        run: git checkout main
-      - name: Rebase main on master
+          ref: main
+      - name: Merge master into main
         run: git merge master
       - name: Push main
         run: git push origin main
@@ -214,17 +204,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Setup NodeJS
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Setup metrics
-        run: npm ci
-      - name: Pull
-        run: git pull
-      - name: Checkout latest
-        run: git checkout latest
-      - name: Rebase latest on master
+          ref: latest
+      - name: Merge master into latest
         run: git merge master
       - name: Push latest
         run: git push origin latest
@@ -270,6 +251,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
       - name: Setup metrics
         run: npm ci
       - name: Publish release

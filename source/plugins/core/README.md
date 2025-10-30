@@ -368,18 +368,18 @@ metrics:
     contents: write
   steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: metrics-renders
 
     - uses: gh-metrics/metrics@latest
       with:
         output_action: none
 
-    - uses: gh-metrics/metrics@latest
+    - name: Push metrics
       run: |
         set +e
-        git checkout metrics-renders
         git config user.name github-actions[bot]
         git config user.email 41898282+github-actions[bot]@users.noreply.github.com
         sudo mv /metrics_renders/* ./

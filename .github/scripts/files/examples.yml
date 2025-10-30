@@ -50,8 +50,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
 <%- steps.split("\n").map(line => `      ${line}`).join("\n") %>
 
@@ -87,8 +86,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
       - name: Contributors
         if: ${{ success() || failure() }}

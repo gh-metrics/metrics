@@ -50,8 +50,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
       - name: 🗃️ Base content - Default metrics
         uses: gh-metrics/metrics@master
@@ -1332,8 +1331,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Checkout examples
-        run: git checkout examples
+          ref: examples
 
       - name: Contributors
         if: ${{ success() || failure() }}
