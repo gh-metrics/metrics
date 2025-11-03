@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="142" class="">
+    <defs>
+        <style/>
+    </defs>
+    <style>@keyframes animation-gauge{0%{stroke-dasharray:0 329}}@keyframes animation-rainbow{0%,to{color:#7f00ff;fill:#7f00ff}14%{color:#a933ff;fill:#a933ff}29%{color:#007fff;fill:#007fff}43%{color:#00ff7f;fill:#00ff7f}57%{color:#ff0;fill:#ff0}71%{color:#ff7f00;fill:#ff7f00}86%{color:red;fill:red}}svg{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;font-size:14px;color:#777}h2{margin:8px 0 2px;padding:0;color:#0366d6;font-weight:400;font-size:16px}h2 svg{fill:currentColor}section&gt;.field{margin-left:5px;margin-right:5px}.field{display:flex;align-items:center;margin-bottom:2px;white-space:nowrap}.field svg{margin:0 8px;fill:#959da5;flex-shrink:0}.row{display:flex;flex-wrap:wrap}.row section{flex:1 1 0}#metrics-end,.fill-width{width:100%}.tracklist{display:flex;flex-direction:column;align-items:flex-start;margin-left:28px;margin-top:4px;width:100%}.track{display:flex;align-items:center;justify-content:center;margin-bottom:4px}.track img{margin:0 10px;border-radius:7px;flex-shrink:0}.track .artist,.track .name{width:387px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track .name{font-size:14px;line-height:14px;height:14px;font-weight:600}.track .artist{font-size:12px;color:#666}.track .infos{flex-grow:1}:root{--color-calendar-graph-day-bg:#ebedf0;--color-calendar-graph-day-border:rgba(27,31,35,0.06);--color-calendar-graph-day-L1-bg:#9be9a8;--color-calendar-graph-day-L2-bg:#40c463;--color-calendar-graph-day-L3-bg:#30a14e;--color-calendar-graph-day-L4-bg:#216e39;--color-calendar-halloween-graph-day-L1-bg:#ffee4a;--color-calendar-halloween-graph-day-L2-bg:#ffc501;--color-calendar-halloween-graph-day-L3-bg:#fe9600;--color-calendar-halloween-graph-day-L4-bg:#03001c;--color-calendar-winter-graph-day-L1-bg:#0a3069;--color-calendar-winter-graph-day-L2-bg:#0969da;--color-calendar-winter-graph-day-L3-bg:#54aeff;--color-calendar-winter-graph-day-L4-bg:#b6e3ff;--color-calendar-graph-day-L4-border:rgba(27,31,35,0.06);--color-calendar-graph-day-L3-border:rgba(27,31,35,0.06);--color-calendar-graph-day-L2-border:rgba(27,31,35,0.06);--color-calendar-graph-day-L1-border:rgba(27,31,35,0.06)}</style>
+    <style/>
+    <foreignObject x="0" y="0" width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink" class="items-wrapper">
+            <section>
+                <h2 class="field">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                        <path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM6.379 5.227A.25.25 0 006 5.442v5.117a.25.25 0 00.379.214l4.264-2.559a.25.25 0 000-.428L6.379 5.227z"/>
+                    </svg>
+                    Suggested tracks
+                </h2>
+                <div class="row fill-width">
+                    <section>
+                        <div class="field">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                                <path fill-rule="evenodd" d="M2.002 2.725a.75.75 0 01.797-.699C8.79 2.42 13.58 7.21 13.974 13.201a.75.75 0 11-1.497.098 10.502 10.502 0 00-9.776-9.776.75.75 0 01-.7-.798zM2 13a1 1 0 112 0 1 1 0 01-2 0zm.84-5.95a.75.75 0 00-.179 1.489c2.509.3 4.5 2.291 4.8 4.8a.75.75 0 101.49-.178A7.003 7.003 0 002.838 7.05z"/>
+                            </svg>
+                            From Apple Music
+                        </div>
+                        <div class="tracklist">
+                            <div class="track">
+                                <img src="data:image/jpg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoACgDASIAAhEBAxEB/8QAHAAAAQUAAwAAAAAAAAAAAAAAAAIDBAUGAQcI/8QALBAAAQMDAwMDBAIDAAAAAAAAAQIDEQAEBRIhMRMiQQYUYTJRcYEjsSSRwf/EABkBAAIDAQAAAAAAAAAAAAAAAAIEAAEDBf/EAB4RAAIDAAIDAQAAAAAAAAAAAAECAAMREiEFE0FR/9oADAMBAAIRAxEAPwDzNjmLRxE3S3AdafpTPbO/7j+vmrC1w7F3e29vbF1arhakIbCTrJg6APBkwPil4O1bXZpddICJ3q+9ohu2Vf27iEO2yQ4jvOpRJEaQByJncxseaXZzyIEdWoBAxlde+m7bGh4ZAvocS6kNpA+ttQJSqfOw5Ej5quFhj0uJ1qeKJVMJ3ie3zHFdhN4VVzfde6eaLWlKG0JQGwFRsNI2JIBP9CqK8xFs9mXmV3wsy32oSR3K3G5HOmDPB4qKxbrZbIqjcmUyuPtGLdC7N1a1d2oFBEAHtO/3H+qKts09alt+3ZcDq20kFSUkfvcCijQn7M7al3VM0vp/0o1f+lrO7au02zmguLW4e0c8iY/dIQw3jbNN/wBFstvudMuaAopVsTM+QDMHYis96f8AVDzGNGOc6nQH16DupP2nx+qn3Dlul5u5t1OrsSnU/wBcgjVPHIkmPG4pXi/Mhp0Wer0hk/O5Kusq01fAu+790hxDrakkBtSIkyOZ/G3NaE3pzTXXTiV6S0qHNilWkQdK+SJ+3E1kUZSz9vau3IH+Opc9Md6taUgpBMzpid9hPzUjBZy5VcIxlv7tzHgkNsNr1qSk7nxB35iKuxCV0fINFqrZxJ6MYyti1Z+nQ5oIefTrX5Jkck/8opz1g841ZON3zbzSiP423E6fiRRWlHIrrQvJepLAtZGATC2b3SdBJgfeKe92mHCqXCoQARAHzRRTJHc4wY5kkO3TDi2VlYhwaXEaSOnwNXyY3rnF5JGNecWhJccOwVMRv4oooSoIwwlsZDojubzisqw0h5ErbJhZUVGD+aKKKJUCjBJZY1h1p//Z" width="32" height="32" alt="" />
+                                <div class="infos">
+                                    <div class="name">Bloodstained Cross</div>
+                                    <div class="artist">Arch Enemy</div>
+                                </div>
+                            </div>
+                            <div class="track">
+                                <img src="data:image/jpg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoACgDASIAAhEBAxEB/8QAGwAAAgMAAwAAAAAAAAAAAAAAAAYDBQcBAgT/xAAsEAABAwIFAwMDBQAAAAAAAAABAAIDBBEFEiExQQYTUSJxoQdCUmGBkcHh/8QAGAEAAwEBAAAAAAAAAAAAAAAAAgQFAwH/xAAdEQACAgMBAQEAAAAAAAAAAAAAAQIDERIhBBMx/9oADAMBAAIRAxEAPwBMo5i57dfnZOuARtMzLTwnXyVlNDiAzC5P8rT+gJqaSdjagB1TIxzoI+LtBdd3kG1gP3VFNtZRK9NXDXMJjDIGXtISPt/1V3UEhpnSERfAV3hVbTy0zauNsLaV3py5AC1/4f3fx+qXvqJU08dM98bgJo2gvZ5BG49r2Kxr2+mGifZSnDgjYziBdchrQUJCxnGRncLlCZc8DVfjepntLOQ4amyfulMalp8QgmjniBieC/uRNuGjwbeNPKzWJ9juvfT1ZDbEmx3AO6Xqngs3U7o36k6/qoqvsGOnNCHZe02FgFuXbb8pT606xq66vcXzwhrnuyNjjbmyk8utp8lIz8cn7LY8x7Qbe3N9t91Tz1ZLcvqy6kA8LaU4r8QtDyd6c11YXvccxOvlCq5XXKEpKWWPqCSOjfdSB9rIQgTwGTiodktc3G2vCje653CELuzBwQOHKEIQsI//2Q==" width="32" height="32" alt="" />
+                                <div class="infos">
+                                    <div class="name">Equal In Death</div>
+                                    <div class="artist">Horizon Ignited</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+        <div xmlns="http://www.w3.org/1999/xhtml" id="metrics-end"></div>
+    </foreignObject>
+</svg>
