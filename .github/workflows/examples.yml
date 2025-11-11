@@ -32,6 +32,9 @@ on:
         required: true
       WAKATIME_TOKEN:
         required: true
+
+permissions: {}
+
 jobs:
   # ======================================================================================
   # Examples renders
@@ -48,13 +51,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: examples
 
       - name: 🗃️ Base content - Default metrics
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.base.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -65,7 +69,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧱 Core - Organization
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.organization.svg
           user: github
@@ -76,7 +80,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧱 Core - Large display
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.large.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -88,7 +92,7 @@ jobs:
         if: ${{ success() || failure() }}
       - name: 🧱 Core - JSON metrics
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.example.json
           token: ${{ secrets.METRICS_TOKEN }}
@@ -99,7 +103,7 @@ jobs:
           plugins_errors_fatal: yes
       - name: 🧱 Core - PNG metrics
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.example.png
           token: ${{ secrets.METRICS_TOKEN }}
@@ -110,7 +114,7 @@ jobs:
           plugins_errors_fatal: yes
       - name: 🧱 Core - Metrics insights
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.insights.html
           token: ${{ secrets.METRICS_TOKEN }}
@@ -120,7 +124,7 @@ jobs:
           user: gh-metrics
           plugins_errors_fatal: yes
       - name: 🧱 Core - Plugin error example
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.error.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -132,7 +136,7 @@ jobs:
           user: gh-metrics
         if: ${{ success() || failure() }}
       - name: 📅 Isometric commit calendar - Half-year calendar
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.isocalendar.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -144,7 +148,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📅 Isometric commit calendar - Full-year calendar
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.isocalendar.fullyear.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -157,7 +161,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🈷️ Languages activity - Most used
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.languages.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -173,7 +177,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🈷️ Languages activity - Most used (with details)
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.languages.details.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -190,7 +194,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🈷️ Languages activity - Recently used
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.languages.recent.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -208,7 +212,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🈷️ Languages activity - Indepth analysis
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.languages.indepth.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -227,7 +231,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ✨ Stargazers - Using classic charts
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stargazers.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -239,7 +243,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ✨ Stargazers - Using graph charts
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stargazers.graph.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -252,7 +256,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ✨ Stargazers - With worldmap
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stargazers.worldmap.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -268,7 +272,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 👨‍💻 Lines of code changed - Compact display in base plugin
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.lines.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -281,7 +285,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 👨‍💻 Lines of code changed - Repositories and diff history
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.lines.history.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -301,7 +305,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📌 Starred topics - Labels
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.topics.svg
           token: NOT_NEEDED
@@ -314,7 +318,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📌 Starred topics - Icons
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.topics.icons.svg
           token: NOT_NEEDED
@@ -328,7 +332,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🌟 Recently starred repositories - Recently starred
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stars.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -354,9 +358,9 @@ jobs:
           user: gh-metrics
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
       - name: 📜 Repository licenses - Licenses with open-source ratio graphs
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.licenses.ratio.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -373,7 +377,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💡 Coding habits and activity - Mildly interesting facts
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.habits.facts.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -388,7 +392,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💡 Coding habits and activity - Recent activity charts
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.habits.charts.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -403,7 +407,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🏅 Repository contributors - Contributors with contributions count
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.contributors.contributions.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -418,7 +422,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🏅 Repository contributors - Contributors by categories
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.contributors.categories.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -439,7 +443,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎟️ Follow-up of issues and pull requests - Opened on user's repositories
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.followup.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -451,7 +455,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎟️ Follow-up of issues and pull requests - Opened by user
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.followup.user.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -464,7 +468,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎟️ Follow-up of issues and pull requests - Indepth analysis
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.followup.indepth.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -477,7 +481,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎭 Comment reactions - Comment reactions
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.reactions.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -491,7 +495,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧑‍🤝‍🧑 People - Followers
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.people.followers.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -504,7 +508,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧑‍🤝‍🧑 People - Contributors and sponsors
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.people.repository.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -519,7 +523,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💝 GitHub Sponsorships - 💝 GitHub Sponsorships
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.sponsorships.svg
           token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
@@ -531,7 +535,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💕 GitHub Sponsors - Sponsors goal
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.sponsors.svg
           token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
@@ -545,7 +549,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💕 GitHub Sponsors - Sponsors introduction
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.sponsors.full.svg
           token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -557,7 +561,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📓 Featured repositories - Featured repositories
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.repositories.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -570,7 +574,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📓 Featured repositories - Pinned repositories
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.repositories.pinned.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -583,7 +587,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💬 Discussions - GitHub Discussions
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.discussions.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -596,7 +600,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💫 Star lists - Featured star list
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.starlists.svg
           token: NOT_NEEDED
@@ -610,7 +614,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💫 Star lists - Featured star list languages
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.starlists.languages.svg
           token: NOT_NEEDED
@@ -626,7 +630,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📆 Commit calendar - Current year calendar
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.calendar.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -638,7 +642,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📆 Commit calendar - Full history calendar
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.calendar.full.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -651,7 +655,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🏆 Achievements - Detailed display
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.achievements.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -664,7 +668,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🏆 Achievements - Compact display
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.achievements.compact.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -681,7 +685,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎩 Notable contributions - Contributions
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.notable.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -693,7 +697,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎩 Notable contributions - Indepth analysis
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.notable.indepth.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -707,7 +711,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📰 Recent activity - Recent activity
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.activity.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -722,7 +726,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧮 Repositories traffic - Repositories traffic
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.traffic.svg
           token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -734,7 +738,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ♐ Random code snippet - JavaScript or TypeScript snippet of the day
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.code.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -748,7 +752,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎫 Gists - Gists
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.gists.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -760,7 +764,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🗂️ GitHub projects - Project from a repository
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.projects.svg
           token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -774,7 +778,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🙋 Introduction - Organization introduction
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.introduction.svg
           token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -786,7 +790,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🙋 Introduction - Repository introduction
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.introduction.repository.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -800,7 +804,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ⏱️ Google PageSpeed - Succinct report
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.pagespeed.svg
           token: NOT_NEEDED
@@ -814,7 +818,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ⏱️ Google PageSpeed - Detailed report
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.pagespeed.detailed.svg
           token: NOT_NEEDED
@@ -829,7 +833,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ⏱️ Google PageSpeed - Screenshot
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.pagespeed.screenshot.svg
           token: NOT_NEEDED
@@ -844,7 +848,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🗨️ Stack Overflow - Top answers from stackoverflow
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stackoverflow.svg
           token: NOT_NEEDED
@@ -861,7 +865,7 @@ jobs:
       - name: >-
           🌸 Anilist watch list and reading list - Favorites anime and currently
           watching
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.anilist.svg
           token: NOT_NEEDED
@@ -878,7 +882,7 @@ jobs:
       - name: >-
           🌸 Anilist watch list and reading list - Favorites manga and currently
           reading
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.anilist.manga.svg
           token: NOT_NEEDED
@@ -893,7 +897,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🌸 Anilist watch list and reading list - Favorites characters
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.anilist.characters.svg
           token: NOT_NEEDED
@@ -907,7 +911,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎼 Music activity and suggestions - Apple Music - Random track from playlist
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.music.playlist.svg
           token: NOT_NEEDED
@@ -921,7 +925,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎼 Music activity and suggestions - Spotify - Random track from playlist
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.music.playlist.spotify.svg
           token: NOT_NEEDED
@@ -934,7 +938,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎼 Music activity and suggestions - Spotify - Recently listed
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.music.recent.svg
           token: NOT_NEEDED
@@ -950,7 +954,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎼 Music activity and suggestions - Spotify - Top tracks
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: NOT_NEEDED
           base: ""
@@ -966,7 +970,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🎼 Music activity and suggestions - Spotify - Top artists
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: NOT_NEEDED
           base: ""
@@ -984,7 +988,7 @@ jobs:
       - name: >-
           🎼 Music activity and suggestions - Youtube Music - Random track from
           playlist
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: NOT_NEEDED
           base: ""
@@ -997,7 +1001,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ✒️ Recent posts - Recent posts
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.posts.svg
           token: NOT_NEEDED
@@ -1010,7 +1014,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ✒️ Recent posts - Recent posts with descriptions and cover images
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.posts.full.svg
           token: NOT_NEEDED
@@ -1026,7 +1030,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🗼 Rss feed - News from hackernews
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.rss.svg
           token: NOT_NEEDED
@@ -1040,7 +1044,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ⏰ WakaTime - WakaTime
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.wakatime.svg
           token: NOT_NEEDED
@@ -1055,7 +1059,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🗳️ Leetcode - LeetCode
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.leetcode.svg
           token: NOT_NEEDED
@@ -1068,7 +1072,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🕹️ Steam - Recently played games
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.steam.svg
           token: NOT_NEEDED
@@ -1085,7 +1089,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🕹️ Steam - Profile and detailed game history
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.steam.full.svg
           token: NOT_NEEDED
@@ -1100,7 +1104,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🧠 16personalities - MBTI Personality profile
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.16personalities.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -1115,7 +1119,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: ♟️ Chess - Last chess game from lichess.org
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.chess.svg
           token: NOT_NEEDED
@@ -1129,7 +1133,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🥠 Fortune - Fortune
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.fortune.svg
           token: NOT_NEEDED
@@ -1141,7 +1145,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📸 Website screenshot - XKCD of the day
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.screenshot.svg
           token: NOT_NEEDED
@@ -1156,7 +1160,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 💹 Stock prices - Stock prices from Tesla
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.plugin.stock.svg
           token: NOT_NEEDED
@@ -1170,7 +1174,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📗 Classic template - Example
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.classic.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -1182,7 +1186,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📘 Repository template - Example
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           template: repository
           filename: metrics.repository.svg
@@ -1198,7 +1202,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📙 Terminal template - Example
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           template: terminal
           filename: metrics.terminal.svg
@@ -1210,7 +1214,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📒 Markdown template - Example
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           template: markdown
           filename: metrics.markdown.md
@@ -1225,7 +1229,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📒 Markdown template - Example with plugins configuration for embed use
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           template: markdown
           filename: metrics.markdown.full.md
@@ -1256,7 +1260,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📒 Markdown template - Example (pdf output)
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           template: markdown
           filename: metrics.markdown.pdf
@@ -1277,7 +1281,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📕 Community templates - Using a community template
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           template: "@classic"
@@ -1288,7 +1292,7 @@ jobs:
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 📕 Community templates - Using a trusted community template
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: ${{ secrets.METRICS_TOKEN }}
           template: "@terminal"
@@ -1330,14 +1334,15 @@ jobs:
     if: ${{ github.repository == 'gh-metrics/metrics' && false }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: examples
 
       - name: Contributors
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.contributors.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -1353,7 +1358,7 @@ jobs:
           delay: 120
       - name: Sponsors
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.sponsors.svg
           token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
@@ -1369,7 +1374,7 @@ jobs:
           delay: 120
       - name: Licenses
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           filename: metrics.licenses.svg
           token: ${{ secrets.METRICS_TOKEN }}

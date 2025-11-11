@@ -4,6 +4,8 @@ on:
   push:
     branches: [master]
 
+permissions: {}
+
 jobs:
   # Build, test and analyze
   build-test-analyze:
@@ -17,10 +19,15 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-test-analyze]
     if: always() && (needs.build-test-analyze.result == 'success' || needs.build-test-analyze.result == 'skipped')
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: master
       - name: Format code
@@ -47,18 +54,20 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: false
           fetch-depth: 0
           ref: master
       - name: Setup NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: 20
           cache: "npm"
       - name: Setup metrics
         run: npm ci
       - name: Publish rebuild metrics indexes
+        # zizmor: ignore[use-trusted-publishing] False-positive.
         run: npm run build -- publish
 
   # Rebase main branch on master
@@ -70,8 +79,9 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: main
       - name: Configure Git Identity
@@ -92,9 +102,11 @@ jobs:
       packages: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - name: Login to GitHub registry
-        run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
       - name: Build docker image
         run: docker build -t ghcr.io/gh-metrics/metrics:master .
       - name: Publish to GitHub registry
@@ -136,7 +148,7 @@ jobs:
     needs: [docker-master]
     steps:
       - name: Run tests
-        uses: gh-metrics/metrics@master
+        uses: gh-metrics/metrics@master # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: MOCKED_TOKEN
           plugins_errors_fatal: yes
@@ -183,9 +195,11 @@ jobs:
     if: contains(github.event.head_commit.message, '[release]')
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - name: Login to GitHub registry
-        run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        run: echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
       - name: Pull docker image (master)
         run: docker pull ghcr.io/gh-metrics/metrics:master
       - name: Tag docker image (release)
@@ -208,8 +222,9 @@ jobs:
     needs: [docker-release]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: latest
       - name: Configure Git Identity
@@ -228,7 +243,7 @@ jobs:
     needs: [update-latest]
     steps:
       - name: Run tests
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@latest # zizmor: ignore[unpinned-uses] First-party.
         with:
           token: MOCKED_TOKEN
           plugins_errors_fatal: yes
@@ -257,9 +272,11 @@ jobs:
     needs: [action-latest-test, deploy-latest]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - name: Setup NodeJS
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
           node-version: 20
           cache: "npm"
