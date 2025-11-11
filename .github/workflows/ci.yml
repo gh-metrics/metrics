@@ -5,13 +5,17 @@ on:
     branches: [ master ]
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
 
   # Build, test and analyze
   build-test-analyze:
     name: Build, test and analyze
     if: ${{ !contains(github.event.head_commit.message, '[skip test]') }}
-    uses: gh-metrics/metrics/.github/workflows/test.yml@master
+    uses: $/.github/workflows/test.yml
+    permissions:
+      contents: read # Check out and test the repository.
 
   # Update plugins and template indexes, along with README.md
   update-indexes:
@@ -19,21 +23,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-test-analyze]
     permissions:
-      contents: write
+      contents: write # Commit and push regenerated indexes.
     steps:
+      # zizmor: ignore[artipacked] Credentials are required to publish regenerated files.
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: master
       - name: Setup NodeJS
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
         with:
           node-version: 20
           cache: "npm"
       - name: Setup metrics
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish rebuild metrics indexes
+        # zizmor: ignore[use-trusted-publishing] This publishes generated files to Git, not an npm package.
         run: npm run build -- publish
 
   # Rebase main branch on master
@@ -42,11 +49,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [update-indexes]
     permissions:
-      contents: write
+      contents: write # Merge master into and push the main branch.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: main
       - name: Configure Git Identity
@@ -64,12 +72,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: [update-indexes]
     permissions:
-      packages: write
+      contents: read # Build the image from repository contents.
+      packages: write # Publish master and beta container images.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Login to GitHub registry
-        run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
       - name: Build docker image
         run: docker build -t ghcr.io/gh-metrics/metrics:master .
       - name: Publish to GitHub registry
@@ -98,7 +112,9 @@ jobs:
     if: github.repository_owner == 'lowlighter'
     steps:
       - name: Deploy web instance
-        run: "curl -X POST -H 'Authorization: ${{ secrets.WEB_DEPLOY_BETA_TOKEN }}' https://beta-metrics.lecoq.io/.control/stop"
+        env:
+          WEB_DEPLOY_TOKEN: ${{ secrets.WEB_DEPLOY_BETA_TOKEN }}
+        run: "curl -X POST -H 'Authorization: $WEB_DEPLOY_TOKEN' https://beta-metrics.lecoq.io/.control/stop"
       - name: Wait for redeploy
         run: sleep 120
       - name: Check deployment status
@@ -111,7 +127,7 @@ jobs:
     needs: [docker-master]
     steps:
       - name: Run tests
-        uses: gh-metrics/metrics@master
+        uses: $/
         with:
           token: MOCKED_TOKEN
           plugins_errors_fatal: yes
@@ -123,10 +139,10 @@ jobs:
   publish-examples:
     name: Publish examples
     needs: [action-master-test]
-    uses: gh-metrics/metrics/.github/workflows/examples.yml@master
+    uses: $/.github/workflows/examples.yml
     permissions:
-      contents: write
-      packages: read
+      contents: write # Publish generated examples.
+      packages: read # Pull the metrics action image.
     secrets:
       METRICS_TOKEN: ${{ secrets.METRICS_TOKEN }}
       METRICS_TOKEN_WITH_SCOPES: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
@@ -146,9 +162,9 @@ jobs:
   publish-examples-presets:
     name: Publish examples (presets)
     needs: [action-master-test]
-    uses: gh-metrics/metrics/.github/workflows/examples.presets.yml@master
+    uses: $/.github/workflows/examples.presets.yml
     permissions:
-      contents: write
+      contents: write # Publish generated preset examples.
 
   # Build docker image from master and publish it to GitHub registry with release tag
   docker-release:
@@ -156,11 +172,19 @@ jobs:
     runs-on: ubuntu-latest
     needs: [publish-examples]
     if: contains(github.event.head_commit.message, '[release]')
+    permissions:
+      contents: read # Read release metadata from the repository.
+      packages: write # Publish release and latest container images.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Login to GitHub registry
-        run: echo ${{ github.token }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: echo "$GITHUB_TOKEN" | docker login ghcr.io -u "$GITHUB_ACTOR" --password-stdin
       - name: Pull docker image (master)
         run: docker pull ghcr.io/gh-metrics/metrics:master
       - name: Tag docker image (release)
@@ -181,10 +205,13 @@ jobs:
     name: Rebase latest on master
     runs-on: ubuntu-latest
     needs: [docker-release]
+    permissions:
+      contents: write # Merge master into and push the latest branch.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: latest
       - name: Configure Git Identity
@@ -201,9 +228,11 @@ jobs:
     name: Test gh-metrics/metrics@latest
     runs-on: ubuntu-latest
     needs: [update-latest]
+    permissions:
+      packages: read # Pull the metrics action image.
     steps:
       - name: Run tests
-        uses: gh-metrics/metrics@latest
+        uses: gh-metrics/metrics@latest # zizmor: ignore[unpinned-uses] First-party action must test latest.
         with:
           token: MOCKED_TOKEN
           plugins_errors_fatal: yes
@@ -219,7 +248,9 @@ jobs:
     if: github.repository_owner == 'lowlighter'
     steps:
       - name: Deploy web instance
-        run: "curl -X POST -H 'Authorization: ${{ secrets.WEB_DEPLOY_TOKEN }}' https://metrics.lecoq.io/.control/stop"
+        env:
+          WEB_DEPLOY_TOKEN: ${{ secrets.WEB_DEPLOY_TOKEN }}
+        run: "curl -X POST -H 'Authorization: $WEB_DEPLOY_TOKEN' https://metrics.lecoq.io/.control/stop"
       - name: Wait for redeploy
         run: sleep 120
       - name: Check deployment status
@@ -230,11 +261,16 @@ jobs:
     name: Publish release
     runs-on: ubuntu-latest
     needs: [action-latest-test, deploy-latest]
+    permissions:
+      contents: write # Create the GitHub release.
     steps:
+      # zizmor: ignore[artipacked] Credentials are required to replace an existing release tag.
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: true
       - name: Setup NodeJS
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
         with:
           node-version: 20
           cache: "npm"

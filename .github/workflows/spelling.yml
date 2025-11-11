@@ -64,6 +64,7 @@ on:
       - "**"
     tags-ignore:
       - "**"
+  # zizmor: ignore[dangerous-triggers] This follows check-spelling's restricted-permissions design and never executes PR code.
   pull_request_target:
     branches:
       - "**"
@@ -82,9 +83,9 @@ jobs:
   spelling:
     name: Check Spelling
     permissions:
-      contents: read
-      pull-requests: read
-      actions: read
+      contents: read # Spell-check repository contents.
+      pull-requests: read # Inspect pull-request metadata.
+      actions: read # Read prior workflow artifacts and results.
     outputs:
       followup: ${{ steps.spelling.outputs.followup }}
     runs-on: ubuntu-latest
@@ -96,13 +97,13 @@ jobs:
     steps:
       - name: check-spelling
         id: spelling
-        uses: check-spelling/check-spelling@v0.0.26
+        uses: check-spelling/check-spelling@cfb6f7e75bbfc89c71eaa30366d0c166f1bd9c8c # v0.0.26
         with:
           suppress_push_for_open_pull_request: ${{ case(github.actor == 'dependabot[bot]', true, false) }}
           checkout: true
           check_file_names: 1
           check_commit_messages: ${{ case(github.actor == 'dependabot[bot]', false, 'title, description') }}
-          spell_check_this: check-spelling/spell-check-this@main
+          spell_check_this: check-spelling/spell-check-this@976261d7b7184b67231c8668f2b35438496ca44f
           post_comment: 0
           use_magic_file: 1
           report-timing: 1
@@ -131,14 +132,14 @@ jobs:
     runs-on: ubuntu-slim
     needs: spelling
     permissions:
-      actions: read
-      contents: write
+      actions: read # Read the spelling job result.
+      contents: write # Update the push report.
     if: (success() || failure()) && needs.spelling.outputs.followup && github.event_name == 'push'
     steps:
       - name: comment
-        uses: check-spelling/check-spelling@v0.0.26
+        uses: check-spelling/check-spelling@cfb6f7e75bbfc89c71eaa30366d0c166f1bd9c8c # v0.0.26
         with:
-          spell_check_this: check-spelling/spell-check-this@main
+          spell_check_this: check-spelling/spell-check-this@976261d7b7184b67231c8668f2b35438496ca44f
           task: ${{ needs.spelling.outputs.followup }}
 
   comment-pr:
@@ -147,23 +148,23 @@ jobs:
     runs-on: ubuntu-slim
     needs: spelling
     permissions:
-      actions: read
-      pull-requests: write
+      actions: read # Read the spelling job result.
+      pull-requests: write # Create or update the pull-request report.
     if: (success() || failure()) && needs.spelling.outputs.followup && contains(github.event_name, 'pull_request')
     steps:
       - name: comment
-        uses: check-spelling/check-spelling@v0.0.26
+        uses: check-spelling/check-spelling@cfb6f7e75bbfc89c71eaa30366d0c166f1bd9c8c # v0.0.26
         with:
-          spell_check_this: check-spelling/spell-check-this@main
+          spell_check_this: check-spelling/spell-check-this@976261d7b7184b67231c8668f2b35438496ca44f
           task: ${{ needs.spelling.outputs.followup }}
           experimental_apply_changes_via_bot: 1
 
   update:
     name: Update PR
     permissions:
-      contents: write
-      pull-requests: write
-      actions: read
+      contents: write # Commit accepted spelling updates.
+      pull-requests: write # Update pull-request metadata and comments.
+      actions: read # Read the spelling job result.
     runs-on: ubuntu-slim
     if: ${{
       github.event_name == 'issue_comment' &&
@@ -177,7 +178,7 @@ jobs:
       cancel-in-progress: false
     steps:
       - name: apply spelling updates
-        uses: check-spelling/check-spelling@v0.0.26
+        uses: check-spelling/check-spelling@cfb6f7e75bbfc89c71eaa30366d0c166f1bd9c8c # v0.0.26
         with:
           experimental_apply_changes_via_bot: 1
           checkout: true

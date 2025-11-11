@@ -1,19 +1,26 @@
 name: Check automated branches
 
 on:
+  # zizmor: ignore[dangerous-triggers] This workflow only comments through a pinned action and never executes PR code.
   pull_request_target:
     branches:
       - main
       - latest
       - examples
 
+permissions: {}
+
 jobs:
   notice:
     name: Notice for automated branches
     runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write # Explain why automated branches reject the pull request.
+
     steps:
       - name: Comment on pull request
-        uses: actions/github-script@v9
+        uses: actions/github-script@373c709c69115d41ff229c7e5df9f8788daa9553 # v9.0.0
         with:
           script: |
             const {issue:{number:issue_number}, repo:{owner, repo}} = context
@@ -28,5 +35,5 @@ jobs:
               "",
               "Thanks for your cooperation 🦾!"
             ].join("\n")})
-      - name: Change base branch
+      - name: Fail workflow
         run: exit 1
