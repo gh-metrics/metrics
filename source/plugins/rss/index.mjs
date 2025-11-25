@@ -14,8 +14,15 @@ export default async function({login, q, imports, data, account}, {enabled = fal
     if (!source)
       throw {error: {message: "RSS feed URL is not set"}}
 
+    //Set User-Agent header
+    const parser = new rss({
+      headers: {
+        "User-Agent": "gh-metrics/metrics (+https://github.com/gh-metrics/metrics"
+      }
+    })
+    
     //Load rss feed
-    const {title, description, link, items} = await (new rss()).parseURL(source) //eslint-disable-line new-cap
+    const {title, description, link, items} = await parser.parseURL(source) //eslint-disable-line new-cap
     const feed = items.map(({title, link, isoDate: date}) => ({title, link, date: new Date(date)}))
 
     //Limit feed
