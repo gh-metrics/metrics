@@ -20,3 +20,6 @@ updates:
       - dependency-name: vue-prism-component
         versions:
           - 2.0.0
+
+    cooldown:
+      default-days: 7

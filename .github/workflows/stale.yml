@@ -5,12 +5,14 @@ on:
     - cron: "30 1 * * *"
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   stale:
     name: Flag stale issues and pull requests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v9
+      - uses: actions/stale@5f858e3efba33a5ca4407a664cc011ad407f2008 # v10.1.0
         with:
           days-before-stale: -1
           stale-pr-message: This pull request seems to be inactive and will be automatically closed in a few days if it remains without any activity.
@@ -25,7 +27,7 @@ jobs:
       - stale
     runs-on: ubuntu-latest
     steps:
-      - uses: dessant/lock-threads@v5
+      - uses: dessant/lock-threads@1bf7ec25051fe7c00bdd17e6a7cf3d7bfb7dc771 # v5
         with:
           github-token: ${{ github.token }}
           issue-inactive-days: 180
@@ -40,7 +42,9 @@ jobs:
     continue-on-error: true
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
       - name: Run script
         run: ./delete_workflows.sh gh-metrics/metrics
         working-directory: .github/actions/ghcr-clean
