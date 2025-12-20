@@ -65,6 +65,27 @@ The following contributions are accepted:
       </ul>
     </td>
   </tr>
+  <tr>
+    <td nowrap="nowrap">🧱 Core</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>
+      <ul>
+        <li>Core changes impact all rendering process, so extra care is needed</li>
+        <li>New dependencies should be avoided unless necessary</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">🗃️ Repository</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>
+      <ul>
+        <li>Workflows, license, readmes, etc. usually don't need to be edited often</li>
+      </ul>
+    </td>
+  </tr>
 </table>
 
 **Legend**
