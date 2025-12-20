@@ -10,8 +10,6 @@ Before working on something, ensure that it will not duplicate any active open p
 
 It is advised to open a [`💬 discussion`](https://github.com/gh-metrics/metrics/discussions) first to gather feedback about new features.
 
-> ⚠️ To avoid an ever-growing backlog, inactive pull requests will be closed after 3 weeks and locked after 5 weeks.
-
 > 😅 Be positive! Even if your changes don't get merged in [gh-metrics/metrics](https://github.com/gh-metrics/metrics), please don't be too sad, you will always be able to run workflows directly from your fork!
 
 ## 🤝 Accepted contributions
@@ -64,27 +62,6 @@ The following contributions are accepted:
     <td>
       <ul>
         <li>Everything that makes metrics more stable is welcomed!</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td nowrap="nowrap">🧱 Core</td>
-    <td>✓</td>
-    <td>❌</td>
-    <td>
-      <ul>
-        <li>Core changes impact all rendering process and should be avoided unless necessary</li>
-        <li>New dependencies should be avoided when possible</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td nowrap="nowrap">🗃️ Repository</td>
-    <td>❌</td>
-    <td>❌</td>
-    <td>
-      <ul>
-        <li>Workflows, license, readmes, etc. usually don't need to be edited</li>
       </ul>
     </td>
   </tr>
