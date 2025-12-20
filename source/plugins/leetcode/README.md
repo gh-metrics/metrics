@@ -91,7 +91,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   <tr>
     <td nowrap="nowrap"><h4><code>plugin_leetcode_ignored_skills</code></h4></td>
     <td rowspan="2"><p>Ignored skills</p>
-<p>It is possible to ignore entires categories by passing <code>fundamental</code>, <code>intermediate</code> or <code>advanced</code></p>
+<p>It is possible to ignore entire categories by passing <code>fundamental</code>, <code>intermediate</code> or <code>advanced</code></p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>

@@ -140,8 +140,8 @@ Requires <a href="/source/plugins/community/splatoon/README.md#plugin_splatoon_s
     <td rowspan="2"><p>Source</p>
 <ul>
 <li><code>splatnet</code> will fetch data from Splatnet using <a href="https://github.com/spacemeowx2/s3si.ts">spacemeowx2/s3si.ts</a> tool</li>
-<li><code>local</code> will assume <code>s3si/export</code> directory already exists and is populated (use this when developping new features for this plugin to save network resources and time)</li>
-<li><code>mocks</code> will use <code>s3si/mocks</code> directory (use this when developping new features for this plugin to avoid setting up a NSO token)</li>
+<li><code>local</code> will assume <code>s3si/export</code> directory already exists and is populated (use this when developing new features for this plugin to save network resources and time)</li>
+<li><code>mocks</code> will use <code>s3si/mocks</code> directory (use this when developing new features for this plugin to avoid setting up a NSO token)</li>
 </ul>
 <img width="900" height="1" alt=""></td>
   </tr>

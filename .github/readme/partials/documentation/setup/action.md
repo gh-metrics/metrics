@@ -113,7 +113,7 @@ There are several *metrics* versions that can be used in workflows:
 
 ### 3️.2️ Configure *metrics*
 
-Read [documentation](/README.md#-documentation) for more informations about configuration.
+Read [documentation](/README.md#-documentation) for more information about configuration.
 It is advised to start with [`🧱 core`](/source/plugins/core/README.md) plugin documentation.
 
 It is also possible to use [metrics.lecoq.io](https://metrics.lecoq.io) to play with configuration options, preview renders and finally copy the auto-generated workflow code.

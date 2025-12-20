@@ -10,7 +10,7 @@ import core from "@actions/core"
 export class Analyzer {
   /**Constructor */
   constructor(login, {account = "bypass", authoring = [], uid = Math.random(), shell, rest = null, context = {mode: "user"}, skipped = [], categories = ["programming", "markup"], timeout = {global: NaN, repositories: NaN}}) {
-    //User informations
+    //User information
     this.login = login
     this.account = account
     this.authoring = authoring

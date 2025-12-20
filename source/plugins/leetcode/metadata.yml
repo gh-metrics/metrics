@@ -54,7 +54,7 @@ inputs:
     description: |
       Ignored skills
 
-      It is possible to ignore entires categories by passing `fundamental`, `intermediate` or `advanced`
+      It is possible to ignore entire categories by passing `fundamental`, `intermediate` or `advanced`
     type: array
     default: ""
     example: hash table, string, divide and conquer, fundamental

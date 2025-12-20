@@ -617,7 +617,7 @@ When doing so, any settings which defaults on user fetched values will not be te
 <li><code>data-changed</code>: skip changes if no data changed (e.g. like when only metadata changed)</li>
 </ul>
 <blockquote>
-<p>ℹ️ This option is only revelant when <a href="/source/plugins/core/README.md#config_output"><code>config_output: svg</code></a> is set</p>
+<p>ℹ️ This option is only relevant when <a href="/source/plugins/core/README.md#config_output"><code>config_output: svg</code></a> is set</p>
 </blockquote>
 <img width="900" height="1" alt=""></td>
   </tr>

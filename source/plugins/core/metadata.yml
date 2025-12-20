@@ -125,7 +125,7 @@ inputs:
       - `always`: always try to push changes
       - `data-changed`: skip changes if no data changed (e.g. like when only metadata changed)
 
-      > ℹ️ This option is only revelant when [`config_output: svg`](/source/plugins/core/README.md#config_output) is set
+      > ℹ️ This option is only relevant when [`config_output: svg`](/source/plugins/core/README.md#config_output) is set
     type: string
     default: always
     values:
