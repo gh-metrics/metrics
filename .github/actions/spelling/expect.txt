@@ -27,6 +27,7 @@ cmake
 codelines
 colorsets
 Consolas
+cooldown
 CVE
 datapoints
 dded
@@ -306,3 +307,4 @@ ytmusic
 Zabcdefghijklmnopqrstuvwxyz
 zenhei
 zenorocha
+zizmor
