@@ -1,9 +1,12 @@
 query BaseContributions {
   user(login: "$login") {
     contributionsCollection$range {
-      $field
+      totalRepositoriesWithContributedCommits
+      totalCommitContributions
+      restrictedContributionsCount
+      totalIssueContributions
+      totalPullRequestContributions
+      totalPullRequestReviewContributions
     }
   }
 }
-
-
