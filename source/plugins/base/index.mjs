@@ -67,7 +67,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           //Query contributions collection
           {
             try {
-              Object.assign(data.user.contributionsCollection, (await graphql(queries.base.contributions({login, account, range: ""})))[account].contributionsCollection)
+              Object.assign(data.user.contributionsCollection, (await graphql(queries.base.contributions({ login, account, range: "", indepthFields: ""})))[account].contributionsCollection)
             }
             catch {
               console.debug(`metrics/compute/${login}/base > failed to retrieve contributionsCollection`)
@@ -90,6 +90,8 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           const start = new Date(data.user.createdAt)
           const end = new Date()
           const contributions = []
+          const indepthExtraFields = ["commitContributionsByRepository", "pullRequestContributionsByRepository", "issueContributionsByRepository", "pullRequestReviewContributionsByRepository"]
+          const totalReposContributed = new Set()
           //Load contribution calendar
           for (let from = new Date(start); from < end;) {
             //Set date range
@@ -106,7 +108,8 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
             //Fetch data from api
             try {
               console.debug(`metrics/compute/${login}/plugins > base > loading contributions collections from "${from.toISOString()}" to "${dto.toISOString()}"`)
-              const {[account]: {contributionsCollection}} = await graphql(queries.base.contributions({login, account, field, range: `(from: "${from.toISOString()}", to: "${dto.toISOString()}")`}))
+              const extraFieldsWithParams = indepthExtraFields.map(x => `${x} { repository { nameWithOwner } }`).join('\n')
+              const { [account]: { contributionsCollection } } = await graphql(queries.base.contributions({ login, account, indepthFields: extraFieldsWithParams, range: `(from: "${from.toISOString()}", to: "${dto.toISOString()}")` }))
               contributions.push(contributionsCollection)
             }
             catch {
@@ -118,10 +121,18 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
 
           for (const contribution of contributions) {
             for (const field in contribution) {
-              data.user.contributionsCollection[field] ??= 0
-              data.user.contributionsCollection[field] += contribution[field]
+              if (indepthExtraFields.includes(field)) {
+                for (const repo of contribution[field]) {
+                  totalReposContributed.add(repo.repository.nameWithOwner)
+                }
+              } else {
+                data.user.contributionsCollection[field] ??= 0
+                data.user.contributionsCollection[field] += contribution[field]
+              } 
             }
           }
+
+          data.user.repositoriesContributedTo.totalCount = totalReposContributed.size
         }
         //Fallback to load whole commit history rather than last year
         else {
@@ -145,7 +156,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         //Iterate through repositories
         let cursor = null
         let pushed = 0
-        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: ", includeUserRepositories: false, contributionTypes: COMMIT"}}[type] ?? null
+        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: ", includeUserRepositories: true, contributionTypes: COMMIT"}}[type] ?? null
         data.user[type] = data.user[type] ?? {}
         data.user[type].nodes = data.user[type].nodes ?? []
         do {
