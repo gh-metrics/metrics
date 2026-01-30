@@ -7,7 +7,7 @@
 export default async function({login, graphql, rest, data, q, queries, imports, callbacks}, conf) {
   //Load inputs
   console.debug(`metrics/compute/${login}/base > started`)
-  let {indepth, hireable, skip, "repositories.forks": _forks, "repositories.affiliations": _affiliations, "repositories.batch": _batch} = imports.metadata.plugins.base.inputs({data, q, account: "bypass"})
+  let {indepth, hireable, skip, "repositories.forks": _forks, "repositories.affiliations": _affiliations, "repositories.owned": _owned, "repositories.batch": _batch} = imports.metadata.plugins.base.inputs({data, q, account: "bypass"})
   const repositories = conf.settings.repositories || 100
   const forks = _forks ? "" : ", isFork: false"
   const affiliations = _affiliations?.length ? `, ownerAffiliations: [${_affiliations.map(x => x.toLocaleUpperCase()).join(", ")}]${conf.authenticated === login ? `, affiliations: [${_affiliations.map(x => x.toLocaleUpperCase()).join(", ")}]` : ""}` : ""
@@ -40,7 +40,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         console.debug(`metrics/compute/${login}/base > failed to load bulk query, falling back to unit queries`)
         //Query basic fields
         const fields = {
-          user: ["packages", "starredRepositories", "watching", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "followers", "following", "issueComments", "organizations", "repositoriesContributedTo(includeUserRepositories: true)"],
+          user: ["packages", "starredRepositories", "watching", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "followers", "following", "issueComments", "organizations", `repositoriesContributedTo(includeUserRepositories: ${_owned})`],
           organization: ["packages", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "membersWithRole"],
         }[account] ?? []
         for (const field of fields) {
@@ -122,7 +122,9 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
             for (const field in contribution) {
               if (indepthExtraFields.includes(field)) {
                 for (const repo of contribution[field]) {
-                  totalReposContributed.add(repo.repository.nameWithOwner)
+                  const nameWithOwner = repo.repository.nameWithOwner
+                  if (!_owned && nameWithOwner.split('/')[0] === login) continue
+                  totalReposContributed.add(nameWithOwner)
                 }
               } else {
                 data.user.contributionsCollection[field] ??= 0
@@ -155,7 +157,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         //Iterate through repositories
         let cursor = null
         let pushed = 0
-        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: ", includeUserRepositories: true, contributionTypes: COMMIT"}}[type] ?? null
+        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: `, includeUserRepositories: ${_owned}, contributionTypes: COMMIT`}}[type] ?? null
         data.user[type] = data.user[type] ?? {}
         data.user[type].nodes = data.user[type].nodes ?? []
         do {

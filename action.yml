@@ -34,6 +34,10 @@ inputs:
     description: Include forks
     default: <default-value>
 
+  repositories_owned:
+    description: Include your own repositories in the "Contributed to X repositories" count
+    default: <default-value>
+
   repositories_affiliations:
     description: Repositories affiliations
     default: <default-value>
