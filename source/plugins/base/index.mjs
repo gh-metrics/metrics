@@ -53,14 +53,13 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           }
         }
         //Query repositories fields
-        for (const field of ["totalCount", "totalDiskUsage"]) {
-          try {
-            Object.assign(data.user.repositories, (await graphql(queries.base["field.repositories"]({login, account, field, affiliations})))[account].repositories)
-          }
-          catch (error) {
-            console.debug(`metrics/compute/${login}/base > failed to retrieve repositories.${field}`)
-            data.user.repositories[field] = NaN
-          }
+        try {
+          Object.assign(data.user.repositories, (await graphql(queries.base["field.repositories"]({ login, account, affiliations })))[account].repositories)
+        }
+        catch {
+          console.debug(`metrics/compute/${login}/base > failed to retrieve repositories count and disk usage`)
+          data.user.repositories["totalCount"] = NaN
+          data.user.repositories["totalDiskUsage"] = NaN
         }
         //Query user account fields
         if (account === "user") {

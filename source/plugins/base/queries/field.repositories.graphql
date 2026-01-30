@@ -1,7 +1,8 @@
 query BaseFieldRepositories{
   $account(login: "$login") {
     repositories(last: 0 $affiliations) {
-      $field
+      totalCount
+      totalDiskUsage
     }
   }
 }
