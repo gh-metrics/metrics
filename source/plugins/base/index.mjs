@@ -70,7 +70,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
             }
             catch {
               console.debug(`metrics/compute/${login}/base > failed to retrieve contributionsCollection`)
-              data.user.contributionsCollection[field] = NaN
+              data.user.contributionsCollection ??= {}
             }
           }
           //Query calendar
@@ -91,6 +91,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           const contributions = []
           const indepthExtraFields = ["commitContributionsByRepository", "pullRequestContributionsByRepository", "issueContributionsByRepository", "pullRequestReviewContributionsByRepository"]
           const totalReposContributed = new Set()
+          const lifetimeCollection = {}
           //Load contribution calendar
           for (let from = new Date(start); from < end;) {
             //Set date range
@@ -127,10 +128,17 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
                   totalReposContributed.add(nameWithOwner)
                 }
               } else {
-                data.user.contributionsCollection[field] ??= 0
-                data.user.contributionsCollection[field] += contribution[field]
+                lifetimeCollection[field] ??= 0
+                lifetimeCollection[field] += contribution[field]
               } 
             }
+          }
+
+          for (const field in lifetimeCollection) {
+            data.user.contributionsCollection[field] = Math.max(
+              lifetimeCollection[field],
+              data.user.contributionsCollection[field] ?? 0
+            )
           }
 
           data.user.repositoriesContributedTo.totalCount = totalReposContributed.size
