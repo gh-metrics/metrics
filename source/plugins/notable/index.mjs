@@ -109,7 +109,7 @@ export default async function({login, q, imports, rest, graphql, data, account, 
     console.debug(`metrics/compute/${login}/plugins > notable > aggregating results`)
     const aggregated = new Map()
     for (const {name, handle, avatar, organization = handle.split("/").shift() ?? "", stars, ..._extras} of contributions) {
-      const key = repositories ? handle : name
+      const key = !organization || repositories ? handle : name
       if (aggregated.has(key)) {
         const aggregate = aggregated.get(key)
         aggregate.aggregated++

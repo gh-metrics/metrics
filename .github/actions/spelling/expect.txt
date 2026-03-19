@@ -12,6 +12,7 @@ audioscrobbler
 Autoloaded
 automator
 backreference
+basehead
 Bizau
 blankslate
 blog
@@ -32,7 +33,6 @@ datapoints
 dded
 dependabot
 deployer
-dessant
 destructuring
 Dexcom
 dflag
