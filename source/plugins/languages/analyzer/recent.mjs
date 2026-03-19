@@ -63,7 +63,7 @@ export class RecentAnalyzer extends Analyzer {
     const wanted = new Map()
     events.forEach(event => {
       let key = `${event.repo.name}@${event.payload.ref}`
-      let item = wanted.get(key) ?? { commits: [] }
+      let item = wanted.get(key) ?? {commits: []}
       item.repo = event.repo.name
       item.ref = event.payload.ref
       item.commits.push(event.payload.before)
@@ -83,8 +83,8 @@ export class RecentAnalyzer extends Analyzer {
                 item.commits = item.commits.filter(c => c !== x.sha)
                 return x
               })
-              .filter(({ committer }) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], { debug: false }))
-              .filter(({ commit }) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
+              .filter(({committer}) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], {debug: false}))
+              .filter(({commit}) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
           )
           if (item.commits < 1) {
             this.debug("found expected commits")

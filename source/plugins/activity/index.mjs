@@ -38,21 +38,21 @@ export default async function({login, data, rest, q, account, imports}, {enabled
     console.debug(`metrics/compute/${login}/plugins > activity > ${events.length} events loaded`)
 
     const payloadTypesToCustomTypes = {
-      CommitCommentEvent:"comment",
-      CreateEvent:"ref/create",
-      DeleteEvent:"ref/delete",
-      ForkEvent:"fork",
-      GollumEvent:"wiki",
-      IssueCommentEvent:"comment",
-      IssuesEvent:"issue",
-      MemberEvent:"member",
-      PublicEvent:"public",
-      PullRequestEvent:"pr",
-      PullRequestReviewEvent:"review",
-      PullRequestReviewCommentEvent:"comment",
-      PushEvent:"push",
-      ReleaseEvent:"release",
-      WatchEvent:"star",
+      CommitCommentEvent: "comment",
+      CreateEvent: "ref/create",
+      DeleteEvent: "ref/delete",
+      ForkEvent: "fork",
+      GollumEvent: "wiki",
+      IssueCommentEvent: "comment",
+      IssuesEvent: "issue",
+      MemberEvent: "member",
+      PublicEvent: "public",
+      PullRequestEvent: "pr",
+      PullRequestReviewEvent: "review",
+      PullRequestReviewCommentEvent: "comment",
+      PushEvent: "push",
+      ReleaseEvent: "release",
+      WatchEvent: "star",
     }
 
     //Extract activity events
@@ -61,18 +61,19 @@ export default async function({login, data, rest, q, account, imports}, {enabled
         .filter(({actor}) => account === "organization" ? true : actor.login?.toLocaleLowerCase() === login.toLocaleLowerCase())
         .filter(({created_at}) => Number.isFinite(days) ? new Date(created_at) > new Date(Date.now() - days * 24 * 60 * 60 * 1000) : true)
         .filter(event => visibility === "public" ? event.public : true)
-        .map(event => ({event, customType:payloadTypesToCustomTypes[event.type]}))
+        .map(event => ({event, customType: payloadTypesToCustomTypes[event.type]}))
         .filter(({customType}) => !!customType) //Ignore events with an unknown type
         .filter(({customType}) => filter.includes("all") || filter.includes(customType)) //Filter events based on user preference
         .map(({event}) => event) //Discard customType, it will be re-assigned
-        .map(async ({type, payload, actor:{login:actor}, repo:{name:repo}, created_at}) => {          //See https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/github-event-types
+        .map(async ({type, payload, actor: {login: actor}, repo: {name: repo}, created_at}) => { //See https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/github-event-types
           const timestamp = new Date(created_at)
           if (!imports.filters.repo(repo, skipped))
             return null
 
           //Get custom type from the previously declared mapping, so that it acts as a single source of truth
           const customType = payloadTypesToCustomTypes[type]
-          if (!customType) throw new Error(`Missing event mapping for type: ${type}`)
+          if (!customType)
+            throw new Error(`Missing event mapping for type: ${type}`)
 
           switch (type) {
             //Commented on a commit
@@ -165,15 +166,15 @@ export default async function({login, data, rest, q, account, imports}, {enabled
               let {size, ref, head, before} = payload
               const [owner, repoName] = repo.split("/")
 
-              const res = await rest.repos.compareCommitsWithBasehead({owner, repo:repoName, basehead:`${before}...${head}`})
+              const res = await rest.repos.compareCommitsWithBasehead({owner, repo: repoName, basehead: `${before}...${head}`})
               let {commits} = res.data
 
-              commits = commits.filter(({author:{email}}) => imports.filters.text(email, ignored))
+              commits = commits.filter(({author: {email}}) => imports.filters.text(email, ignored))
               if (!commits.length)
                 return null
               if (commits.slice(-1).pop()?.commit.message.startsWith("Merge branch "))
                 commits = commits.slice(-1)
-              return {type:customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: commits.reverse().map(({sha, message}) => ({sha: sha.substring(0, 7), message}))}
+              return {type: customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: commits.reverse().map(({sha, message}) => ({sha: sha.substring(0, 7), message}))}
             }
             //Released
             case "ReleaseEvent": {

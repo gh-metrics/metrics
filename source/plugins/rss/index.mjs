@@ -17,8 +17,8 @@ export default async function({login, q, imports, data, account}, {enabled = fal
     //Set User-Agent header
     const parser = new rss({ //eslint-disable-line new-cap
       headers: {
-        "User-Agent": "gh-metrics/metrics (+https://github.com/gh-metrics/metrics)"
-      }
+        "User-Agent": "gh-metrics/metrics (+https://github.com/gh-metrics/metrics)",
+      },
     })
 
     //Load rss feed
