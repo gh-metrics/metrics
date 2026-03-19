@@ -63,7 +63,7 @@ rules:
   # Code integrity
   no-unsafe-optional-chaining: error
   no-duplicate-imports: error
-  eqeqeq: error
+  eqeqeq: [error, "always", {null: "ignore"}]
 
   # Code simplicity
   max-depth: [error, 10]
