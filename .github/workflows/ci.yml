@@ -27,7 +27,7 @@ jobs:
           ref: master
       - name: Format code
         run: |
-          npm install -g dprint
+          npm i
           mkdir -v -p /home/runner/.cache/dprint/cache
           npx dprint fmt --config .github/config/dprint.json
       - name: Publish formatted code
@@ -38,7 +38,6 @@ jobs:
           git add --all
           git commit -m "chore: code formatting"
           git push
-          set -e
 
   # Update plugins and template indexes, along with README.md
   update-indexes:

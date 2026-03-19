@@ -51,7 +51,6 @@ export default async function({login, data, rest, imports, q, account}, {enabled
           .filter(commit => {
             if (commit == null || typeof commit !== "object")
               return false
-            // Safely check author property
             const author = commit?.author
             if (!author)
               return false
