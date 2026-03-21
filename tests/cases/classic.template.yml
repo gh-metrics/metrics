@@ -1,5 +1,5 @@
 - name: 📗 Classic template - Example
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     base: header, repositories

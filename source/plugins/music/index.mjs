@@ -238,7 +238,7 @@ export default async function({login, imports, data, q, account}, {enabled = fal
               console.debug(`metrics/compute/${login}/plugins > music > querying lastfm api`)
               tracks = (await imports.axios.get(`https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${token}&limit=${limit}&format=json`, {
                 headers: {
-                  "User-Agent": "lowlighter/metrics",
+                  "User-Agent": "gh-metrics/metrics",
                   Accept: "application/json",
                 },
               })).data.recenttracks.track.map(track => ({
@@ -433,7 +433,7 @@ export default async function({login, imports, data, q, account}, {enabled = fal
                     `https://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user=${user}&api_key=${token}&limit=${limit}&period=${period}&format=json`,
                     {
                       headers: {
-                        "User-Agent": "lowlighter/metrics",
+                        "User-Agent": "gh-metrics/metrics",
                         Accept: "application/json",
                       },
                     },
@@ -448,7 +448,7 @@ export default async function({login, imports, data, q, account}, {enabled = fal
                     `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${user}&api_key=${token}&limit=${limit}&period=${period}&format=json`,
                     {
                       headers: {
-                        "User-Agent": "lowlighter/metrics",
+                        "User-Agent": "gh-metrics/metrics",
                         Accept: "application/json",
                       },
                     },
@@ -502,7 +502,7 @@ export default async function({login, imports, data, q, account}, {enabled = fal
   }
 }
 
-//get all objects that have the given key name with recursively
+//get all objects that have the given key name, recursively
 function get_all_with_key(obj, key) {
   const result = []
   if (obj instanceof Object) {

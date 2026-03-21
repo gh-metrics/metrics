@@ -19,9 +19,9 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Classic charts</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.svg" alt=""></img></details>
-      <details><summary>Graph charts</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.graph.svg" alt=""></img></details>
-      <details open><summary>Worldmap</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg" alt=""></img></details>
+      <details open><summary>Classic charts</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.svg" alt=""></img></details>
+      <details><summary>Graph charts</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.graph.svg" alt=""></img></details>
+      <details open><summary>Worldmap</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.stargazers.worldmap.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -31,7 +31,7 @@ All product and company names are trademarks™ or registered® trademarks of th
 ## 🗝️ Obtaining a Google Maps API token
 
 Some features like `plugin_stagazers_worldmap` require a Google Geocoding API token.
-Follow instructions from their [documentation](https://developers.google.com/maps/documentation/geocoding/get-api-key) for more informations.
+Follow instructions from their [documentation](https://developers.google.com/maps/documentation/geocoding/get-api-key) for more information.
 
 > 💳 A billing account is required to get a token. However a recurring [monthly credit](https://developers.google.com/maps/billing-credits#monthly) is offered which means you should not be charged if you don't exceed the free quota.
 >
@@ -52,7 +52,8 @@ Follow instructions from their [documentation](https://developers.google.com/map
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -63,7 +64,8 @@ Follow instructions from their [documentation](https://developers.google.com/map
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥)</i>
 <br>
@@ -77,7 +79,8 @@ Follow instructions from their [documentation](https://developers.google.com/map
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
   </tr>
@@ -94,7 +97,8 @@ Follow instructions from their [documentation](https://developers.google.com/map
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.npm.optional.d3</i></li>
 </ul>
@@ -109,7 +113,8 @@ Follow instructions from their [documentation](https://developers.google.com/map
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.api.google.maps</i></li>
 <li><i>metrics.npm.optional.d3</i></li>
@@ -125,6 +130,7 @@ Follow instructions from their [documentation](https://developers.google.com/map
   </tr>
   <tr>
     <td nowrap="nowrap">🔐 Token<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>token</code>
 <br></td>
   </tr>
@@ -136,7 +142,8 @@ Helps to avoid consuming too much Google Geocoding API requests while still bein
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥)</i>
 <br>
@@ -151,7 +158,7 @@ Helps to avoid consuming too much Google Geocoding API requests while still bein
 <!--examples-->
 ```yaml
 name: Using classic charts
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.stargazers.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -161,7 +168,7 @@ with:
 ```
 ```yaml
 name: Using graph charts
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.stargazers.graph.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -172,7 +179,7 @@ with:
 ```
 ```yaml
 name: With worldmap
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.stargazers.worldmap.svg
   token: ${{ secrets.METRICS_TOKEN }}

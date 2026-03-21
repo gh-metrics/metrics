@@ -13,9 +13,9 @@ jobs:
     continue-on-error: true
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run script
-        run: ./delete_ghcr_dangling_images.sh lowlighter metrics
+        run: ./delete_ghcr_dangling_images.sh gh-metrics metrics
         working-directory: .github/actions/ghcr-clean
         env:
           GITHUB_TOKEN: ${{ secrets.GHCR_BOT_TOKEN }}

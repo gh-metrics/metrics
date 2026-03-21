@@ -1,5 +1,5 @@
 - name: 📌 Starred topics - Labels
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_topics: 'yes'
@@ -7,7 +7,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 📌 Starred topics - Icons
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: NOT_NEEDED
     plugin_topics: 'yes'

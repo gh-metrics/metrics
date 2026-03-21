@@ -19,7 +19,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.projects.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -39,7 +39,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -50,7 +51,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 100)</i>
@@ -68,6 +70,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br></td>
@@ -78,7 +81,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -98,7 +102,7 @@ To enable it, open the `≡ Menu` from the project page and opt-in to `Track pro
 To create a personal project, select the `Projects` tab from your profile:
 ![Create a new project](/.github/readme/imgs/plugin_projects_create.png)
 
-Fill informations and set visibility to *public*:
+Fill information and set visibility to *public*:
 ![Configure project](/.github/readme/imgs/plugin_projects_setup.png)
 
 ## 📓 Use repositories projects
@@ -113,10 +117,10 @@ Be sure to tick `Track project progress` in project settings to display a progre
 
 *Example: include a project repository*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_projects: yes
-    plugin_projects_repositories: lowlighter/metrics/projects/1
+    plugin_projects_repositories: gh-metrics/metrics/projects/1
 ```
 
 ## ℹ️ Examples workflows
@@ -124,13 +128,13 @@ Be sure to tick `Track project progress` in project settings to display a progre
 <!--examples-->
 ```yaml
 name: Project from a repository
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.projects.svg
   token: ${{ secrets.METRICS_TOKEN_WITH_SCOPES }}
   base: ""
   plugin_projects: yes
-  plugin_projects_repositories: lowlighter/metrics/projects/1
+  plugin_projects_repositories: gh-metrics/metrics/projects/1
   plugin_projects_descriptions: yes
 
 ```

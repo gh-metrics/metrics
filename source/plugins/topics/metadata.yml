@@ -5,8 +5,8 @@ description: |
 
   Check out [GitHub topics](https://github.com/topics) to search interesting topics.
 examples:
-  +with icons: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.icons.svg
-  +with labels: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.topics.svg
+  +with icons: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.icons.svg
+  +with labels: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.topics.svg
 index: 4
 supports:
   - user

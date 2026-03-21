@@ -3,8 +3,8 @@ category: github
 description: |
   This plugin displays star lists.
 examples:
-  +repositories from star lists: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.starlists.svg
-  +languages from star lists: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.starlists.languages.svg
+  +repositories from star lists: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.starlists.svg
+  +languages from star lists: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.starlists.languages.svg
 index: 16
 supports:
   - user

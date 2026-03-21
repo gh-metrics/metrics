@@ -19,10 +19,10 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Indepth analysis (clone and analyze repositories)</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.indepth.svg" alt=""></img></details>
-      <details open><summary>Recently used (analyze recent activity events)</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.recent.svg" alt=""></img></details>
-      <details><summary>Default algorithm</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.svg" alt=""></img></details>
-      <details><summary>Default algorithm (with details)</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.languages.details.svg" alt=""></img></details>
+      <details open><summary>Indepth analysis (clone and analyze repositories)</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.indepth.svg" alt=""></img></details>
+      <details open><summary>Recently used (analyze recent activity events)</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.recent.svg" alt=""></img></details>
+      <details><summary>Default algorithm</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.svg" alt=""></img></details>
+      <details><summary>Default algorithm (with details)</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.languages.details.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -42,7 +42,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -52,7 +53,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br></td>
   </tr>
@@ -63,6 +65,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td nowrap="nowrap">⏩ Inherits <code>repositories_skipped</code><br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(newline-separated)</i>
 <br></td>
@@ -73,7 +76,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 8)</i>
@@ -87,7 +91,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> 0%<br></td>
   </tr>
@@ -99,7 +104,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -109,7 +115,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> github<br></td>
@@ -120,7 +127,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br></td>
   </tr>
   <tr>
@@ -130,7 +138,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> most-used<br>
@@ -143,7 +152,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>allowed values:</b><ul><li>bytes-size</li><li>percentage</li><li>lines</li></ul></td>
@@ -157,7 +167,8 @@ It will be automatically hidden if empty.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.cpu.overuse</i></li>
 <li><i>metrics.run.tempdir</i></li>
@@ -173,9 +184,9 @@ It will be automatically hidden if empty.</p>
 <p>Specify a list of additional repositories to analyze.</p>
 <p>Below are the supported syntax formats:</p>
 <ul>
-<li><code>owner/repo</code> (e.g. <code>lowlighter/metrics</code>)</li>
-<li><code>owner/repo@branch</code> (e.g. <code>lowlighter/metrics@main</code>)</li>
-<li><code>owner/repo@branch:commits</code> (e.g. <code>lowlighter/metrics@main:v1.0..v1.1</code>)<ul>
+<li><code>owner/repo</code> (e.g. <code>gh-metrics/metrics</code>)</li>
+<li><code>owner/repo@branch</code> (e.g. <code>gh-metrics/metrics@main</code>)</li>
+<li><code>owner/repo@branch:commits</code> (e.g. <code>gh-metrics/metrics@main:v1.0..v1.1</code>)<ul>
 <li>See <a href="https://git-scm.com/docs/git-rev-list#_description"><code>git rev-list</code></a> documentation for more information about <code>commits</code> syntax</li>
 </ul>
 </li>
@@ -188,7 +199,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br></td>
   </tr>
@@ -198,7 +210,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(1 ≤
 𝑥
 ≤ 60)</i>
@@ -211,7 +224,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 15)</i>
@@ -225,7 +239,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> markup, programming<br>
@@ -237,7 +252,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> markup, programming<br>
@@ -249,7 +265,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(100 ≤
 𝑥
 ≤ 1000)</i>
@@ -262,7 +279,8 @@ In this case the repository must be accessible directly.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 365)</i>
@@ -284,7 +302,7 @@ Since git lets you use any email and username for commits, *metrics* may not be 
 
 *Example: configuring `indepth` mode*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_indepth: yes
@@ -350,7 +368,7 @@ It will fetch a specified amount of recent push events and perform linguistic an
 
 *Example: display recently used languages from 400 GitHub events from last 2 weeks*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_sections: recently-used
@@ -360,23 +378,23 @@ It will fetch a specified amount of recent push events and perform linguistic an
 
 > 🌐 Web instances must enable this feature in `settings.json`
 
-## 🥽 Controling which languages are displayed
+## 🥽 Controlling which languages are displayed
 
 Several options lets you customize which languages should be displayed.
 It is possible to ignore completely languages or those lower than a given threshold, skip repositories, and filter by language categories.
 
-*Example: hide HTML and CSS languages, skip lowlighter/metrics repository*
+*Example: hide HTML and CSS languages, skip gh-metrics/metrics repository*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_ignored: html, css
-    plugin_languages_skipped: lowlighter/metrics
+    plugin_languages_skipped: gh-metrics/metrics
 ```
 
 *Example: hide languages with less than 2% usage*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_threshold: 2%
@@ -389,7 +407,7 @@ Supported categories are `data`, `markup`, `programming` and `prose`.
 
 *Example: hide data and prose languages from stats*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_categories: data, prose
@@ -410,7 +428,7 @@ Both hexadecimal and [named color](https://developer.mozilla.org/en-US/docs/Web/
 
 *Example: using a predefined color set*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_colors: rainbow
@@ -419,7 +437,7 @@ Both hexadecimal and [named color](https://developer.mozilla.org/en-US/docs/Web/
 
 *Example: setting JavaScript to red, the first language to blue and the second one to `#ff00aa`*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_colors: javascript:red, 0:blue, 1:#ff00aa
@@ -433,7 +451,7 @@ To mitigate this, it is possible to use `plugin_languages_aliases` option and pr
 
 *Example: display JavaScript as JS and TypeScript as TS*
 ```yml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     plugin_languages: yes
     plugin_languages_aliases: javascript:JS typescript:TS
@@ -444,7 +462,7 @@ To mitigate this, it is possible to use `plugin_languages_aliases` option and pr
 <!--examples-->
 ```yaml
 name: Most used
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.languages.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -458,7 +476,7 @@ with:
 ```
 ```yaml
 name: Most used (with details)
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.languages.details.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -473,7 +491,7 @@ with:
 ```
 ```yaml
 name: Recently used
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.languages.recent.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -489,7 +507,7 @@ with:
 ```
 ```yaml
 name: Indepth analysis
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.languages.indepth.svg
   token: ${{ secrets.METRICS_TOKEN }}

@@ -9,7 +9,7 @@ All product and company names are trademarks™ or registered® trademarks of th
 <p>This specific plugin is licensed under GPL-3.0 rather than MIT to comply with <a href="https://github.com/spacemeowx2/s3si.ts">spacemeowx2/s3si.ts</a> license.</p>
 <p>Note that <em>Nintendo Switch Online</em> web tokens usage are not explicitly allowed by <em>Nintendo</em>, use at your own risk.</p>
 </td></tr>
-<tr><th>Authors</th><td><a href="https://github.com/lowlighter">@lowlighter</a></td></tr>
+<tr><th>Authors</th><td><a href="https://github.com/gh-metrics">@gh-metrics</a></td></tr>
   <tr>
     <th rowspan="3">Supported features<br><sub><a href="metadata.yml">→ Full specification</a></sub></th>
     <td><a href="/source/templates/classic/README.md"><code>📗 Classic template</code></a></td>
@@ -22,7 +22,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
+      <img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.splatoon.svg" alt=""></img>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -42,7 +42,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -53,6 +54,7 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td nowrap="nowrap">🔐 Token<br>
+✨ On <code>master</code>/<code>main</code><br>
 🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.api.nintendo.splatnet</i></li>
@@ -71,7 +73,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> player, versus, salmon-run<br></td>
@@ -82,7 +85,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 6)</i>
@@ -95,7 +99,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 6)</i>
@@ -110,7 +115,8 @@ Requires <a href="/source/plugins/community/splatoon/README.md#plugin_splatoon_s
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.api.statink</i></li>
 </ul>
@@ -125,6 +131,7 @@ Requires <a href="/source/plugins/community/splatoon/README.md#plugin_splatoon_s
   </tr>
   <tr>
     <td nowrap="nowrap">🔐 Token<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>token</code>
 <br></td>
   </tr>
@@ -133,14 +140,15 @@ Requires <a href="/source/plugins/community/splatoon/README.md#plugin_splatoon_s
     <td rowspan="2"><p>Source</p>
 <ul>
 <li><code>splatnet</code> will fetch data from Splatnet using <a href="https://github.com/spacemeowx2/s3si.ts">spacemeowx2/s3si.ts</a> tool</li>
-<li><code>local</code> will assume <code>s3si/export</code> directory already exists and is populated (use this when developping new features for this plugin to save network resources and time)</li>
-<li><code>mocks</code> will use <code>s3si/mocks</code> directory (use this when developping new features for this plugin to avoid setting up a NSO token)</li>
+<li><code>local</code> will assume <code>s3si/export</code> directory already exists and is populated (use this when developing new features for this plugin to save network resources and time)</li>
+<li><code>mocks</code> will use <code>s3si/mocks</code> directory (use this when developing new features for this plugin to avoid setting up a NSO token)</li>
 </ul>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br>
 <b>default:</b> splatnet<br>
@@ -155,7 +163,7 @@ The helper script is intended to be run by [deno runtime](https://deno.land/). E
 
 Run the following command in your terminal and follow instructions:
 ```bash
-deno run --allow-run=deno --allow-read=profile.json --allow-write=profile.json --unstable https://raw.githubusercontent.com/lowlighter/metrics/master/source/plugins/community/splatoon/token.ts
+deno run --allow-run=deno --allow-read=profile.json --allow-write=profile.json --unstable https://raw.githubusercontent.com/gh-metrics/metrics/master/source/plugins/community/splatoon/token.ts
 ```
 
 ![Script](/.github/readme/imgs/plugin_splatoon_script.png)
@@ -184,7 +192,7 @@ Data are fetched using [spacemeowx2/s3si.ts](https://github.com/spacemeowx2/s3si
 <!--examples-->
 ```yaml
 name: Splatnet data
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.splatoon.svg
   token: NOT_NEEDED
@@ -195,7 +203,7 @@ with:
 ```
 ```yaml
 name: Splatnet data with stat.ink integration
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.splatoon.svg
   token: NOT_NEEDED

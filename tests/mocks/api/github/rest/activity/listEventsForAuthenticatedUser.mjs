@@ -234,7 +234,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
           login,
         },
         repo: {
-          name: "lowlighter/metrics",
+          name: "gh-metrics/metrics",
         },
         payload: {action: "started"},
         created_at: faker.date.recent({days: 7}),
@@ -272,7 +272,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
             {
               sha: "MOCKED_SHA",
               message: faker.lorem.sentence(),
-              url: "https://api.github.com/repos/lowlighter/metrics/commits/MOCKED_SHA",
+              url: "https://api.github.com/repos/gh-metrics/metrics/commits/MOCKED_SHA",
               author: {
                 email: faker.internet.email(),
               },

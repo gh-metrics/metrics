@@ -3,8 +3,8 @@ category: social
 description: |
   This plugin displays recent articles from a specified and supported external source.
 examples:
-  +latest posts width description and cover image: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.full.svg
-  latest posts: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.posts.svg
+  +latest posts width description and cover image: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.full.svg
+  latest posts: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.posts.svg
 index: 6
 supports:
   - user

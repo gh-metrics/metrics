@@ -1,5 +1,5 @@
 - name: Latest tweets
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.tweets.svg
     token: NOT_NEEDED
@@ -13,7 +13,7 @@
     skip: true
 
 - name: Latest tweets including attachments
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.tweets.attachments.svg
     token: NOT_NEEDED

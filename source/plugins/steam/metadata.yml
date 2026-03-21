@@ -6,8 +6,8 @@ disclaimer: |
   This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with [Steam](https://store.steampowered.com).
   All product and company names are trademarks™ or registered® trademarks of their respective holders.
 examples:
-  +Recently played games: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.svg
-  Profile and detailed game history: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.steam.full.svg
+  +Recently played games: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.svg
+  Profile and detailed game history: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.steam.full.svg
 supports:
   - user
   - organization

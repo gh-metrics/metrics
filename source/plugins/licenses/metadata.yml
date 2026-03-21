@@ -1,15 +1,15 @@
 name: 📜 Repository licenses
 category: github
 description: |
-  This plugin display repository license informations like permissions, limitations and conditions along with additional stats about dependencies.
+  This plugin display repository license information like permissions, limitations and conditions along with additional stats about dependencies.
 notes: |
   > ⚠️ This is **NOT** legal advice, use at your own risk
 
   > 💣 This plugin **SHOULD NOT** be enabled on web instances, since it allows raw command injection.
   > This could result in compromised server!
 examples:
-  +permissions, limitations and conditions: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.svg
-  +licenses overview: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.ratio.svg
+  +permissions, limitations and conditions: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.svg
+  +licenses overview: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.ratio.svg
 index: 6
 supports:
   - repository

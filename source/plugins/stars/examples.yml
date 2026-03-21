@@ -1,5 +1,5 @@
 - name: Recently starred
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     filename: metrics.plugin.stars.svg
     token: ${{ secrets.METRICS_TOKEN }}

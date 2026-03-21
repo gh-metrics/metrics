@@ -1,5 +1,5 @@
 - name: 🏆 Achievements - Detailed display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_achievements: 'yes'
@@ -8,7 +8,7 @@
     verify: 'yes'
   timeout: 1800000
 - name: 🏆 Achievements - Compact display
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_achievements: 'yes'

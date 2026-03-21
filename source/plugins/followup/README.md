@@ -19,9 +19,9 @@ All product and company names are trademarks™ or registered® trademarks of th
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Indepth analysis</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.indepth.svg" alt=""></img></details>
-      <details><summary>Created on a user's repositories</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.svg" alt=""></img></details>
-      <details><summary>Created by a user</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.followup.user.svg" alt=""></img></details>
+      <details open><summary>Indepth analysis</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.indepth.svg" alt=""></img></details>
+      <details><summary>Created on a user's repositories</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.svg" alt=""></img></details>
+      <details><summary>Created by a user</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.followup.user.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -41,7 +41,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -55,7 +56,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> repositories<br>
@@ -67,7 +69,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.api.github.overuse</i></li>
 </ul>
@@ -81,7 +84,8 @@ All product and company names are trademarks™ or registered® trademarks of th
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
   </tr>
@@ -101,7 +105,7 @@ It helps knowing whether repositories are also maintained by other users and giv
 <!--examples-->
 ```yaml
 name: Opened on user's repositories
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.followup.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -111,7 +115,7 @@ with:
 ```
 ```yaml
 name: Opened by user
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.followup.user.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -122,7 +126,7 @@ with:
 ```
 ```yaml
 name: Indepth analysis
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.followup.indepth.svg
   token: ${{ secrets.METRICS_TOKEN }}
@@ -133,7 +137,7 @@ with:
 ```
 ```yaml
 name: Exclude Archived
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.followup.archived.svg
   token: ${{ secrets.METRICS_TOKEN }}

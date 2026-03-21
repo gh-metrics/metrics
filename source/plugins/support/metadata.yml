@@ -5,7 +5,7 @@ description: |
 deprecation: |
   GitHub Support Community has been moved to [GitHub Discussions](https://github.blog/2022-07-26-launching-github-community-powered-by-github-discussions).
 examples:
-  default: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.support.svg
+  default: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.support.svg
 supports:
   - user
 scopes: []

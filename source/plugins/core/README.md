@@ -32,7 +32,7 @@ Configure `config_timezone` (see [supported timezone](https://en.wikipedia.org/w
 
 *Example: configuring timezone*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_timezone: Europe/Paris
 ```
@@ -43,7 +43,7 @@ Content can be manually ordered using `config_order` option.
 
 *Example: display base.header, isocalendar, languages and stars in this specific order*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     base: header
     plugin_isocalendar: yes
@@ -123,23 +123,23 @@ Options resolution is done in the following order:
 
 *Example: using a configuration preset from an url*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
-    config_presets: https://raw.githubusercontent.com/lowlighter/metrics/presets/lunar-red/preset.yaml
+    config_presets: https://raw.githubusercontent.com/gh-metrics/metrics/presets/lunar-red/preset.yaml
 ```
 
-Some presets are hosted on this repository on the [`@presets`](https://github.com/lowlighter/metrics/tree/presets) branch and can be used directly by using their identifier prefixed by an arobase (`@`).
+Some presets are hosted on this repository on the [`@presets`](https://github.com/gh-metrics/metrics/tree/presets) branch and can be used directly by using their identifier prefixed by an arobase (`@`).
 
 *Example: using a pre-defined configuration preset*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_presets: "@lunar-red"
 ```
 
 > ⚠️ `🔐 Tokens` and options marked with `⏯️ Cannot be preset`, as they suggest, cannot be preset and thus requires to be explicitly defined to be set.
 
-> ℹ️ Presets configurations use [schemas](https://github.com/lowlighter/metrics/tree/presets/%40schema) to ensure compatibility between format changes
+> ℹ️ Presets configurations use [schemas](https://github.com/gh-metrics/metrics/tree/presets/%40schema) to ensure compatibility between format changes
 
 ## 🎨 Custom CSS styling
 
@@ -147,7 +147,7 @@ Additional CSS can be injected using `extras_css` option.
 
 *Example: changing the color of `h2`*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     base: header
     extras_css: |
@@ -168,7 +168,7 @@ Additional JavaScript can be injected using `extras_js` option.
 
 *Example: removing all `h2`*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     base: header
     extras_js: |
@@ -205,21 +205,21 @@ Each value need to respect the following format:
 
 *Example: add 10px padding for both width and height*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_padding: 10
 ```
 
 *Example: add 10px padding to height and increase it by 8%*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_padding: 0, 10 + 8%
 ```
 
 *Example: remove 10% from height*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_padding: 0, -10%
 ```
@@ -234,7 +234,7 @@ The `columns` display will render a full-width image with automatic resizing: tw
 
 *Example: output a PNG image*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_display: large
 ```
@@ -245,7 +245,7 @@ Use `config_output` to change output format.
 
 *Example: output a PNG image*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_output: png
 ```
@@ -254,7 +254,7 @@ A JSON output can be used to retrieved collected data and use it elsewhere.
 
 *Example: output a JSON data dump*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_output: json
 ```
@@ -263,7 +263,7 @@ When using a PDF output, it is advised to set `config_base64: yes` to encode emb
 
 *Example: output a self-contained PDF document*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     markdown: TEMPLATE.md
     config_output: markdown-pdf
@@ -278,7 +278,7 @@ It is possible to generate a self-contained HTML file containing `✨ Metrics in
 
 *Example: output `✨ Metrics insights` report*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     config_output: insights
 ```
@@ -306,7 +306,7 @@ metrics:
   permissions:
     contents: write
   steps:
-    - uses: lowlighter/metrics@latest
+    - uses: gh-metrics/metrics@latest
       with:
         output_action: commit
         committer_branch: metrics-renders
@@ -328,12 +328,12 @@ metrics:
     contents: write
     pull-requests: write
   steps:
-    - uses: lowlighter/metrics@latest
+    - uses: gh-metrics/metrics@latest
       with:
         filename: my-metrics-0.svg
         output_action: pull-request
 
-    - uses: lowlighter/metrics@latest
+    - uses: gh-metrics/metrics@latest
       with:
         filename: my-metrics-1.svg
         output_action: pull-request-merge
@@ -350,7 +350,7 @@ It is required to provide a gist id to `committer_gist` option to make it work.
 ```yaml
 metrics:
   steps:
-    - uses: lowlighter/metrics@latest
+    - uses: gh-metrics/metrics@latest
       with:
         output_action: gist
         committer_gist: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -368,18 +368,18 @@ metrics:
     contents: write
   steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: metrics-renders
 
-    - uses: lowlighter/metrics@latest
+    - uses: gh-metrics/metrics@latest
       with:
         output_action: none
 
-    - uses: lowlighter/metrics@latest
+    - name: Push metrics
       run: |
         set +e
-        git checkout metrics-renders
         git config user.name github-actions[bot]
         git config user.email 41898282+github-actions[bot]@users.noreply.github.com
         sudo mv /metrics_renders/* ./
@@ -395,7 +395,7 @@ Use `retries` and `retries_delay` options to automatically retry rendering.
 
 *Example: retry render up to 3 times (wait 5 minutes between each fail)*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     retries: 3
     retries_delay: 300
@@ -408,7 +408,7 @@ Use `retries_output_action` and `retries_delay_output_action` options to automat
 
 *Example: retry output action up to 5 times (wait 2 minutes between each fail)*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     retries_output_action: 5
     retries_delay_output_action: 120
@@ -422,14 +422,14 @@ To reduce filesize and decrease loading time, *metrics* offers several optimizat
 
 *Example: optimize CSS and XML*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     optimize: css, xml
 ```
 
 *Example: optimize SVG (experimental)*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     optimize: svg
     experimental_features: --optimize-svg
@@ -437,7 +437,7 @@ To reduce filesize and decrease loading time, *metrics* offers several optimizat
 
 ## 🐳 Faster execution with prebuilt docker images
 
-When using `lowlighter/metrics` official releases as a GitHub Action, a prebuilt docker container image will be pulled from [GitHub Container Registry](https://github.com/users/lowlighter/packages/container/package/metrics). It allows to significantly reduce workflow execution time.
+When using `gh-metrics/metrics` official releases as a GitHub Action, a prebuilt docker container image will be pulled from [GitHub Container Registry](https://github.com/users/gh-metrics/packages/container/package/metrics). It allows to significantly reduce workflow execution time.
 
 > 💡 This option is enabled by default!
 
@@ -445,7 +445,7 @@ On forks, this feature is disable to take into account any changes you made on i
 
 *Example: using prebuilt docker image*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     use_prebuilt_image: yes
 ```
@@ -468,6 +468,7 @@ When doing so, any settings which defaults on user fetched values will not be te
   <tr>
     <td nowrap="nowrap">✔️ Required<br>
 🔐 Token<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>token</code>
 <br></td>
   </tr>
@@ -479,17 +480,19 @@ When doing so, any settings which defaults on user fetched values will not be te
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
   <tr>
     <td nowrap="nowrap"><h4><code>repo</code></h4></td>
     <td rowspan="2"><p>GitHub repository</p>
-<p>This option is only revelant for repositories templates</p>
+<p>This option is only relevant for repositories templates</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
@@ -504,6 +507,7 @@ When doing so, any settings which defaults on user fetched values will not be te
   </tr>
   <tr>
     <td nowrap="nowrap">🔐 Token<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>token</code>
 <br>
 <b>default:</b> ${{ github.token }}<br></td>
@@ -515,7 +519,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br></td>
   </tr>
   <tr>
@@ -525,7 +530,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> Update ${filename} - [Skip GitHub Action]<br></td>
   </tr>
@@ -537,6 +543,7 @@ When doing so, any settings which defaults on user fetched values will not be te
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
@@ -547,7 +554,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> github-metrics.*<br></td>
   </tr>
@@ -558,7 +566,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> TEMPLATE.md<br></td>
   </tr>
@@ -568,7 +577,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> .cache<br></td>
   </tr>
@@ -593,7 +603,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> commit<br>
 <b>allowed values:</b><ul><li>none</li><li>commit</li><li>pull-request</li><li>pull-request-merge</li><li>pull-request-squash</li><li>pull-request-rebase</li><li>gist</li></ul></td>
@@ -606,12 +617,13 @@ When doing so, any settings which defaults on user fetched values will not be te
 <li><code>data-changed</code>: skip changes if no data changed (e.g. like when only metadata changed)</li>
 </ul>
 <blockquote>
-<p>ℹ️ This option is only revelant when <a href="/source/plugins/core/README.md#config_output"><code>config_output: svg</code></a> is set</p>
+<p>ℹ️ This option is only relevant when <a href="/source/plugins/core/README.md#config_output"><code>config_output: svg</code></a> is set</p>
 </blockquote>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> always<br>
 <b>allowed values:</b><ul><li>always</li><li>data-changed</li></ul></td>
@@ -628,7 +640,8 @@ When doing so, any settings which defaults on user fetched values will not be te
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>array</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
 <b>default:</b> css, xml<br>
@@ -637,11 +650,12 @@ When doing so, any settings which defaults on user fetched values will not be te
   <tr>
     <td nowrap="nowrap"><h4><code>setup_community_templates</code></h4></td>
     <td rowspan="2"><p>Community templates to setup</p>
-<p>See <a href="https://github.com/lowlighter/metrics/blob/master/source/templates/community/README.md">community templates guide</a> for more informations</p>
+<p>See <a href="https://github.com/gh-metrics/metrics/blob/master/source/templates/community/README.md">community templates guide</a> for more information</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.setup.community.templates</i></li>
 </ul>
@@ -653,11 +667,12 @@ When doing so, any settings which defaults on user fetched values will not be te
     <td nowrap="nowrap"><h4><code>template</code></h4></td>
     <td rowspan="2"><p>Template</p>
 <p>Community templates must be prefixed by at sign (<code>@</code>)
-See <a href="https://github.com/lowlighter/metrics/blob/master/README.md#%EF%B8%8F-templates">list of supported templates</a></p>
+See <a href="https://github.com/gh-metrics/metrics/blob/master/README.md#%EF%B8%8F-templates">list of supported templates</a></p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> classic<br></td>
   </tr>
@@ -672,7 +687,8 @@ This is mostly useful for custom templates.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>json</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>json</code>
 <br>
 <b>default:</b> <details><summary>→ Click to expand</summary><pre language="json"><code>{}</code></pre></details><br></td>
   </tr>
@@ -687,7 +703,8 @@ Useful to avoid creating a new template just to tweak some styling</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.run.puppeteer.user.css</i></li>
 </ul>
@@ -707,7 +724,8 @@ It is run after transformations and optimizations, but just before resizing.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.run.puppeteer.user.js</i></li>
 </ul>
@@ -723,6 +741,7 @@ Leave empty to use default endpoint.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
@@ -738,6 +757,7 @@ Leave empty to use default endpoint.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
@@ -749,6 +769,7 @@ Leave empty to use default endpoint.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br></td>
   </tr>
@@ -762,6 +783,7 @@ You can override the content order by using this setting.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br></td>
@@ -775,6 +797,7 @@ May increase filesize.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -790,6 +813,7 @@ See full list at <a href="https://api.github.com/emojis">https://api.github.com/
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
@@ -807,6 +831,7 @@ Size must be a supported icon size (12, 16 or 24).
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -818,7 +843,7 @@ Size must be a supported icon size (12, 16 or 24).
 <li><code>regular</code>: 480px width</li>
 <li><code>large</code>: 960px width (may not be supported by all templates)</li>
 <li><code>columns</code>: Full width with auto-sizing (two columns for desktops, and one column for mobile)<ul>
-<li>known issue: <a href="https://github.com/lowlighter/metrics/issues/374">https://github.com/lowlighter/metrics/issues/374</a></li>
+<li>known issue: <a href="https://github.com/gh-metrics/metrics/issues/374">https://github.com/gh-metrics/metrics/issues/374</a></li>
 </ul>
 </li>
 </ul>
@@ -826,6 +851,7 @@ Size must be a supported icon size (12, 16 or 24).
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>string</code>
 <br>
 <b>default:</b> regular<br>
@@ -838,6 +864,7 @@ Size must be a supported icon size (12, 16 or 24).
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
@@ -850,6 +877,7 @@ Size must be a supported icon size (12, 16 or 24).
   </tr>
   <tr>
     <td nowrap="nowrap">⏭️ Global option<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
@@ -874,7 +902,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> 0, 8 + 11%<br></td>
   </tr>
@@ -894,7 +923,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br>
 <b>default:</b> auto<br>
 <b>allowed values:</b><ul><li>auto</li><li>svg</li><li>png</li><li>jpeg</li><li>json</li><li>markdown</li><li>markdown-pdf</li><li>insights</li></ul></td>
@@ -906,6 +936,7 @@ It can result in cropped or oversized outputs.</p>
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.setup.community.presets</i></li>
@@ -920,7 +951,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(1 ≤
 𝑥
 ≤ 10)</i>
@@ -933,7 +965,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 3600)</i>
@@ -946,7 +979,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(1 ≤
 𝑥
 ≤ 10)</i>
@@ -959,7 +993,8 @@ It can result in cropped or oversized outputs.</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 3600)</i>
@@ -979,6 +1014,7 @@ Be sure to disable this option when asking for help or submitting bug reports.</
   </tr>
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(comma-separated)</i>
 <br>
@@ -991,7 +1027,8 @@ Be sure to disable this option when asking for help or submitting bug reports.</
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 3600)</i>
@@ -1006,7 +1043,8 @@ Be sure to disable this option when asking for help or submitting bug reports.</
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 5000)</i>
@@ -1021,7 +1059,8 @@ Be sure to disable this option when asking for help or submitting bug reports.</
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 5000)</i>
@@ -1036,7 +1075,8 @@ Be sure to disable this option when asking for help or submitting bug reports.</
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>number</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>number</code>
 <i>(0 ≤
 𝑥
 ≤ 30)</i>
@@ -1049,13 +1089,14 @@ Be sure to disable this option when asking for help or submitting bug reports.</
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
   </tr>
   <tr>
     <td nowrap="nowrap"><h4><code>use_prebuilt_image</code></h4></td>
-    <td rowspan="2"><p>Use pre-built docker image from <a href="https://github.com/lowlighter/metrics/pkgs/container/metrics">GitHub container registry</a></p>
+    <td rowspan="2"><p>Use pre-built docker image from <a href="https://github.com/gh-metrics/metrics/pkgs/container/metrics">GitHub container registry</a></p>
 <p>It allows to save build time and make job significantly faster, and there is almost no reason to disable this settings.
 This option has no effects on forks (images will always be rebuilt from Dockerfile)</p>
 <img width="900" height="1" alt=""></td>
@@ -1063,6 +1104,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
@@ -1076,6 +1118,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -1089,6 +1132,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -1101,6 +1145,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.npm.optional.libxml2</i></li>
@@ -1135,6 +1180,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(space-separated)</i>
 <br>
@@ -1148,6 +1194,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -1163,6 +1210,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
@@ -1178,6 +1226,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>array</code>
 <i>(space-separated)</i>
 <br>
@@ -1191,6 +1240,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap">⏯️ Cannot be preset<br>
 🔧 For development<br>
+✨ On <code>master</code>/<code>main</code><br>
 <b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>

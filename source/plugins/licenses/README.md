@@ -2,7 +2,7 @@
 <table>
   <tr><td colspan="2"><a href="/README.md#-plugins">← Back to plugins index</a></td></tr>
   <tr><th colspan="2"><h3>📜 Repository licenses</h3></th></tr>
-  <tr><td colspan="2" align="center"><p>This plugin display repository license informations like permissions, limitations and conditions along with additional stats about dependencies.</p>
+  <tr><td colspan="2" align="center"><p>This plugin display repository license information like permissions, limitations and conditions along with additional stats about dependencies.</p>
 </td></tr>
   <tr><th>⚠️ Disclaimer</th><td><p>This plugin is not affiliated, associated, authorized, endorsed by, or in any way officially connected with <a href="https://github.com">GitHub</a>.
 All product and company names are trademarks™ or registered® trademarks of their respective holders.</p>
@@ -27,8 +27,8 @@ This could result in compromised server!</p>
   </tr>
   <tr>
     <td colspan="2" align="center">
-      <details open><summary>Permissions, limitations and conditions</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
-      <details open><summary>Licenses overview</summary><img src="https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
+      <details open><summary>Permissions, limitations and conditions</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.svg" alt=""></img></details>
+      <details open><summary>Licenses overview</summary><img src="https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.licenses.ratio.svg" alt=""></img></details>
       <img width="900" height="1" alt="">
     </td>
   </tr>
@@ -69,7 +69,8 @@ Dependencies will be analyzed by [GitHub licensed](https://github.com/github/lic
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap">🌐 Web instances must configure <code>settings.json</code>:
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+🌐 Web instances must configure <code>settings.json</code>:
 <ul>
 <li><i>metrics.cpu.overuse</i></li>
 <li><i>metrics.run.tempdir</i></li>
@@ -91,7 +92,8 @@ The example command is intended for NodeJs projects that use <code>npm</code> to
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>string</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>string</code>
 <br></td>
   </tr>
   <tr>
@@ -100,7 +102,8 @@ The example command is intended for NodeJs projects that use <code>npm</code> to
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> no<br></td>
   </tr>
@@ -110,7 +113,8 @@ The example command is intended for NodeJs projects that use <code>npm</code> to
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
-    <td nowrap="nowrap"><b>type:</b> <code>boolean</code>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
 <br>
 <b>default:</b> yes<br></td>
   </tr>
@@ -134,7 +138,7 @@ with:
 ```
 ```yaml
 name: Licenses with open-source ratio graphs
-uses: lowlighter/metrics@latest
+uses: gh-metrics/metrics@latest
 with:
   filename: metrics.plugin.licenses.ratio.svg
   token: ${{ secrets.METRICS_TOKEN }}

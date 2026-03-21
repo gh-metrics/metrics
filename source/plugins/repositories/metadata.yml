@@ -7,8 +7,8 @@ description: |
 notes: |
   > ⚠️ Due to limitations of using SVG images inside `<img>` tags, clicking on a repository card will not redirect to repository page.
 examples:
-  +featured: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.repositories.svg
-  pinned: https://github.com/lowlighter/metrics/blob/examples/metrics.plugin.repositories.pinned.svg
+  +featured: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.repositories.svg
+  pinned: https://github.com/gh-metrics/metrics/blob/examples/metrics.plugin.repositories.pinned.svg
 index: 14
 supports:
   - user
@@ -31,7 +31,7 @@ inputs:
     type: array
     format: comma-separated
     default: ""
-    example: metrics, lowlighter/metrics
+    example: metrics, gh-metrics/metrics
     preset: no
 
   plugin_repositories_pinned:

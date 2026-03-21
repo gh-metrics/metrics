@@ -203,7 +203,7 @@ export class IndepthAnalyzer extends Analyzer {
       //Guess file language with linguist (only run it once per sha)
       if ((!(edition.path in cache.files)) && (!seen.has(commit.sha))) {
         this.debug(`language for file ${edition.path} is not in cache, running linguist at ${commit.sha}`)
-        await this.shell.run(`git checkout ${commit.sha}`, {cwd: path, env: {LANG: "en_GB"}}, {log: false, debug: false, prefixed: false})
+        await this.shell.run(`git switch --detach ${commit.sha}`, {cwd: path, env: {LANG: "en_GB"}}, {log: false, debug: false, prefixed: false})
         const {files: {results: files}, languages: {results: languages}} = await linguist(path)
         Object.assign(cache.files, files)
         Object.assign(cache.languages, languages)

@@ -1,5 +1,5 @@
 - name: 🈷️ Languages activity - Most used
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_languages: 'yes'
@@ -10,7 +10,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🈷️ Languages activity - Most used (with details)
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_languages: 'yes'
@@ -22,7 +22,7 @@
     use_mocked_data: 'yes'
     verify: 'yes'
 - name: 🈷️ Languages activity - Recently used
-  uses: lowlighter/metrics@latest
+  uses: gh-metrics/metrics@latest
   with:
     token: MOCKED_TOKEN
     plugin_languages: 'yes'

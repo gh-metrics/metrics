@@ -15,10 +15,7 @@ export default async function({login, data, imports, graphql, q, queries, accoun
 
     //Retrieve user owned projects from graphql api
     console.debug(`metrics/compute/${login}/plugins > projects > querying api`)
-    const {[account]: {projects}} = await graphql(queries.projects["user.legacy"]({login, limit, account}))
     const {[account]: {projectsV2}} = await graphql(queries.projects.user({login, limit, account}))
-    projects.nodes.unshift(...projectsV2.nodes)
-    projects.totalCount += projectsV2.totalCount
 
     //Retrieve repositories projects from graphql api
     for (const identifier of repositories) {
@@ -36,30 +33,20 @@ export default async function({login, data, imports, graphql, q, queries, accoun
         catch (error) {
           console.debug(error)
         }
-        //Try projects classic
-        try {
-          console.debug(`metrics/compute/${login}/plugins > projects > falling back to projects classic for ${identifier}`)
-          ;({project} = (await graphql(queries.projects["repository.legacy"]({user, repository, id, account})))[account].repository)
-          if (project)
-            break
-        }
-        catch (error) {
-          console.debug(error)
-        }
       }
       if (!project)
         throw new Error(`Could not load project ${user}/${repository}`)
       //Adding it to projects list
       console.debug(`metrics/compute/${login}/plugins > projects > registering ${identifier}`)
       project.name = `${project.name} (${user}/${repository})`
-      projects.nodes.unshift(project)
-      projects.totalCount++
+      projectsV2.nodes.unshift(project)
+      projectsV2.totalCount++
     }
 
     //Iterate through projects and format them
-    console.debug(`metrics/compute/${login}/plugins > projects > processing ${projects.nodes.length} projects`)
+    console.debug(`metrics/compute/${login}/plugins > projects > processing ${projectsV2.nodes.length} projects`)
     const list = []
-    for (const project of projects.nodes) {
+    for (const project of projectsV2.nodes) {
       //Format date
       const time = (Date.now() - new Date(project.updatedAt).getTime()) / (24 * 60 * 60 * 1000)
       let updated = new Date(project.updatedAt).toDateString().substring(4)
@@ -85,7 +72,7 @@ export default async function({login, data, imports, graphql, q, queries, accoun
     list.splice(limit)
 
     //Results
-    return {list, totalCount: projects.totalCount, descriptions}
+    return {list, totalCount: projectsV2.totalCount, descriptions}
   }
   //Handle errors
   catch (error) {

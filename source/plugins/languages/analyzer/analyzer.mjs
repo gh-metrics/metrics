@@ -4,12 +4,13 @@ import os from "os"
 import paths from "path"
 import git from "simple-git"
 import { filters } from "../../../app/metrics/utils.mjs"
+import core from "@actions/core"
 
 /**Analyzer */
 export class Analyzer {
   /**Constructor */
   constructor(login, {account = "bypass", authoring = [], uid = Math.random(), shell, rest = null, context = {mode: "user"}, skipped = [], categories = ["programming", "markup"], timeout = {global: NaN, repositories: NaN}}) {
-    //User informations
+    //User information
     this.login = login
     this.account = account
     this.authoring = authoring
@@ -86,13 +87,19 @@ export class Analyzer {
   /**Clone a repository */
   async clone(repository) {
     const {repo, branch, path} = this.parse(repository)
-    let url = /^https?:\/\//.test(repo) ? repo : `https://github.com/${repo}`
+    let token
+
+    if (process.env.GITHUB_ACTIONS) {
+      token = core.getInput("token")
+    }
+
+    let url = /^https?:\/\//.test(repo) ? repo : `https://${token}@github.com/${repo}`
     try {
-      this.debug(`cloning ${url} to ${path}`)
+      this.debug(`cloning https://github.com/${repo} to ${path}`)
       await fs.rm(path, {recursive: true, force: true})
       await fs.mkdir(path, {recursive: true})
       await git(path).clone(url, ".", ["--single-branch"]).status()
-      this.debug(`cloned ${url} to ${path}`)
+      this.debug(`cloned https://github.com/${repo} to ${path}`)
       if (branch) {
         this.debug(`switching to branch ${branch} for ${repo}`)
         await git(path).branch(branch)
@@ -100,7 +107,7 @@ export class Analyzer {
       return true
     }
     catch (error) {
-      this.debug(`failed to clone ${url} (${error})`)
+      this.debug(`failed to clone https://github.com/${repo} (${error})`)
       this.clean(path)
       return false
     }

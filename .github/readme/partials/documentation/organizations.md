@@ -2,7 +2,7 @@
 
 While *metrics* targets mainly user accounts, it's possible to render metrics for organization accounts.
 
-![Metrics (organization account)](https://github.com/lowlighter/metrics/blob/examples/metrics.organization.svg)
+![Metrics (organization account)](https://github.com/gh-metrics/metrics/blob/examples/metrics.organization.svg)
 
 ## *️⃣ Using *metrics* on organization
 
@@ -15,7 +15,7 @@ Setup is mostly the same as for user accounts. A personal access token from an u
 
 *Example: render metrics for `github` organization*
 ```yaml
-- uses: lowlighter/metrics@latest
+- uses: gh-metrics/metrics@latest
   with:
     token: ${{ secrets.METRICS_TOKEN }}
     user: github

@@ -13,7 +13,7 @@ const token = process.env.GITHUB_TOKEN
 const rest = github.getOctokit(token).rest
 
 //Environment
-const maintainer = "lowlighter"
+const maintainer = "gh-metrics"
 const repository = process.env.GITHUB_REPOSITORY.match(/^(?<owner>[\s\S]+)[/](?<name>[\s\S]+)$/)?.groups ?? null
 const version = process.env.GITHUB_COMMIT_MESSAGE.match(/(?<version>v\d+[.]\d+)/)?.groups?.version ?? null
 
