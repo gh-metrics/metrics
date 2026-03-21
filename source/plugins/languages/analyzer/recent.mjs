@@ -63,7 +63,7 @@ export class RecentAnalyzer extends Analyzer {
     const wanted = new Map()
     events.forEach(event => {
       let key = `${event.repo.name}@${event.payload.ref}`
-      let item = wanted.get(key) ?? { commits: [] }
+      let item = wanted.get(key) ?? {commits: []}
       item.repo = event.repo.name
       item.ref = event.payload.ref
       item.commits.push(event.payload.before)
@@ -83,8 +83,8 @@ export class RecentAnalyzer extends Analyzer {
                 item.commits = item.commits.filter(c => c !== x.sha)
                 return x
               })
-              .filter(({ committer }) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], { debug: false }))
-              .filter(({ commit }) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
+              .filter(({committer}) => (this.account === "organization") || (this.context.mode === "repository") ? true : !filters.text(committer.login, [this.login], {debug: false}))
+              .filter(({commit}) => ((!this.days) || (new Date(commit.committer.date) > new Date(Date.now() - this.days * 24 * 60 * 60 * 1000)))),
           )
           if (item.commits < 1) {
             this.debug("found expected commits")
@@ -114,7 +114,7 @@ export class RecentAnalyzer extends Analyzer {
       .filter(({status}) => status === "fulfilled")
       .map(({value}) => value)
       .filter(({parents}) => parents.length <= 1)
-      .map(({ sha, commit: { message, author }, verification, files }) => ({
+      .map(({sha, commit: {message, author}, verification, files}) => ({
         sha,
         name: `${message} (authored by ${author.name} on ${author.date})`,
         verified: verification?.verified ?? null,
@@ -143,15 +143,15 @@ export class RecentAnalyzer extends Analyzer {
   }
 
   /**Run linguist against a commit and compute edited lines and bytes*/
-  async linguist(_, { commit, cache: { languages } }) {
-    const cache = { files: {}, languages }
-    const result = { total: 0, files: 0, missed: { lines: 0, bytes: 0 }, lines: {}, stats: {}, languages: {} }
+  async linguist(_, {commit, cache: {languages}}) {
+    const cache = {files: {}, languages}
+    const result = {total: 0, files: 0, missed: {lines: 0, bytes: 0}, lines: {}, stats: {}, languages: {}}
     const edited = new Set()
     for (const edition of commit.editions) {
       edited.add(edition.path)
 
       //Guess file language with linguist
-      const { files: { results: files }, languages: { results: languages }, unknown } = await linguist(edition.path, { fileContent: edition.patch })
+      const {files: {results: files}, languages: {results: languages}, unknown} = await linguist(edition.path, {fileContent: edition.patch})
       Object.assign(cache.files, files)
       Object.assign(cache.languages, languages)
       if (!(edition.path in cache.files))
