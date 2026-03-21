@@ -104,7 +104,7 @@ dist
 .tern-port
 
 # User settings
-settings.json
+/settings.json
 
 # Community templates
 source/templates/.community
