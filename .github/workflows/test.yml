@@ -36,11 +36,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Format code with dprint
-        run: |
-          npm install -g dprint
-          mkdir -v -p /home/runner/.cache/dprint/cache
-          npx dprint fmt --config .github/config/dprint.json
       - name: Build gh-metrics/metrics:${{ github.head_ref || 'master' }}
         env:
           GIT_REF: ${{ github.head_ref || 'master' }}
