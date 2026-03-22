@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build-test-analyze]
     if: always() && (needs.build-test-analyze.result == 'success' || needs.build-test-analyze.result == 'skipped')
+
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
