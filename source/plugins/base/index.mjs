@@ -7,7 +7,7 @@
 export default async function({login, graphql, rest, data, q, queries, imports, callbacks}, conf) {
   //Load inputs
   console.debug(`metrics/compute/${login}/base > started`)
-  let {indepth, hireable, skip, "repositories.forks": _forks, "repositories.affiliations": _affiliations, "repositories.batch": _batch} = imports.metadata.plugins.base.inputs({data, q, account: "bypass"})
+  let {indepth, hireable, skip, "repositories.forks": _forks, "repositories.affiliations": _affiliations, "repositories.owned": _owned, "repositories.batch": _batch} = imports.metadata.plugins.base.inputs({data, q, account: "bypass"})
   const repositories = conf.settings.repositories || 100
   const forks = _forks ? "" : ", isFork: false"
   const affiliations = _affiliations?.length ? `, ownerAffiliations: [${_affiliations.map(x => x.toLocaleUpperCase()).join(", ")}]${conf.authenticated === login ? `, affiliations: [${_affiliations.map(x => x.toLocaleUpperCase()).join(", ")}]` : ""}` : ""
@@ -40,7 +40,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         console.debug(`metrics/compute/${login}/base > failed to load bulk query, falling back to unit queries`)
         //Query basic fields
         const fields = {
-          user: ["packages", "starredRepositories", "watching", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "followers", "following", "issueComments", "organizations", "repositoriesContributedTo(includeUserRepositories: true)"],
+          user: ["packages", "starredRepositories", "watching", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "followers", "following", "issueComments", "organizations", `repositoriesContributedTo(includeUserRepositories: ${_owned})`],
           organization: ["packages", "sponsorshipsAsSponsor", "sponsorshipsAsMaintainer", "membersWithRole"],
         }[account] ?? []
         for (const field of fields) {
@@ -53,28 +53,24 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           }
         }
         //Query repositories fields
-        for (const field of ["totalCount", "totalDiskUsage"]) {
-          try {
-            Object.assign(data.user.repositories, (await graphql(queries.base["field.repositories"]({login, account, field, affiliations})))[account].repositories)
-          }
-          catch (error) {
-            console.debug(`metrics/compute/${login}/base > failed to retrieve repositories.${field}`)
-            data.user.repositories[field] = NaN
-          }
+        try {
+          Object.assign(data.user.repositories, (await graphql(queries.base["field.repositories"]({ login, account, affiliations })))[account].repositories)
+        }
+        catch {
+          console.debug(`metrics/compute/${login}/base > failed to retrieve repositories count and disk usage`)
+          data.user.repositories["totalCount"] = NaN
+          data.user.repositories["totalDiskUsage"] = NaN
         }
         //Query user account fields
         if (account === "user") {
           //Query contributions collection
           {
-            const fields = ["totalRepositoriesWithContributedCommits", "totalCommitContributions", "restrictedContributionsCount", "totalIssueContributions", "totalPullRequestContributions", "totalPullRequestReviewContributions"]
-            for (const field of fields) {
-              try {
-                Object.assign(data.user.contributionsCollection, (await graphql(queries.base.contributions({login, account, field, range: ""})))[account].contributionsCollection)
-              }
-              catch {
-                console.debug(`metrics/compute/${login}/base > failed to retrieve contributionsCollection.${field}`)
-                data.user.contributionsCollection[field] = NaN
-              }
+            try {
+              Object.assign(data.user.contributionsCollection, (await graphql(queries.base.contributions({ login, account, range: "", indepthFields: ""})))[account].contributionsCollection)
+            }
+            catch {
+              console.debug(`metrics/compute/${login}/base > failed to retrieve contributionsCollection`)
+              data.user.contributionsCollection ??= {}
             }
           }
           //Query calendar
@@ -90,39 +86,62 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
       //Query contributions collection over account lifetime instead of last year
       if (account === "user") {
         if ((indepth) && (imports.metadata.plugins.base.extras("indepth", {...conf.settings, error: false}))) {
-          const fields = ["totalRepositoriesWithContributedCommits", "totalCommitContributions", "restrictedContributionsCount", "totalIssueContributions", "totalPullRequestContributions", "totalPullRequestReviewContributions"]
           const start = new Date(data.user.createdAt)
           const end = new Date()
-          const collection = {}
-          for (const field of fields) {
-            collection[field] = 0
-            //Load contribution calendar
-            for (let from = new Date(start); from < end;) {
-              //Set date range
-              let to = new Date(from)
-              to.setUTCHours(+6 * 4 * 7 * 24)
-              if (to > end)
-                to = end
-              //Ensure that date ranges are not overlapping by setting it to previous day at 23:59:59.999
-              const dto = new Date(to)
-              dto.setUTCHours(-1)
-              dto.setUTCMinutes(59)
-              dto.setUTCSeconds(59)
-              dto.setUTCMilliseconds(999)
-              //Fetch data from api
-              try {
-                console.debug(`metrics/compute/${login}/plugins > base > loading contributions collections for ${field} from "${from.toISOString()}" to "${dto.toISOString()}"`)
-                const {[account]: {contributionsCollection}} = await graphql(queries.base.contributions({login, account, field, range: `(from: "${from.toISOString()}", to: "${dto.toISOString()}")`}))
-                collection[field] += contributionsCollection[field]
-              }
-              catch {
-                console.debug(`metrics/compute/${login}/plugins > base > failed to load contributions collections for ${field} from "${from.toISOString()}" to "${dto.toISOString()}"`)
-              }
-              //Set next date range start
-              from = new Date(to)
+          const contributions = []
+          const indepthExtraFields = ["commitContributionsByRepository", "pullRequestContributionsByRepository", "issueContributionsByRepository", "pullRequestReviewContributionsByRepository"]
+          const totalReposContributed = new Set()
+          const lifetimeCollection = {}
+          //Load contribution calendar
+          for (let from = new Date(start); from < end;) {
+            //Set date range
+            let to = new Date(from)
+            to.setUTCHours(+6 * 4 * 7 * 24)
+            if (to > end)
+              to = end
+            //Ensure that date ranges are not overlapping by setting it to previous day at 23:59:59.999
+            const dto = new Date(to)
+            dto.setUTCHours(-1)
+            dto.setUTCMinutes(59)
+            dto.setUTCSeconds(59)
+            dto.setUTCMilliseconds(999)
+            //Fetch data from api
+            try {
+              console.debug(`metrics/compute/${login}/plugins > base > loading contributions collections from "${from.toISOString()}" to "${dto.toISOString()}"`)
+              const extraFieldsWithParams = indepthExtraFields.map(x => `${x} { repository { nameWithOwner } }`).join('\n')
+              const { [account]: { contributionsCollection } } = await graphql(queries.base.contributions({ login, account, indepthFields: extraFieldsWithParams, range: `(from: "${from.toISOString()}", to: "${dto.toISOString()}")` }))
+              contributions.push(contributionsCollection)
             }
-            data.user.contributionsCollection[field] = Math.max(collection[field], data.user.contributionsCollection[field])
+            catch {
+              console.debug(`metrics/compute/${login}/plugins > base > failed to load contributions collections from "${from.toISOString()}" to "${dto.toISOString()}"`)
+            }
+            //Set next date range start
+            from = new Date(to)
           }
+
+          for (const contribution of contributions) {
+            for (const field in contribution) {
+              if (indepthExtraFields.includes(field)) {
+                for (const repo of contribution[field]) {
+                  const nameWithOwner = repo.repository.nameWithOwner
+                  if (!_owned && nameWithOwner.split('/')[0] === login) continue
+                  totalReposContributed.add(nameWithOwner)
+                }
+              } else {
+                lifetimeCollection[field] ??= 0
+                lifetimeCollection[field] += contribution[field]
+              } 
+            }
+          }
+
+          for (const field in lifetimeCollection) {
+            data.user.contributionsCollection[field] = Math.max(
+              lifetimeCollection[field],
+              data.user.contributionsCollection[field] ?? 0
+            )
+          }
+
+          data.user.repositoriesContributedTo.totalCount = totalReposContributed.size
         }
         //Fallback to load whole commit history rather than last year
         else {
@@ -146,7 +165,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         //Iterate through repositories
         let cursor = null
         let pushed = 0
-        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: ", includeUserRepositories: false, contributionTypes: COMMIT"}}[type] ?? null
+        const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: `, includeUserRepositories: ${_owned}, contributionTypes: COMMIT`}}[type] ?? null
         data.user[type] = data.user[type] ?? {}
         data.user[type].nodes = data.user[type].nodes ?? []
         do {
