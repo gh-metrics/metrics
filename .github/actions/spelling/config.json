@@ -1,0 +1,15 @@
+{
+  "extra_dictionaries": [
+    "cspell:software-terms/dict/softwareTerms.txt",
+    "cspell:fullstack/dict/fullstack.txt",
+    "cspell:npm/dict/npm.txt",
+    "cspell:html/dict/html.txt",
+    "cspell:node/dict/node.txt",
+    "cspell:css/dict/css.txt",
+    "cspell:typescript/dict/typescript.txt",
+    "cspell:public-licenses/src/generated/public-licenses.txt",
+    "cspell:filetypes/filetypes.txt",
+    "cspell:lorem-ipsum/dictionary.txt",
+    "cspell:shell/dict/shell-all-words.txt"
+  ]
+}
