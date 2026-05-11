@@ -26,6 +26,7 @@ codelines
 codeql
 colorsets
 Consolas
+cooldown
 datapoints
 dded
 Dexcom
@@ -290,3 +291,4 @@ ytmusic
 Zabcdefghijklmnopqrstuvwxyz
 zenhei
 zenorocha
+zizmor
