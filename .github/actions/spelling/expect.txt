@@ -13,6 +13,7 @@ audioscrobbler
 Autoloaded
 automator
 backreference
+basehead
 Bizau
 blankslate
 brackethighlighter
