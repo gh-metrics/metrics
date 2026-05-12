@@ -409,6 +409,8 @@ function quit(reason) {
         console.warn(`::group::${errors.length} error(s) occurred`)
         console.warn(util.inspect(errors, {depth: Infinity, maxStringLength: 256}))
         console.warn("::endgroup::")
+        if (die)
+          throw new Error(`${errors.length} plugin error(s) occurred`)
       }
       return {rendered, mime}
     }, {retries, delay: retries_delay})

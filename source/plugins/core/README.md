@@ -450,6 +450,28 @@ On forks, this feature is disable to take into account any changes you made on i
     use_prebuilt_image: yes
 ```
 
+## ❌ Fail on plugin errors
+
+By default, plugin errors are treated as non-fatal: the output is still generated and committed with a visible error section embedded in it, so the job stays green.
+
+Set `plugins_errors_fatal: yes` to change this behaviour: if any plugin fails, the job is **marked as failed** and the output is **not committed** to the repository. Combined with `retries`, this gives failed plugins the opportunity to recover before the job finally aborts.
+
+*Example: abort and fail the job if any plugin errors occur*
+```yaml
+- uses: gh-metrics/metrics@latest
+  with:
+    plugins_errors_fatal: yes
+```
+
+*Example: also retry up to 3 times before giving up*
+```yaml
+- uses: gh-metrics/metrics@latest
+  with:
+    plugins_errors_fatal: yes
+    retries: 3
+    retries_delay: 300
+```
+
 ## ➡️ Available options
 
 <!--options-->
@@ -1112,7 +1134,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap"><h4><code>plugins_errors_fatal</code></h4></td>
     <td rowspan="2"><p>Fatal plugin errors</p>
-<p>When enabled, the job will fail in case of plugin errors, else it will be handled gracefully in output with an error message</p>
+<p>When enabled, the job will fail and output will not be committed in case of plugin errors, else errors will be handled gracefully and displayed in the generated output</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
@@ -1162,6 +1184,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
 <li><code>--halloween</code>: enable halloween colors <em>(only first color scheme will be applied if multiple are specified)</em></li>
 <li><code>--winter</code>: enable winter colors <em>(only first color scheme will be applied if multiple are specified)</em></li>
 <li><code>--error</code>: force render error</li>
+<li><code>--plugin-error</code>: force a plugin error <em>(useful to test <a href="/source/plugins/core/README.md#plugins_errors_fatal"><code>plugins_errors_fatal</code></a>)</em></li>
 <li><code>--puppeteer-debug</code>: enable puppeteer debug mode*</li>
 <li><code>--puppeteer-disable-headless</code>: disable puppeteer headless mode <em>(requires a graphical environment)</em>*</li>
 <li><code>--puppeteer-wait-load</code>: override puppeteer wait events*</li>
@@ -1184,7 +1207,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
 <b>type:</b> <code>array</code>
 <i>(space-separated)</i>
 <br>
-<b>allowed values:</b><ul><li>--cakeday</li><li>--halloween</li><li>--winter</li><li>--error</li><li>--puppeteer-debug</li><li>--puppeteer-disable-headless</li><li>--puppeteer-wait-load</li><li>--puppeteer-wait-domcontentloaded</li><li>--puppeteer-wait-networkidle0</li><li>--puppeteer-wait-networkidle2</li></ul></td>
+<b>allowed values:</b><ul><li>--cakeday</li><li>--halloween</li><li>--winter</li><li>--error</li><li>--plugin-error</li><li>--puppeteer-debug</li><li>--puppeteer-disable-headless</li><li>--puppeteer-wait-load</li><li>--puppeteer-wait-domcontentloaded</li><li>--puppeteer-wait-networkidle0</li><li>--puppeteer-wait-networkidle2</li></ul></td>
   </tr>
   <tr>
     <td nowrap="nowrap"><h4><code>debug_print</code></h4></td>

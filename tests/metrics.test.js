@@ -119,7 +119,7 @@ describe("GitHub Action", () =>
       if ((skip.includes(template)) || ((modes.length) && (!modes.includes("action"))))
         test.skip(name, () => null)
       else
-        test(name, async () => expect(await action.run({template, base: "", query: JSON.stringify(query), plugins_errors_fatal: true, dryrun: true, use_mocked_data: true, verify: true, retries: 1, ...input})).toBe(true), timeout)
+        test(name, async () => expect(await action.run({template, base: "", query: JSON.stringify(query), dryrun: true, use_mocked_data: true, verify: true, retries: 1, retries_delay: 0, ...input})).toBe(true), timeout)
     }
   }))
 
@@ -149,3 +149,15 @@ describe("Web instance (placeholder)", () =>
         test(name, async () => expect(await placeholder.run({template, base: 0, ...query, ...input})).toBe(true), timeout)
     }
   }))
+
+describe("plugins_errors_fatal", () => {
+  const base_opts = {token: "MOCKED_TOKEN", template: "classic", base: "header", dryrun: true, use_mocked_data: true, retries: 1, retries_delay: 0}
+
+  describe("GitHub Action", () => {
+    test("job fails when plugin error occurs and plugins_errors_fatal is enabled", async () =>
+      expect(action.run({...base_opts, plugins_errors_fatal: true, debug_flags: "--plugin-error"})).rejects.toBeDefined())
+
+    test("job succeeds when plugin error occurs and plugins_errors_fatal is disabled", async () =>
+      expect(await action.run({...base_opts, plugins_errors_fatal: false, debug_flags: "--plugin-error"})).toBe(true))
+  })
+})
