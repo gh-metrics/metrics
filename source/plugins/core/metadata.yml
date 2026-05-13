@@ -506,7 +506,7 @@ inputs:
     description: |
       Fatal plugin errors
 
-      When enabled, the job will fail and output will not be committed in case of plugin errors, else errors will be handled gracefully and displayed in the generated output
+      When enabled, the job will fail and output will not be committed in case of plugin errors, otherwise errors will be handled gracefully and displayed in the generated output
     type: boolean
     default: no
     testing: yes
