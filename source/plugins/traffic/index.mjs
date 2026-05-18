@@ -17,6 +17,8 @@ export default async function({login, imports, data, rest, q, account}, {enabled
     console.debug(`metrics/compute/${login}/plugins > traffic > querying api`)
     const views = {count: 0, uniques: 0}
     const promised = [...await Promise.allSettled(repositories.map(({repo, owner}) => imports.filters.repo(`${owner}/${repo}`, skipped) ? rest.repos.getViews({owner, repo}) : {}))]
+    if (!promised.length)
+      throw {error: {message: "Rate-limited or no repositories"}}
     const response = promised.filter(({status}) => status === "fulfilled").map(({value}) => value)
 
     //Handle error if all promises were rejected
