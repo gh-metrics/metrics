@@ -213,7 +213,7 @@ export default async function metrics({login, q}, {graphql, rest, plugins, conf,
       catch (error) {
         console.debug(`metrics/compute/${login} > failed to import libxmljs2 (${error}), ignoring SVG verification`)
       }
-      if (!libxmljs) {
+      if (libxmljs) {
         const parsed = libxmljs.parseXml(rendered)
         if (parsed.errors.length)
           throw new Error(`Malformed SVG : \n${parsed.errors.join("\n")}`)

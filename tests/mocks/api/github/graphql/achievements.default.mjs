@@ -49,7 +49,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
           totalCount: faker.number.int(1000),
         },
       },
-      projects: {totalCount: faker.number.int(100)},
+      projectsV2: {totalCount: faker.number.int(100)},
       packages: {totalCount: faker.number.int(100)},
       organizations: {nodes: [], totalCount: faker.number.int(5)},
       gists: {
