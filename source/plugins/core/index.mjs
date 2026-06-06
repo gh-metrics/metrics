@@ -176,6 +176,10 @@ export default async function({login, q}, {conf, data, rest, graphql, plugins, q
     console.debug(`metrics/compute/${login} > applying dflag --error`)
     throw new Error("Failed as requested by --error flag")
   }
+  if (dflags.includes("--plugin-error")) {
+    console.debug(`metrics/compute/${login} > applying dflag --plugin-error`)
+    data.errors.push({error: {message: "Simulated plugin error requested by --plugin-error flag", instance: null}})
+  }
 
   //Results
   return null

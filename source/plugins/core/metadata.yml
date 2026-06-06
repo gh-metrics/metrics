@@ -506,7 +506,7 @@ inputs:
     description: |
       Fatal plugin errors
 
-      When enabled, the job will fail in case of plugin errors, else it will be handled gracefully in output with an error message
+      When enabled, the job will fail and output will not be committed in case of plugin errors, otherwise errors will be handled gracefully and displayed in the generated output
     type: boolean
     default: no
     testing: yes
@@ -539,6 +539,7 @@ inputs:
       - `--halloween`: enable halloween colors *(only first color scheme will be applied if multiple are specified)*
       - `--winter`: enable winter colors *(only first color scheme will be applied if multiple are specified)*
       - `--error`: force render error
+      - `--plugin-error`: force a plugin error *(useful to test [`plugins_errors_fatal`](/source/plugins/core/README.md#plugins_errors_fatal))*
       - `--puppeteer-debug`: enable puppeteer debug mode\*
       - `--puppeteer-disable-headless`: disable puppeteer headless mode *(requires a graphical environment)*\*
       - `--puppeteer-wait-load`: override puppeteer wait events\*
@@ -557,6 +558,7 @@ inputs:
       - --halloween
       - --winter
       - --error
+      - --plugin-error
       - --puppeteer-debug
       - --puppeteer-disable-headless
       - --puppeteer-wait-load

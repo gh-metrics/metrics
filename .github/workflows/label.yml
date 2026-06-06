@@ -10,8 +10,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/labeler@v4
+      - uses: actions/labeler@v6
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           configuration-path: .github/config/label.yml
-          sync-labels: yes
+          sync-labels: true
