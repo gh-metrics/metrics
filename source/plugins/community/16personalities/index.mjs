@@ -26,7 +26,7 @@ export default async function({login, q, imports, data, account}, {enabled = fal
       personality: {
         category: "personality",
         value: document.querySelector(".type-info > div:nth-child(2)").innerText,
-        image: /male|female/i.exec(document.querySelector(".result__outline+div a.sp-button").href)[0],
+        image: /(?:fe)?male/i.exec(document.querySelector(".result__outline+div a.sp-button").href)[0],
         text: document.querySelector("#intro .content__inner > div:first-child > p:first-of-type").innerText,
       },
       traits: [...document.querySelectorAll(".traitbox")].map(box => {
