@@ -21,37 +21,48 @@ export default async function({login, q, imports, data, account}, {enabled = fal
 
     //Fetch raw data
     const raw = await page.evaluate(() => ({
-      color: getComputedStyle(document.querySelector(".card__line")).backgroundColor, //eslint-disable-line no-undef
-      type: document.querySelector(".type__code").innerText,
-      personality: [...document.querySelectorAll(".personality-cards .sp-personality-card")].map(card => ({
-        category: card.querySelector(".card__title").innerText,
-        value: card.querySelector(".card__subtitle").innerText,
-        image: card.querySelector(".card__image").src,
-        text: card.querySelector(".card__text").innerText,
-      })),
-      traits: [...document.querySelectorAll("#traits .card__body")].map(card => ({
-        category: card.querySelector(".card__title").innerText,
-        value: card.querySelector(".card__subtitle").innerText,
-        score: card.querySelector(".center__num").innerText,
-        text: card.querySelector("p").innerText,
-      })),
+      color: getComputedStyle(document.querySelector(".section__wrap")).backgroundColor, //eslint-disable-line no-undef
+      type: document.querySelector(".code").innerText,
+      personality: {
+        category: "personality",
+        value: document.querySelector(".type-info > div:nth-child(2)").innerText,
+        image: /(?:fe)?male/i.exec(document.querySelector(".result__outline+div a.sp-button").href)[0],
+        text: document.querySelector("#intro .content__inner > div:first-child > p:first-of-type").innerText,
+      },
+      traits: [...document.querySelectorAll(".traitbox")].map(box => {
+        const valueEle = box.querySelector(".traitbox__value")
+        const rawScore = valueEle.querySelector("span").innerText
+        return {
+          category: box.querySelector(".traitbox__label").innerText,
+          value: valueEle.innerText.replace(rawScore, ""),
+          score: rawScore,
+          text: box.querySelector("div[id^='trait-desc-'] p").innerText,
+        }
+      }),
     }))
 
     //Format data
-    const {color} = raw
-    const type = raw.type.replace("(", "").replace(")", "").trim()
-    const personality = await Promise.all(raw.personality.map(async ({category, value, image, text}) => ({
-      category,
-      value: value.replace(`(${type})`, "").trim(),
-      image: await imports.imgb64(image),
-      text: text.replace(`${category}\n${value}\n`, "").trim(),
-    })))
-    const traits = raw.traits.map(({category, value, score, text}) => ({
-      category,
-      value: `${value[0]}${value.substring(1).toLocaleLowerCase()}`,
-      score: scores ? Number(score.replace("%", "")) / 100 : NaN,
-      text: text.split(".").slice(1).join("."),
-    }))
+    const {color, type} = raw
+    const personality = await (async ({category, value, image, text}) => {
+      const fileName = `${type.split("-")[0]}-${value}-${image}`.toLowerCase()
+      image = `https://www.16personalities.com/static/images/personality-types/avatars/${fileName}.svg`
+      text = (/^.*you are (.*?\.) .*$/.exec(text)?.[1] ?? text).replaceAll("your", "their").replaceAll("you", "they")
+      return [{
+        category,
+        value,
+        image: await imports.imgb64(image),
+        text: `${text[0].toLocaleUpperCase()}${text.substring(1)}`,
+      }]
+    })(raw.personality)
+    const traits = raw.traits.map(({category, value, score, text}) => {
+      text = text.split(" ").slice(1).join(" ").trim()
+      return {
+        category: category.replace(":", "").trim(),
+        value: value.trim(),
+        score: scores ? parseInt(score, 10) / 100 : NaN,
+        text: `${text[0].toLocaleUpperCase()}${text.substring(1)}`,
+      }
+    })
 
     //Results
     return {sections, color, type, personality, traits}
