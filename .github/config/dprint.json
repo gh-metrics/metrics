@@ -1,6 +1,7 @@
 {
   "incremental": true,
   "indentWidth": 2,
+  "newLineKind": "lf",
   "typescript": {
     "lineWidth": 360,
     "semiColons": "asi",
