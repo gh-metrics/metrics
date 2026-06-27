@@ -7,7 +7,7 @@ export default async function({login, q, imports, data, account}, {enabled = fal
       return null
 
     //Load inputs
-    let {url, selector, title, background, viewport, lazy_load: lazyload, wait, mode} = imports.metadata.plugins.screenshot.inputs({data, account, q})
+    let {url, selector, title, background, viewport, lazy_load: lazyLoad, wait, mode} = imports.metadata.plugins.screenshot.inputs({data, account, q})
     if (!url)
       throw {error: {message: "URL is not set"}}
 
@@ -21,7 +21,7 @@ export default async function({login, q, imports, data, account}, {enabled = fal
     await page.goto(url, {waitUntil: ["domcontentloaded", "networkidle2"]})
 
     await page.waitForSelector(selector)
-    if (lazyload) {
+    if (lazyLoad) {
       await page.evaluate(async sel => {
         const element = document.querySelector(sel)
         if (!element)
