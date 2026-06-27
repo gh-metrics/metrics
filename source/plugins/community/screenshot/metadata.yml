@@ -65,7 +65,7 @@ inputs:
         "height": 1280
       }
 
-  plugin_screenshot_lazyload:
+  plugin_screenshot_lazy_load:
     description: |
       Lazy load images
       
