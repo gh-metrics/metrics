@@ -23,6 +23,8 @@ jobs:
     permissions:
       contents: write
 
+    timeout-minutes: 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -31,7 +33,7 @@ jobs:
           ref: master
       - name: Format code
         run: |
-          npm ci
+          npm ci --ignore-scripts
           mkdir -v -p /home/runner/.cache/dprint/cache
           npx dprint fmt --config .github/config/dprint.json
       - name: Publish formatted code
