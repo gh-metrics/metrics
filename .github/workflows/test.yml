@@ -28,36 +28,11 @@ jobs:
         run: npm run test-contrib
       - name: Run linter
         run: npm run linter
-
-  # Format code
-  format:
-    name: Format code
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
-    timeout-minutes: 5
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: master
       - name: Format code
         run: |
           npm ci --ignore-scripts
           mkdir -v -p /home/runner/.cache/dprint/cache
-          npx dprint fmt --config .github/config/dprint.json
-      - name: Publish formatted code
-        run: |
-          set +e
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add --all
-          git commit -m "chore: code formatting"
-          git push
+          npm exec dprint check -- --config .github/config/dprint.json
 
   # Build docker image from branch and run tests
   build:

@@ -33,7 +33,7 @@ jobs:
         run: |
           npm ci --ignore-scripts
           mkdir -v -p /home/runner/.cache/dprint/cache
-          npx dprint fmt --config .github/config/dprint.json
+          npm exec dprint fmt -- --config .github/config/dprint.json
       - name: Publish formatted code
         run: |
           set +e
