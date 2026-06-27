@@ -85,7 +85,6 @@ jobs:
       contents: read
       pull-requests: read
       actions: read
-      security-events: write
     outputs:
       followup: ${{ steps.spelling.outputs.followup }}
     runs-on: ubuntu-latest
@@ -99,17 +98,16 @@ jobs:
         id: spelling
         uses: check-spelling/check-spelling@v0.0.26
         with:
-          suppress_push_for_open_pull_request: ${{ github.actor != 'dependabot[bot]' && 1 }}
+          suppress_push_for_open_pull_request: ${{ case(github.actor == 'dependabot[bot]', true, false) }}
           checkout: true
           check_file_names: 1
-          check_commit_messages: ${{ github.actor != 'dependabot[bot]' && 'commits, title, description' }}
+          check_commit_messages: ${{ case(github.actor == 'dependabot[bot]', false, 'title, description') }}
           spell_check_this: check-spelling/spell-check-this@main
           post_comment: 0
           use_magic_file: 1
           report-timing: 1
           warnings: bad-regex,binary-file,deprecated-feature,ignored-expect-variant,large-file,limited-references,no-newline-at-eof,noisy-file,non-alpha-in-dictionary,token-is-substring,unexpected-line-ending,whitespace-in-dictionary,minified-file,unsupported-configuration,no-files-to-check,unclosed-block-ignore-begin,unclosed-block-ignore-end
           experimental_apply_changes_via_bot: 1
-          use_sarif: 1
           check-images: 1
           extra_dictionary_limit: 20
           allow-hunspell: false
