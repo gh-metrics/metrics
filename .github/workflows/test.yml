@@ -28,6 +28,11 @@ jobs:
         run: npm run test-contrib
       - name: Run linter
         run: npm run linter
+      - name: Format code
+        run: |
+          npm ci --ignore-scripts
+          mkdir -v -p /home/runner/.cache/dprint/cache
+          npm exec dprint check -- --config .github/config/dprint.json
 
   # Build docker image from branch and run tests
   build:
