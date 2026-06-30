@@ -71,7 +71,7 @@
     "xml-formatter": "^3.5.0"
   },
   "devDependencies": {
-    "dprint": "^0.41.0",
+    "dprint": "^0.55.1",
     "eslint": "^8.49.0",
     "jest": "^29.7.0"
   },
