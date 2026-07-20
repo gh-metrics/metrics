@@ -40,7 +40,7 @@
     "@primer/css": "^21.0.9",
     "@primer/octicons": "^19.7.0",
     "@twemoji/parser": "^14.1.0",
-    "axios": "^1.16.1",
+    "axios": "^1.18.1",
     "clipboard": "^2.0.11",
     "compression": "^1.7.4",
     "csso": "^5.0.5",
