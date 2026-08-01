@@ -23,14 +23,13 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Setup metrics
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check contributions requirements
         run: npm run test-contrib
       - name: Run linter
         run: npm run linter
       - name: Format code
         run: |
-          npm ci --ignore-scripts
           mkdir -v -p /home/runner/.cache/dprint/cache
           npm exec dprint check -- --config .github/config/dprint.json
 
