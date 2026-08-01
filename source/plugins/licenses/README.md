@@ -39,13 +39,13 @@ This could result in compromised server!</p>
 
 Use to `plugin_licenses_setup` command to setup project dependencies.
 
-*Example: setup a NodeJS project using `npm ci --ignore-scripts`*
+*Example: setup a NodeJS project using `npm ci`*
 ```yml
 - name: Licenses and permissions
   with:
     repo: metrics
     plugin_licenses: yes
-    plugin_licenses_setup: npm ci --ignore-scripts
+    plugin_licenses_setup: npm ci
 ```
 
 Dependencies will be analyzed by [GitHub licensed](https://github.com/github/licensed) and compared against GitHub known licenses.
@@ -133,7 +133,7 @@ with:
   template: repository
   repo: metrics
   plugin_licenses: yes
-  plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci --ignore-scripts || true'
+  plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
 
 ```
 ```yaml
@@ -146,7 +146,7 @@ with:
   template: repository
   repo: metrics
   plugin_licenses: yes
-  plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci --ignore-scripts || true'
+  plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
   plugin_licenses_legal: no
   plugin_licenses_ratio: yes
 

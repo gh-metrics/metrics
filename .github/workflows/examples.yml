@@ -348,7 +348,7 @@ jobs:
           template: repository
           repo: metrics
           plugin_licenses: yes
-          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci --ignore-scripts || true'
+          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
           output_action: none
           delay: 120
           user: gh-metrics
@@ -364,7 +364,7 @@ jobs:
           template: repository
           repo: metrics
           plugin_licenses: yes
-          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci --ignore-scripts || true'
+          plugin_licenses_setup: bash -c '[[ -f package.json ]] && npm ci || true'
           plugin_licenses_legal: no
           plugin_licenses_ratio: yes
           output_action: none
@@ -1378,7 +1378,7 @@ jobs:
           user: gh-metrics
           repo: metrics
           plugin_licenses: yes
-          plugin_licenses_setup: npm ci --ignore-scripts
+          plugin_licenses_setup: npm ci
           plugin_licenses_legal: yes
           plugin_licenses_ratio: yes
           plugins_errors_fatal: yes
