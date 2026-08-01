@@ -9,19 +9,23 @@ on:
         type: string
       repo:
         type: string
-jobs:
 
+permissions:
+  contents: read
+
+jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: false
           fetch-depth: 0
           ref: master
       - name: Setup NodeJS
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
         with:
           node-version: 20
           cache: "npm"

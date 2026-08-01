@@ -10,20 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'gh-metrics/metrics'
     permissions:
-      contents: write
+      contents: write # Commit and push generated preset examples.
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.0.0
         with:
           node-version: 20
           cache: "npm"
       - name: Setup metrics
         run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish presets examples
+        # zizmor: ignore[use-trusted-publishing] This publishes generated files to Git, not an npm package.
         run: npm run presets -- publish
         env:
           GITHUB_TOKEN: ${{ github.token }}
