@@ -20,8 +20,9 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 20
+          cache: "npm"
       - name: Setup metrics
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish presets examples
         run: npm run presets -- publish
         env:

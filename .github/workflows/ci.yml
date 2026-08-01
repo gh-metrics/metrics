@@ -32,7 +32,7 @@ jobs:
           node-version: 20
           cache: "npm"
       - name: Setup metrics
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish rebuild metrics indexes
         run: npm run build -- publish
 
@@ -239,7 +239,7 @@ jobs:
           node-version: 20
           cache: "npm"
       - name: Setup metrics
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Publish release
         run: node .github/scripts/release.mjs
         env:
