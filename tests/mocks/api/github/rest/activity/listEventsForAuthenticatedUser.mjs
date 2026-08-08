@@ -50,12 +50,7 @@ export default async function({faker}, target, that, [{username: login, page, pe
             body: faker.lorem.paragraph(),
           },
           pull_request: {
-            title: faker.lorem.sentence(),
             number: 1,
-            user: {
-              login: faker.internet.userName(),
-            },
-            body: "",
           },
         },
         created_at: faker.date.recent({days: 7}),
@@ -180,10 +175,6 @@ export default async function({faker}, target, that, [{username: login, page, pe
             state: "open",
             number: 4,
             locked: false,
-            title: faker.lorem.sentence(),
-            user: {
-              login: faker.internet.userName(),
-            },
           },
         },
         created_at: faker.date.recent({days: 7}),
@@ -295,14 +286,8 @@ export default async function({faker}, target, that, [{username: login, page, pe
           action: faker.helpers.arrayElement(["opened", "closed"]),
           number: 5,
           pull_request: {
-            user: {
-              login,
-            },
             state: "open",
-            title: faker.lorem.sentence(),
-            additions: faker.number.int(1000),
-            deletions: faker.number.int(1000),
-            changed_files: faker.number.int(10),
+            number: 5,
           },
         },
         created_at: faker.date.recent({days: 7}),
