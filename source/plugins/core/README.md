@@ -1134,7 +1134,7 @@ This option has no effects on forks (images will always be rebuilt from Dockerfi
   <tr>
     <td nowrap="nowrap"><h4><code>plugins_errors_fatal</code></h4></td>
     <td rowspan="2"><p>Fatal plugin errors</p>
-<p>When enabled, the job will fail and output will not be committed in case of plugin errors, else errors will be handled gracefully and displayed in the generated output</p>
+<p>When enabled, the job will fail and output will not be committed in case of plugin errors, otherwise errors will be handled gracefully and displayed in the generated output</p>
 <img width="900" height="1" alt=""></td>
   </tr>
   <tr>
