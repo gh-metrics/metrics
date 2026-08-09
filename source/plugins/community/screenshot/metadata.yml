@@ -65,6 +65,16 @@ inputs:
         "height": 1280
       }
 
+  plugin_screenshot_lazy_load:
+    description: |
+      Lazy load images
+      
+      Progressively scroll to the selected element and wait for images to load before taking the screenshot
+      
+      When combined with `plugin_screenshot_wait`, wait will happen after lazy loading is complete
+    type: boolean
+    default: no
+
   plugin_screenshot_wait:
     description: |
       Wait time before taking screenshot (ms)
