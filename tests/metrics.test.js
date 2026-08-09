@@ -154,10 +154,8 @@ describe("plugins_errors_fatal", () => {
   const base_opts = {token: "MOCKED_TOKEN", template: "classic", base: "header", dryrun: true, use_mocked_data: true, retries: 1, retries_delay: 0}
 
   describe("GitHub Action", () => {
-    test("job fails when plugin error occurs and plugins_errors_fatal is enabled", async () =>
-      expect(action.run({...base_opts, plugins_errors_fatal: true, debug_flags: "--plugin-error"})).rejects.toBeDefined())
+    test("job fails when plugin error occurs and plugins_errors_fatal is enabled", async () => expect(action.run({...base_opts, plugins_errors_fatal: true, debug_flags: "--plugin-error"})).rejects.toBeDefined())
 
-    test("job succeeds when plugin error occurs and plugins_errors_fatal is disabled", async () =>
-      expect(await action.run({...base_opts, plugins_errors_fatal: false, debug_flags: "--plugin-error"})).toBe(true))
+    test("job succeeds when plugin error occurs and plugins_errors_fatal is disabled", async () => expect(await action.run({...base_opts, plugins_errors_fatal: false, debug_flags: "--plugin-error"})).toBe(true))
   })
 })

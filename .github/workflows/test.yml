@@ -6,41 +6,61 @@ on:
   workflow_call:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
 
   # Run linter to ensure new code respect coding rules
   lint:
     name: Lint code
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: false
           fetch-depth: 0
       - name: Setup NodeJS
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v6.0.0
         with:
           node-version: 20
           cache: 'npm'
       - name: Setup metrics
-        run: npm ci
+        run: npm ci --ignore-scripts --no-audit --no-fund
       - name: Check contributions requirements
         run: npm run test-contrib
       - name: Run linter
         run: npm run linter
+      - name: Verify generated files
+        run: |
+          npm run build
+          git diff --exit-code
+          test -z "$(git ls-files --others --exclude-standard)"
       - name: Format code
         run: |
-          npm ci --ignore-scripts
           mkdir -v -p /home/runner/.cache/dprint/cache
           npm exec dprint check -- --config .github/config/dprint.json
 
-  # Build docker image from branch and run tests
-  build:
-    name: Build and test
+  # Build the Docker image and run independent test suites in parallel
+  test:
+    name: Test metrics (${{ matrix.suite }})
     runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: action
+            pattern: ^(GitHub Action|plugins_errors_fatal)
+          - suite: web
+            pattern: ^Web instance
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Build gh-metrics/metrics:${{ github.head_ref || 'master' }}
         env:
           GIT_REF: ${{ github.head_ref || 'master' }}
@@ -48,4 +68,20 @@ jobs:
       - name: Run tests
         env:
           GIT_REF: ${{ github.head_ref || 'master' }}
-        run: docker run --rm --entrypoint="" gh-metrics/metrics:$(echo $GIT_REF | sed 's/[^a-z]/-/g') npm run test-metrics
+          TEST_PATTERN: ${{ matrix.pattern }}
+        run: docker run --rm --entrypoint="" gh-metrics/metrics:$(echo $GIT_REF | sed 's/[^a-z]/-/g') npm run test-metrics -- --testNamePattern "$TEST_PATTERN"
+
+  # Preserve the required status-check name while aggregating the test shards
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    if: ${{ always() }}
+    steps:
+      - name: Check lint and test results
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          TEST_RESULT: ${{ needs.test.result }}
+        run: |
+          test "$LINT_RESULT" = "success"
+          test "$TEST_RESULT" = "success"

@@ -8,6 +8,7 @@ apidojo
 apostrophecms
 apps
 arobase
+artipacked
 asi
 audioscrobbler
 Autoloaded
@@ -27,6 +28,7 @@ codelines
 codeql
 colorsets
 Consolas
+cooldown
 datapoints
 dded
 Dexcom
@@ -292,3 +294,4 @@ ytmusic
 Zabcdefghijklmnopqrstuvwxyz
 zenhei
 zenorocha
+zizmor
