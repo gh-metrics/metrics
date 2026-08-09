@@ -147,6 +147,17 @@ This setting may not be supported by all plugins.</p>
 <b>default:</b> no<br></td>
   </tr>
   <tr>
+    <td nowrap="nowrap"><h4><code>repositories_owned</code></h4></td>
+    <td rowspan="2"><p>Include your own repositories in the &quot;Contributed to X repositories&quot; count</p>
+<img width="900" height="1" alt=""></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
+<br>
+<b>default:</b> yes<br></td>
+  </tr>
+  <tr>
     <td nowrap="nowrap"><h4><code>repositories_affiliations</code></h4></td>
     <td rowspan="2"><p>Repositories affiliations</p>
 <ul>

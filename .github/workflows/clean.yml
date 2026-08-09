@@ -6,14 +6,23 @@ on:
       - published
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   clean:
     name: Clean untagged docker images
     runs-on: ubuntu-latest
     continue-on-error: true
+
+    permissions:
+      contents: read # Check out the cleanup script.
+      packages: write # Delete untagged container images.
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
+        with:
+          persist-credentials: false
       - name: Run script
         run: ./delete_ghcr_dangling_images.sh gh-metrics metrics
         working-directory: .github/actions/ghcr-clean

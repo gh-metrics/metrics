@@ -32,6 +32,9 @@ on:
         required: true
       WAKATIME_TOKEN:
         required: true
+
+permissions: {}
+
 jobs:
   # ======================================================================================
   # Examples renders
@@ -44,12 +47,15 @@ jobs:
     if: ${{ github.repository == 'gh-metrics/metrics' && false }}
 
     permissions:
-      contents: write
+      contents: write # Push generated examples to the examples branch.
+      packages: read # Pull the private/package-backed metrics action if required.
 
     steps:
+      # zizmor: ignore[artipacked] Credentials are required to publish generated examples.
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: examples
 
@@ -81,18 +87,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: [examples]
 
+    permissions:
+      contents: write # Push repository assets to the examples branch.
+      packages: read # Pull the private/package-backed metrics action if required.
+
     # Skip until I secure the workflows enough to feel comfortable minting tokens.
     if: ${{ github.repository == 'gh-metrics/metrics' && false }}
     steps:
+      # zizmor: ignore[artipacked] Credentials are required to publish generated examples.
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.0
         with:
+          persist-credentials: true
           fetch-depth: 0
           ref: examples
 
       - name: Contributors
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: $/
         with:
           filename: metrics.contributors.svg
           token: ${{ secrets.METRICS_TOKEN }}
@@ -108,7 +120,7 @@ jobs:
           delay: 120
       - name: Sponsors
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: $/
         with:
           filename: metrics.sponsors.svg
           token: ${{ secrets.METRICS_TOKEN_PERSONAL }}
@@ -124,7 +136,7 @@ jobs:
           delay: 120
       - name: Licenses
         if: ${{ success() || failure() }}
-        uses: gh-metrics/metrics@master
+        uses: $/
         with:
           filename: metrics.licenses.svg
           token: ${{ secrets.METRICS_TOKEN }}
