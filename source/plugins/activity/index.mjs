@@ -140,14 +140,18 @@ export default async function({login, data, rest, q, account, imports}, {enabled
             case "PullRequestEvent": {
               if (!["opened", "closed"].includes(payload.action))
                 return null
-              const {action, pull_request: {user: {login: user}, title, number, body: content, additions: added, deletions: deleted, changed_files: changed, merged}} = payload
+              const {action, pull_request: {number}} = payload
+              const [owner, repoName] = repo.split("/")
+              const {data: {user: {login: user}, title, body: content, additions: added, deletions: deleted, changed_files: changed, merged}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
               if (!imports.filters.text(user, ignored))
                 return null
               return {type: customType, actor, timestamp, repo, action: (action === "closed") && (merged) ? "merged" : action, user, title, number, content: await imports.markdown(content, {mode: markdown, codelines}), lines: {added, deleted}, files: {changed}}
             }
             //Reviewed a pull request
             case "PullRequestReviewEvent": {
-              const {review: {state: review}, pull_request: {user: {login: user}, number, title}} = payload
+              const {review: {state: review}, pull_request: {number}} = payload
+              const [owner, repoName] = repo.split("/")
+              const {data: {user: {login: user}, title}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
               if (!imports.filters.text(user, ignored))
                 return null
               return {type: customType, actor, timestamp, repo, review, user, number, title}
@@ -156,7 +160,9 @@ export default async function({login, data, rest, q, account, imports}, {enabled
             case "PullRequestReviewCommentEvent": {
               if (!["created"].includes(payload.action))
                 return null
-              const {pull_request: {user: {login: user}, title, number}, comment: {body: content, performed_via_github_app: mobile}} = payload
+              const {pull_request: {number}, comment: {body: content, performed_via_github_app: mobile}} = payload
+              const [owner, repoName] = repo.split("/")
+              const {data: {user: {login: user}, title}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
               if (!imports.filters.text(user, ignored))
                 return null
               return {type: customType, on: "pr", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile, number, title}
