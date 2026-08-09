@@ -1429,6 +1429,10 @@ inputs:
     description: Viewport options
     default: <default-value>
 
+  plugin_screenshot_lazy_load:
+    description: Lazy load images
+    default: <default-value>
+
   plugin_screenshot_wait:
     description: Wait time before taking screenshot (ms)
     default: <default-value>

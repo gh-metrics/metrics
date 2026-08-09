@@ -114,6 +114,19 @@
 </code></pre></details><br></td>
   </tr>
   <tr>
+    <td nowrap="nowrap"><h4><code>plugin_screenshot_lazy_load</code></h4></td>
+    <td rowspan="2"><p>Lazy load images</p>
+<p>Progressively scroll to the selected element and wait for images to load before taking the screenshot</p>
+<p>When combined with <code>plugin_screenshot_wait</code>, wait will happen after lazy loading is complete</p>
+<img width="900" height="1" alt=""></td>
+  </tr>
+  <tr>
+    <td nowrap="nowrap">✨ On <code>master</code>/<code>main</code><br>
+<b>type:</b> <code>boolean</code>
+<br>
+<b>default:</b> no<br></td>
+  </tr>
+  <tr>
     <td nowrap="nowrap"><h4><code>plugin_screenshot_wait</code></h4></td>
     <td rowspan="2"><p>Wait time before taking screenshot (ms)</p>
 <img width="900" height="1" alt=""></td>
