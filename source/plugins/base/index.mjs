@@ -167,14 +167,17 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
         //Iterate through repositories
         let cursor = null
         let pushed = 0
+        let retry = false
         const options = {repositories: {forks, affiliations, constraints: ""}, repositoriesContributedTo: {forks: "", affiliations: "", constraints: `, includeUserRepositories: ${_owned}, contributionTypes: COMMIT`}}[type] ?? null
         data.user[type] = data.user[type] ?? {}
         data.user[type].nodes = data.user[type].nodes ?? []
         do {
+          retry = false
           console.debug(`metrics/compute/${login}/base > retrieving ${type} after ${cursor}`)
           const request = {}
+          const batch = Math.min(repositories, {user: _batch, organization: Math.min(25, _batch)}[account])
           try {
-            Object.assign(request, await graphql(queries.base.repositories({login, account, type, after: cursor ? `after: "${cursor}"` : "", repositories: Math.min(repositories, {user: _batch, organization: Math.min(25, _batch)}[account]), ...options})))
+            Object.assign(request, await graphql(queries.base.repositories({login, account, type, after: cursor ? `after: "${cursor}"` : "", repositories: batch, ...options})))
           }
           catch (error) {
             console.debug(`metrics/compute/${login}/base > failed to retrieve ${_batch} repositories after ${cursor}, this is probably due to an API timeout, halving batch`)
@@ -183,6 +186,7 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
               console.debug(`metrics/compute/${login}/base > failed to retrieve repositories, cannot halve batch anymore`)
               throw error
             }
+            retry = true
             continue
           }
           const {[account]: {[type]: {edges = [], nodes = []} = {}}} = request
@@ -190,12 +194,12 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           data.user[type].nodes.push(...nodes)
           pushed = nodes.length
           console.debug(`metrics/compute/${login}/base > retrieved ${pushed} ${type} after ${cursor}`)
-          if (pushed < repositories) {
+          if (pushed < batch) {
             console.debug(`metrics/compute/${login}/base > retrieved less repositories than expected, probably no more to fetch`)
             break
           }
         }
-        while ((pushed) && (cursor) && ((data.user.repositories?.nodes?.length ?? 0) + (data.user.repositoriesContributedTo?.nodes?.length ?? 0) < repositories))
+        while ((retry) || ((pushed) && (cursor) && ((data.user.repositories?.nodes?.length ?? 0) + (data.user.repositoriesContributedTo?.nodes?.length ?? 0) < repositories)))
         //Limit repositories
         console.debug(`metrics/compute/${login}/base > keeping only ${repositories} ${type}`)
         data.user[type].nodes.splice(repositories)
