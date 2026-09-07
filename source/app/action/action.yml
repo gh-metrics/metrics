@@ -29,6 +29,7 @@ runs:
       shell: bash
       env:
         METRICS_ACTION: ${{ github.action }}
+        METRICS_ACTION_REPOSITORY: ${{ github.action_repository }}
         METRICS_ACTION_PATH: ${{ github.action_path }}
         METRICS_USE_PREBUILT_IMAGE: ${{ inputs.use_prebuilt_image }}
         INPUTS: ${{ toJson(inputs) }}
