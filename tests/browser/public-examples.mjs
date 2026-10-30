@@ -34,7 +34,7 @@ const imports = {
           selector: "#himehina_grid > div:nth-child(5) > div",
           title: "HIMEHINA New Releases",
           viewport: {width: 1920, height: 1080},
-          lazy_load: true,
+          "lazy.load": true,
           wait: 0,
           mode: "image",
           background: true,

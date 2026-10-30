@@ -35,6 +35,79 @@ const setup = `
 
 const check = code => void execFileSync(process.execPath, ["--input-type=module", "--eval", setup + code], {cwd: require("path").join(__dirname, ".."), timeout: 10000, stdio: "pipe"})
 
+test("real metadata converts action lazy-load input to lazy.load and activates readiness through the plugin", () =>
+  check(`
+  const {default: metadata} = await import('./source/app/metrics/metadata.mjs')
+  const descriptor = await metadata.plugin({
+    __plugins: './source/plugins/community',
+    __templates: './source/templates',
+    name: 'screenshot',
+    logger: () => {},
+  })
+  assert.equal(metadata.to.query('plugin_screenshot_lazy_load'), 'screenshot.lazy.load')
+  assert.equal(metadata.to.query('plugin_screenshot_lazy_load', {name: 'screenshot'}), 'lazy.load')
+  for (const enabled of [true, false]) {
+    const raw = {
+      plugin_screenshot: true,
+      plugin_screenshot_url: 'https://example.test/public-fixture',
+      plugin_screenshot_selector: '#target',
+      plugin_screenshot_mode: 'text',
+      plugin_screenshot_viewport: {width: 1920, height: 1080},
+      plugin_screenshot_lazy_load: enabled,
+    }
+    const q = Object.fromEntries(Object.entries(raw).map(([key, value]) => [metadata.to.query(key), value]))
+    assert.equal(q['screenshot.lazy.load'], enabled)
+    const parsed = descriptor.inputs({data: {}, q, account: 'user'})
+    assert.equal(parsed['lazy.load'], enabled)
+    assert.equal(Object.hasOwn(parsed, 'lazy_load'), false, 'The real parser never emits the old mock-only underscore key')
+
+    const {window, element, page, scrolls} = fixture('<section id="target"><img loading="lazy" src="https://cdn.test/cover?signature=unchanged"></section>', 1800)
+    element.innerText = 'Public fixture text'
+    const img = element.querySelector('img')
+    let decoded = 0
+    const state = imageState(img, {decode: async () => {decoded++}})
+    let requested = false
+    window.addEventListener('scroll', () => {
+      if (requested)
+        return
+      requested = true
+      setTimeout(() => {
+        state.complete = true
+        state.width = 320
+        img.dispatchEvent(new window.Event('load'))
+      }, 25)
+    })
+    page.setViewport = async viewport => assert.deepEqual(viewport, {width: 1920, height: 1080})
+    page.goto = async url => assert.equal(url, raw.plugin_screenshot_url)
+    page.waitForSelector = async selector => assert.equal(selector, '#target')
+    let closed = 0
+    const browser = {version: async () => 'DOM fixture', newPage: async () => page, close: async () => {closed++}}
+    const imports = {
+      metadata: {plugins: {screenshot: descriptor}},
+      puppeteer: {launch: async () => browser},
+      format: {error: error => error},
+    }
+    const result = await plugin({login: 'fixture', q, data: {}, account: 'user', imports}, {enabled: true, extras: true})
+    assert.equal(result.content, 'Public fixture text')
+    assert.equal(closed, 1)
+    assert.equal(img.src, 'https://cdn.test/cover?signature=unchanged')
+    if (enabled) {
+      assert.equal(result.images?.total, 1, 'The action-shaped lazy-load option must reach prepareImages')
+      assert.equal(result.images.loaded, 1)
+      assert.equal(result.images.unresolved, 0)
+      assert.equal(result.images.scrollComplete, true)
+      assert.equal(decoded, 1)
+      assert.ok(scrolls.length > 1)
+      assert.equal(img.loading, 'eager')
+    }
+    else {
+      assert.equal(result.images, null)
+      assert.equal(decoded, 0)
+      assert.equal(scrolls.length, 0)
+    }
+  }
+`))
+
 test("cold 1920x1080 DOM fixture progressively loads and decodes all eight slow covers without rewriting signed URLs", () =>
   check(`
   const fixtureImages = Array.from({length: 8}, (_, i) => '<img loading="lazy" data-y="' + i * 700 + '" src="https://cdn.test/cover' + i + '.png?signature=secret-' + i + '">').join("")

@@ -61,7 +61,7 @@ try {
               selector: "#target",
               title: "Offline fixture",
               viewport: {width: 1920, height: 1080},
-              lazy_load: true,
+              "lazy.load": true,
               wait: 0,
               mode: "image",
               background: true,

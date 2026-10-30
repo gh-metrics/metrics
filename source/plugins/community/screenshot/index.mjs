@@ -11,7 +11,7 @@ export default async function({login, q, imports, data, account}, {enabled = fal
       return null
 
     //Load inputs
-    let {url, selector, title, background, viewport, lazy_load: lazyLoad, wait, mode} = imports.metadata.plugins.screenshot.inputs({data, account, q})
+    let {url, selector, title, background, viewport, "lazy.load": lazyLoad, wait, mode} = imports.metadata.plugins.screenshot.inputs({data, account, q})
     if (!url)
       throw {error: {message: "URL is not set"}}
 
