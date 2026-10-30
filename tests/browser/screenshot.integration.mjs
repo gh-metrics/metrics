@@ -94,10 +94,27 @@ try {
     assert.ok(!JSON.stringify(result.images).includes("fixture-only"))
     assert.ok(browsers.every(browser => !browser.isConnected()))
     const pixels = Buffer.from(result.image.split(",")[1], "base64")
-    assert.equal((await sharp(pixels).metadata()).width, 454)
     if (artifactDirectory)
       await fs.writeFile(path.join(artifactDirectory, broken ? "fixture-two-failed.png" : "fixture-eight-loaded.png"), pixels)
-    console.log(JSON.stringify({test: broken ? "two failed images" : "eight cold lazy images", viewport: "1920x1080", images: result.images}))
+    const {data: rgba, info} = await sharp(pixels).ensureAlpha().raw().toBuffer({resolveWithObject: true})
+    assert.equal(info.width, 454)
+    assert.equal(info.channels, 4)
+    //Read the actual screenshot pixels, not only the DOM's image readiness.
+    //Each 320x120 cover begins at (0, index * 700) in the 800px-wide target.
+    const scale = info.width / 800
+    const pixelSamples = []
+    for (let index = 0; index < 8; index++) {
+      const x = Math.floor(160 * scale)
+      const y = Math.floor((index * 700 + 60) * scale)
+      assert.ok(x < info.width && y < info.height, `Cover ${index + 1} center must be inside the captured image`)
+      const offset = (y * info.width + x) * info.channels
+      const pixel = [...rgba.subarray(offset, offset + info.channels)]
+      const purple = [118, 87, 255, 255].every((value, channel) => Math.abs(pixel[channel] - value) <= 2)
+      const expectedPurple = !broken || index < 6
+      assert.equal(purple, expectedPurple, `Cover ${index + 1} center at (${x}, ${y}) should ${expectedPurple ? "" : "not "}contain purple pixels; got RGBA ${pixel}`)
+      pixelSamples.push({cover: index + 1, x, y, rgba: pixel})
+    }
+    console.log(JSON.stringify({test: broken ? "two failed images" : "eight cold lazy images", viewport: "1920x1080", images: result.images, pixelSamples}))
   }
   assert.ok(requests.length >= 16)
   assert.ok(requests.every(query => query.includes("signature=fixture-only")), "Signed image queries must reach the server unchanged")

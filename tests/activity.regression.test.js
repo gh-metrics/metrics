@@ -280,3 +280,68 @@ sourceTest("organization events retain other actors and disabled plugins make no
   assert.equal(await activity(context), null)
   assert.equal(calls.pages.length, 1)
 })
+
+sourceTest("pushes without payload size use the full comparison total rather than the returned subset", async () => {
+  const pushed = event(0)
+  delete pushed.payload.size
+  const {context, rest} = fixture([pushed])
+  rest.repos.compareCommitsWithBasehead = async () => ({
+    data: {
+      total_commits: 300,
+      commits: [
+        {sha: "11111111", author: null, commit: {message: "latest", author: {email: "writer@example.test"}}},
+      ],
+    },
+  })
+  const result = await activity(context)
+  assert.equal(result.events[0].size, 300)
+  assert.equal(result.events[0].commits.length, 1)
+})
+
+sourceTest("missing or invalid comparison totals fall back to commit count before filtering or merge trimming", async () => {
+  for (const total_commits of [undefined, null, -1, 1.5, Infinity, NaN, "3"]) {
+    const pushed = event(0)
+    delete pushed.payload.size
+    const {context, rest} = fixture([pushed], {ignored: ["bot@example.test"]})
+    rest.repos.compareCommitsWithBasehead = async () => ({
+      data: {
+        total_commits,
+        commits: [
+          {sha: "11111111", author: null, commit: {message: "first", author: {email: "writer@example.test"}}},
+          {sha: "22222222", author: null, commit: {message: "ignored", author: {email: "bot@example.test"}}},
+          {sha: "33333333", author: null, commit: {message: "Merge branch feature", author: {email: "writer@example.test"}}},
+        ],
+      },
+    })
+    const result = await activity(context)
+    assert.equal(result.events[0].size, 3)
+    assert.equal(result.events[0].commits.length, 1)
+  }
+})
+
+sourceTest("valid legacy sizes including zero are retained and missing embedded sizes fall back without comparisons", async () => {
+  for (const size of [0, 7, undefined, null, -1, 1.5, Infinity, NaN]) {
+    const pushed = event(0, {
+      payload: {
+        size,
+        ref: "refs/heads/main",
+        commits: [
+          {sha: "11111111", message: "first", author: null},
+          {sha: "22222222", message: "second", author: null},
+        ],
+      },
+    })
+    const {context, calls} = fixture([pushed])
+    const result = await activity(context)
+    assert.equal(result.events[0].size, Number.isSafeInteger(size) && size >= 0 ? size : 2)
+    assert.equal(calls.comparisons.length, 0)
+  }
+  const {context, rest} = fixture([event(0)])
+  const original = rest.repos.compareCommitsWithBasehead
+  rest.repos.compareCommitsWithBasehead = async args => {
+    const response = await original(args)
+    response.data.total_commits = 300
+    return response
+  }
+  assert.equal((await activity(context)).events[0].size, 1)
+})

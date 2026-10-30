@@ -154,7 +154,12 @@ export default async function({login, data, rest, q, account, imports}, {enabled
 
           //Older event payloads include commits; current GitHub events require a
           //comparison. REST comparison authors/messages live inside `commit`.
-          let commits = payload.commits ?? (await requestWithBackoff(() => rest.repos.compareCommitsWithBasehead({owner, repo: repoName, basehead: `${before}...${head}`}))).data.commits
+          const comparison = payload.commits == null ? (await requestWithBackoff(() => rest.repos.compareCommitsWithBasehead({owner, repo: repoName, basehead: `${before}...${head}`}))).data : null
+          let commits = payload.commits ?? comparison.commits
+          //Current PushEvents may omit size. Count the push before author filters
+          //and merge-summary trimming, preferring the full comparison total.
+          if (!Number.isSafeInteger(size) || (size < 0))
+            size = Number.isSafeInteger(comparison?.total_commits) && (comparison.total_commits >= 0) ? comparison.total_commits : commits.length
           commits = commits
             .map(({sha, message, author, commit}) => ({sha, message: commit?.message ?? message ?? "", email: commit?.author?.email ?? author?.email ?? ""}))
             .filter(({email}) => imports.filters.text(email, ignored))
