@@ -1,3 +1,4 @@
+import { captureAtOrigin } from "./capture.mjs"
 import { diagnosticUrl, prepareImages } from "./images.mjs"
 
 //Setup
@@ -39,17 +40,8 @@ export default async function({login, q, imports, data, account}, {enabled = fal
     const metadata = {height: null, width: null}
     switch (mode) {
       case "image": {
-        const clip = await page.evaluate(selector => {
-          const {x, y, width, height} = document.querySelector(selector).getBoundingClientRect()
-          return {
-            x: x + window.scrollX,
-            y: y + window.scrollY,
-            width,
-            height,
-          }
-        }, selector)
+        const {clip, buffer} = await captureAtOrigin({page, selector, record: imports.record, background})
         console.debug(`metrics/compute/${login}/plugins > screenshot > coordinates ${JSON.stringify(clip)}`)
-        const [buffer] = await imports.record({page, ...clip, frames: 1, background})
         const screenshot = await imports.sharp(Buffer.from(buffer.split(",").pop(), "base64")).resize({width: Math.min(454 * (1 + data.large), clip.width)})
         image = `data:image/png;base64,${(await screenshot.toBuffer()).toString("base64")}`
         Object.assign(metadata, await screenshot.metadata())
