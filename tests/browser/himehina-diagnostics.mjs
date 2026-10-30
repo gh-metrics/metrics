@@ -62,6 +62,11 @@ try {
   await page.screenshot({path: path.join(directory, "public-direct-capture.png"), clip, type: "png"})
   await inspect("after-capture")
 
+  await page.evaluate(() => window.scrollTo({top: 0, left: 0, behavior: "instant"}))
+  await page.evaluate(() => new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve))))
+  const reset = await inspect("reset-scroll-origin")
+  await page.screenshot({path: path.join(directory, "public-reset-origin.png"), clip: reset, type: "png"})
+
   //Compare compositor/viewport readiness without rewriting any website images or URLs.
   await page.setViewport({width: 1920, height: Math.min(4096, Math.ceil(clip.height + 100))})
   await page.evaluate(selector => document.querySelector(selector).scrollIntoView({block: "start", behavior: "instant"}), selector)
