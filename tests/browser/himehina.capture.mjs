@@ -5,6 +5,7 @@ import fs from "node:fs/promises"
 import path from "node:path"
 import { puppeteer, record, sharp } from "../../source/app/metrics/utils.mjs"
 import screenshot from "../../source/plugins/community/screenshot/index.mjs"
+import { coverVariation } from "./cover-pixels.mjs"
 
 const directory = process.env.METRICS_ARTIFACT_DIR
 if (!directory)
@@ -71,8 +72,7 @@ for (let attempt = 1; attempt <= 3; attempt++) {
     assert.ok(box.width >= 90 && box.height >= 90, `Cover ${index + 1} must have full layout dimensions`)
     const crop = {left: Math.round(box.x + box.width * 0.15), top: Math.round(box.y + box.height * 0.15), width: Math.floor(box.width * 0.7), height: Math.floor(box.height * 0.7)}
     assert.ok(crop.left >= 0 && crop.top >= 0 && crop.left + crop.width <= width && crop.top + crop.height <= height)
-    const stats = await sharp(pixels).extract(crop).removeAlpha().stats()
-    const variation = Math.max(...stats.channels.slice(0, 3).map(channel => channel.stdev))
+    const variation = await coverVariation(pixels, crop)
     covers.push({cover: index + 1, variation: Math.round(variation * 100) / 100})
     assert.ok(variation > 10, `Cover ${index + 1} is blank/flat rather than painted artwork (variation ${variation})`)
   }

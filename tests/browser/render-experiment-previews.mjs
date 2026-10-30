@@ -5,6 +5,7 @@ import path from "node:path"
 import { pathToFileURL } from "node:url"
 import sharp from "sharp"
 import { puppeteer } from "../../source/app/metrics/utils.mjs"
+import { coverVariation } from "./cover-pixels.mjs"
 
 const directory = process.env.METRICS_ARTIFACT_DIR
 if (!directory)
@@ -30,8 +31,7 @@ try {
       assert.equal(metadata.height, 1209)
       const covers = []
       for (let index = 0; index < 8; index++) {
-        const stats = await sharp(pixels).extract({left: 35, top: 119 + index * 129, width: 70, height: 70}).removeAlpha().stats()
-        const variation = Math.max(...stats.channels.slice(0, 3).map(channel => channel.stdev))
+        const variation = await coverVariation(pixels, {left: 35, top: 119 + index * 129, width: 70, height: 70})
         covers.push({cover: index + 1, variation: Math.round(variation * 100) / 100})
         assert.ok(variation > 10, `Actual action cover ${index + 1} is blank/flat rather than painted artwork`)
       }
