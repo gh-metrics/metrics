@@ -1,3 +1,6 @@
+//Imports
+import { requestWithBackoff } from "./request.mjs"
+
 //Setup
 export default async function({login, data, rest, q, account, imports}, {enabled = false, markdown = "inline", extras = false} = {}) {
   //Plugin execution
@@ -23,20 +26,6 @@ export default async function({login, data, rest, q, account, imports}, {enabled
     const pages = Math.ceil(load / 100)
     const codelines = 2
 
-    //Get user recent activity
-    console.debug(`metrics/compute/${login}/plugins > activity > querying api`)
-    const events = []
-    try {
-      for (let page = 1; page <= pages; page++) {
-        console.debug(`metrics/compute/${login}/plugins > activity > loading page ${page}/${pages}`)
-        events.push(...(context.mode === "repository" ? await rest.activity.listRepoEvents({owner: context.owner, repo: context.repo}) : await rest.activity.listEventsForAuthenticatedUser({username: login, per_page: 100, page})).data)
-      }
-    }
-    catch {
-      console.debug(`metrics/compute/${login}/plugins > activity > no more page to load`)
-    }
-    console.debug(`metrics/compute/${login}/plugins > activity > ${events.length} events loaded`)
-
     const payloadTypesToCustomTypes = {
       CommitCommentEvent: "comment",
       CreateEvent: "ref/create",
@@ -55,156 +44,190 @@ export default async function({login, data, rest, q, account, imports}, {enabled
       WatchEvent: "star",
     }
 
-    //Extract activity events
-    const activity = (await Promise.all(
-      events
-        .filter(({actor}) => account === "organization" ? true : actor.login?.toLocaleLowerCase() === login.toLocaleLowerCase())
-        .filter(({created_at}) => Number.isFinite(days) ? new Date(created_at) > new Date(Date.now() - days * 24 * 60 * 60 * 1000) : true)
-        .filter(event => visibility === "public" ? event.public : true)
-        .map(event => ({event, customType: payloadTypesToCustomTypes[event.type]}))
-        .filter(({customType}) => !!customType) //Ignore events with an unknown type
-        .filter(({customType}) => filter.includes("all") || filter.includes(customType)) //Filter events based on user preference
-        .map(({event}) => event) //Discard customType, it will be re-assigned
-        .map(async ({type, payload, actor: {login: actor}, repo: {name: repo}, created_at}) => { //See https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/github-event-types
-          const timestamp = new Date(created_at)
-          if (!imports.filters.repo(repo, skipped))
+    //Enrich one event at a time, preserving the API's newest-first order.
+    const enrich = async ({type, payload, actor: {login: actor}, repo: {name: repo}, created_at}) => {
+      const timestamp = new Date(created_at)
+      if (!imports.filters.repo(repo, skipped))
+        return null
+
+      //Get custom type from the previously declared mapping, so that it acts as a single source of truth
+      const customType = payloadTypesToCustomTypes[type]
+      if (!customType)
+        throw new Error(`Missing event mapping for type: ${type}`)
+
+      switch (type) {
+        //Commented on a commit
+        case "CommitCommentEvent": {
+          if (!["created"].includes(payload.action))
             return null
+          const {comment: {user: {login: user}, commit_id: sha, body: content}} = payload
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, on: "commit", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile: null, number: sha.substring(0, 7), title: ""}
+        }
+        //Created a git branch or tag
+        case "CreateEvent": {
+          const {ref: name, ref_type: type} = payload
+          return {type: customType, actor, timestamp, repo, ref: {name, type}}
+        }
+        //Deleted a git branch or tag
+        case "DeleteEvent": {
+          const {ref: name, ref_type: type} = payload
+          return {type: customType, actor, timestamp, repo, ref: {name, type}}
+        }
+        //Forked repository
+        case "ForkEvent": {
+          const {forkee: {full_name: forked}} = payload
+          return {type: customType, actor, timestamp, repo, forked}
+        }
+        //Wiki changes
+        case "GollumEvent": {
+          const {pages} = payload
+          return {type: customType, actor, timestamp, repo, pages: pages.map(({title}) => title)}
+        }
+        //Commented on an issue
+        case "IssueCommentEvent": {
+          if (!["created"].includes(payload.action))
+            return null
+          const {issue: {user: {login: user}, title, number}, comment: {body: content, performed_via_github_app: mobile}} = payload
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, on: "issue", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile, number, title}
+        }
+        //Issue event
+        case "IssuesEvent": {
+          if (!["opened", "closed", "reopened"].includes(payload.action))
+            return null
+          const {action, issue: {user: {login: user}, title, number, body: content}} = payload
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, actor, timestamp, repo, action, user, number, title, content: await imports.markdown(content, {mode: markdown, codelines})}
+        }
+        //Activity from repository collaborators
+        case "MemberEvent": {
+          if (!["added"].includes(payload.action))
+            return null
+          const {member: {login: user}} = payload
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, actor, timestamp, repo, user}
+        }
+        //Made repository public
+        case "PublicEvent": {
+          return {type: customType, actor, timestamp, repo}
+        }
+        //Pull requests events
+        case "PullRequestEvent": {
+          if (!["opened", "closed"].includes(payload.action))
+            return null
+          const {action, pull_request: {number}} = payload
+          const [owner, repoName] = repo.split("/")
+          const {data: {user: {login: user}, title, body: content, additions: added, deletions: deleted, changed_files: changed, merged}} = await requestWithBackoff(() => rest.pulls.get({owner, repo: repoName, pull_number: number}))
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, actor, timestamp, repo, action: (action === "closed") && (merged) ? "merged" : action, user, title, number, content: await imports.markdown(content, {mode: markdown, codelines}), lines: {added, deleted}, files: {changed}}
+        }
+        //Reviewed a pull request
+        case "PullRequestReviewEvent": {
+          const {review: {state: review}, pull_request: {number}} = payload
+          const [owner, repoName] = repo.split("/")
+          const {data: {user: {login: user}, title}} = await requestWithBackoff(() => rest.pulls.get({owner, repo: repoName, pull_number: number}))
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, actor, timestamp, repo, review, user, number, title}
+        }
+        //Commented on a pull request
+        case "PullRequestReviewCommentEvent": {
+          if (!["created"].includes(payload.action))
+            return null
+          const {pull_request: {number}, comment: {body: content, performed_via_github_app: mobile}} = payload
+          const [owner, repoName] = repo.split("/")
+          const {data: {user: {login: user}, title}} = await requestWithBackoff(() => rest.pulls.get({owner, repo: repoName, pull_number: number}))
+          if (!imports.filters.text(user, ignored))
+            return null
+          return {type: customType, on: "pr", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile, number, title}
+        }
+        //Pushed commits
+        case "PushEvent": {
+          let {size, ref, head, before} = payload
+          const [owner, repoName] = repo.split("/")
 
-          //Get custom type from the previously declared mapping, so that it acts as a single source of truth
-          const customType = payloadTypesToCustomTypes[type]
-          if (!customType)
-            throw new Error(`Missing event mapping for type: ${type}`)
+          //Older event payloads include commits; current GitHub events require a
+          //comparison. REST comparison authors/messages live inside `commit`.
+          let commits = payload.commits ?? (await requestWithBackoff(() => rest.repos.compareCommitsWithBasehead({owner, repo: repoName, basehead: `${before}...${head}`}))).data.commits
+          commits = commits
+            .map(({sha, message, author, commit}) => ({sha, message: commit?.message ?? message ?? "", email: commit?.author?.email ?? author?.email ?? ""}))
+            .filter(({email}) => imports.filters.text(email, ignored))
+          if (!commits.length)
+            return null
+          if (commits.slice(-1).pop()?.message.startsWith("Merge branch "))
+            commits = commits.slice(-1)
+          return {type: customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: commits.reverse().map(({sha, message}) => ({sha: sha.substring(0, 7), message}))}
+        }
+        //Released
+        case "ReleaseEvent": {
+          if (!["published"].includes(payload.action))
+            return null
+          const {action, release: {name, tag_name, prerelease, draft, body: content}} = payload
+          return {type: customType, actor, timestamp, repo, action, name: name || tag_name, prerelease, draft, content: await imports.markdown(content, {mode: markdown, codelines})}
+        }
+        //Starred a repository
+        case "WatchEvent": {
+          if (!["started"].includes(payload.action))
+            return null
+          const {action} = payload
+          return {type: customType, actor, timestamp, repo, action}
+        }
+        //Unknown event
+        default: {
+          return null
+        }
+      }
+    }
 
-          switch (type) {
-            //Commented on a commit
-            case "CommitCommentEvent": {
-              if (!["created"].includes(payload.action))
-                return null
-              const {comment: {user: {login: user}, commit_id: sha, body: content}} = payload
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, on: "commit", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile: null, number: sha.substring(0, 7), title: ""}
-            }
-            //Created a git branch or tag
-            case "CreateEvent": {
-              const {ref: name, ref_type: type} = payload
-              return {type: customType, actor, timestamp, repo, ref: {name, type}}
-            }
-            //Deleted a git branch or tag
-            case "DeleteEvent": {
-              const {ref: name, ref_type: type} = payload
-              return {type: customType, actor, timestamp, repo, ref: {name, type}}
-            }
-            //Forked repository
-            case "ForkEvent": {
-              const {forkee: {full_name: forked}} = payload
-              return {type: customType, actor, timestamp, repo, forked}
-            }
-            //Wiki changes
-            case "GollumEvent": {
-              const {pages} = payload
-              return {type: customType, actor, timestamp, repo, pages: pages.map(({title}) => title)}
-            }
-            //Commented on an issue
-            case "IssueCommentEvent": {
-              if (!["created"].includes(payload.action))
-                return null
-              const {issue: {user: {login: user}, title, number}, comment: {body: content, performed_via_github_app: mobile}} = payload
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, on: "issue", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile, number, title}
-            }
-            //Issue event
-            case "IssuesEvent": {
-              if (!["opened", "closed", "reopened"].includes(payload.action))
-                return null
-              const {action, issue: {user: {login: user}, title, number, body: content}} = payload
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, actor, timestamp, repo, action, user, number, title, content: await imports.markdown(content, {mode: markdown, codelines})}
-            }
-            //Activity from repository collaborators
-            case "MemberEvent": {
-              if (!["added"].includes(payload.action))
-                return null
-              const {member: {login: user}} = payload
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, actor, timestamp, repo, user}
-            }
-            //Made repository public
-            case "PublicEvent": {
-              return {type: customType, actor, timestamp, repo}
-            }
-            //Pull requests events
-            case "PullRequestEvent": {
-              if (!["opened", "closed"].includes(payload.action))
-                return null
-              const {action, pull_request: {number}} = payload
-              const [owner, repoName] = repo.split("/")
-              const {data: {user: {login: user}, title, body: content, additions: added, deletions: deleted, changed_files: changed, merged}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, actor, timestamp, repo, action: (action === "closed") && (merged) ? "merged" : action, user, title, number, content: await imports.markdown(content, {mode: markdown, codelines}), lines: {added, deleted}, files: {changed}}
-            }
-            //Reviewed a pull request
-            case "PullRequestReviewEvent": {
-              const {review: {state: review}, pull_request: {number}} = payload
-              const [owner, repoName] = repo.split("/")
-              const {data: {user: {login: user}, title}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, actor, timestamp, repo, review, user, number, title}
-            }
-            //Commented on a pull request
-            case "PullRequestReviewCommentEvent": {
-              if (!["created"].includes(payload.action))
-                return null
-              const {pull_request: {number}, comment: {body: content, performed_via_github_app: mobile}} = payload
-              const [owner, repoName] = repo.split("/")
-              const {data: {user: {login: user}, title}} = await rest.pulls.get({owner, repo: repoName, pull_number: number})
-              if (!imports.filters.text(user, ignored))
-                return null
-              return {type: customType, on: "pr", actor, timestamp, repo, content: await imports.markdown(content, {mode: markdown, codelines}), user, mobile, number, title}
-            }
-            //Pushed commits
-            case "PushEvent": {
-              let {size, ref, head, before} = payload
-              const [owner, repoName] = repo.split("/")
-
-              const res = await rest.repos.compareCommitsWithBasehead({owner, repo: repoName, basehead: `${before}...${head}`})
-              let {commits} = res.data
-
-              commits = commits.filter(({author: {email}}) => imports.filters.text(email, ignored))
-              if (!commits.length)
-                return null
-              if (commits.slice(-1).pop()?.commit.message.startsWith("Merge branch "))
-                commits = commits.slice(-1)
-              return {type: customType, actor, timestamp, repo, size, branch: ref.match(/refs.heads.(?<branch>.*)/)?.groups?.branch ?? null, commits: commits.reverse().map(({sha, message}) => ({sha: sha.substring(0, 7), message}))}
-            }
-            //Released
-            case "ReleaseEvent": {
-              if (!["published"].includes(payload.action))
-                return null
-              const {action, release: {name, tag_name, prerelease, draft, body: content}} = payload
-              return {type: customType, actor, timestamp, repo, action, name: name || tag_name, prerelease, draft, content: await imports.markdown(content, {mode: markdown, codelines})}
-            }
-            //Starred a repository
-            case "WatchEvent": {
-              if (!["started"].includes(payload.action))
-                return null
-              const {action} = payload
-              return {type: customType, actor, timestamp, repo, action}
-            }
-            //Unknown event
-            default: {
-              return null
-            }
-          }
-        }),
-    ))
-      .filter(event => event)
-      .slice(0, limit)
+    //Only request/enrich enough events to fill the display. Null results (for
+    //example ignored authors or unsupported actions) do not consume the limit.
+    const activity = []
+    let loaded = 0
+    console.debug(`metrics/compute/${login}/plugins > activity > querying api`)
+    for (let page = 1; (page <= pages) && (activity.length < limit); page++) {
+      let events
+      try {
+        console.debug(`metrics/compute/${login}/plugins > activity > loading page ${page}/${pages}`)
+        const response = await requestWithBackoff(() =>
+          context.mode === "repository"
+            ? rest.activity.listRepoEvents({owner: context.owner, repo: context.repo, per_page: 100, page})
+            : rest.activity.listEventsForAuthenticatedUser({username: login, per_page: 100, page})
+        )
+        events = response.data.slice(0, load - loaded)
+      }
+      catch (error) {
+        if (!activity.length)
+          throw error
+        console.warn(`metrics/compute/${login}/plugins > activity > unable to load more events (${error.status ?? "unknown status"})`)
+        break
+      }
+      loaded += events.length
+      for (const event of events) {
+        if ((account !== "organization") && (event.actor?.login?.toLocaleLowerCase() !== login.toLocaleLowerCase()))
+          continue
+        if (Number.isFinite(days) && !(new Date(event.created_at) > new Date(Date.now() - days * 24 * 60 * 60 * 1000)))
+          continue
+        if ((visibility === "public") && !event.public)
+          continue
+        const customType = payloadTypesToCustomTypes[event.type]
+        if (!customType || (!filter.includes("all") && !filter.includes(customType)))
+          continue
+        const result = await enrich(event)
+        if (result)
+          activity.push(result)
+        if (activity.length >= limit)
+          break
+      }
+      if ((events.length < 100) || (loaded >= load))
+        break
+    }
+    console.debug(`metrics/compute/${login}/plugins > activity > ${loaded} events loaded`)
 
     //Results
     return {timestamps, events: activity}
