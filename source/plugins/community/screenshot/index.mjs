@@ -1,5 +1,8 @@
+import { diagnosticUrl, prepareImages } from "./images.mjs"
+
 //Setup
 export default async function({login, q, imports, data, account}, {enabled = false, extras = false} = {}) {
+  let browser
   //Plugin execution
   try {
     //Check if plugin is enabled and requirements are met
@@ -13,45 +16,19 @@ export default async function({login, q, imports, data, account}, {enabled = fal
 
     //Start puppeteer and navigate to page
     console.debug(`metrics/compute/${login}/plugins > screenshot > starting browser`)
-    const browser = await imports.puppeteer.launch()
+    browser = await imports.puppeteer.launch()
     console.debug(`metrics/compute/${login}/plugins > screenshot > started ${await browser.version()}`)
     const page = await browser.newPage()
     await page.setViewport(viewport)
-    console.debug(`metrics/compute/${login}/plugins > screenshot > loading ${url}`)
+    console.debug(`metrics/compute/${login}/plugins > screenshot > loading ${diagnosticUrl(url)}`)
     await page.goto(url, {waitUntil: ["domcontentloaded", "networkidle2"]})
 
     await page.waitForSelector(selector)
+    let images = null
     if (lazyLoad) {
-      await page.evaluate(async sel => {
-        const element = document.querySelector(sel)
-        if (!element)
-          return
-
-        //Progressive scroll
-        await new Promise(resolve => {
-          const timer = setInterval(() => {
-            const rect = element.getBoundingClientRect()
-            if (rect.bottom <= window.innerHeight || window.scrollY + window.innerHeight >= document.body.scrollHeight) {
-              clearInterval(timer)
-              resolve()
-            }
-            else {
-              window.scrollBy(0, 300)
-            }
-          }, 100)
-        })
-
-        await Promise.all([...element.querySelectorAll("img")].map(img =>
-          new Promise(solve => {
-            if (img.complete)
-              solve()
-            else {
-              img.addEventListener("load", solve)
-              img.addEventListener("error", solve)
-            }
-          })
-        ))
-      }, selector)
+      images = await prepareImages(page, selector)
+      if (images.unresolved || !images.scrollComplete)
+        console.warn(`metrics/compute/${login}/plugins > screenshot > image readiness ${JSON.stringify(images)}`)
     }
     if (wait)
       await new Promise(solve => setTimeout(solve, wait))
@@ -86,13 +63,18 @@ export default async function({login, q, imports, data, account}, {enabled = fal
         throw {error: {message: `Unsupported mode "${mode}"`}}
     }
 
-    await browser.close()
-
     //Results
-    return {mode, image, content, title, height: metadata.height, width: metadata.width, url}
+    return {mode, image, content, title, height: metadata.height, width: metadata.width, url, images}
   }
   //Handle errors
   catch (error) {
+    //Navigation errors can contain the original signed page URL too.
+    if (error instanceof Error)
+      error = new Error(error.message.replace(/https?:\/\/[^\s"<>]+/g, diagnosticUrl))
     throw imports.format.error(error, {title: "Screenshot error"})
+  }
+  finally {
+    if (browser)
+      await browser.close().catch(() => console.warn("metrics/plugins > screenshot > browser cleanup failed"))
   }
 }
