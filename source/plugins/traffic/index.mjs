@@ -24,9 +24,13 @@ export default async function({login, imports, data, rest, q, account}, {enabled
     //Handle error if all promises were rejected
     const rejected = promised.filter(({status}) => status === "rejected")
     if (rejected.length === promised.length) {
-      if (promised.map(({reason}) => reason.message).every(error => /must have push access to repository/i.test(error)))
-        throw {error: {message: "Insufficient token scopes"}}
-      throw new Error(promised[0].reason.message)
+      //Fine-grained tokens get told which permission the endpoint wanted
+      const {status, message, response} = rejected[0].reason
+      const accepted = response?.headers?.["x-accepted-github-permissions"]
+      console.debug(`metrics/compute/${login}/plugins > traffic > all ${rejected.length} requests rejected, first: ${status} ${message}${accepted ? ` (accepted permissions: ${accepted})` : ""}`)
+      if (rejected.map(({reason}) => reason.message).every(error => /must have push access to repository|resource not accessible by personal access token/i.test(error)))
+        throw {error: {message: `Insufficient token scopes${accepted ? ` (needs ${accepted})` : ""}`}}
+      throw new Error(message)
     }
     else if (rejected.length) {
       rejected.map(({reason}) => console.debug(`metrics/compute/${login}/plugins > traffic > warn > ${reason.message}`))
