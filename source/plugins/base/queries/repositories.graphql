@@ -15,9 +15,7 @@ query BaseRepositories {
         watchers {
           totalCount
         }
-        stargazers {
-          totalCount
-        }
+        stargazerCount
         releases {
           totalCount
         }

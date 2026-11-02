@@ -16,9 +16,7 @@ query AchievementsOrganizations {
     }
     popular:repositories(first:1, orderBy: {field: STARGAZERS, direction: DESC}) {
       nodes {
-        stargazers {
-          totalCount
-        }
+        stargazerCount
       }
     }
     projects: projectsV2(first: 1, orderBy: {field: CREATED_AT, direction: ASC}) {

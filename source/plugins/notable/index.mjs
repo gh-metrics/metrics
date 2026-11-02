@@ -22,8 +22,8 @@ export default async function({login, q, imports, rest, graphql, data, account, 
         edges
           .filter(({node}) => imports.filters.repo(node, skipped))
           .filter(({node}) => ({all: true, organization: node.isInOrganization, user: !node.isInOrganization}[from]))
-          .filter(({node}) => imports.filters.github(filter, {name: node.nameWithOwner, user: node.owner.login, stars: node.stargazers.totalCount, watchers: node.watchers.totalCount, forks: node.forks.totalCount}))
-          .map(({node}) => contributions.push({handle: node.nameWithOwner, stars: node.stargazers.totalCount, issues: node.issues.totalCount, pulls: node.pullRequests.totalCount, organization: node.isInOrganization, avatarUrl: node.owner.avatarUrl}))
+          .filter(({node}) => imports.filters.github(filter, {name: node.nameWithOwner, user: node.owner.login, stars: node.stargazerCount, watchers: node.watchers.totalCount, forks: node.forks.totalCount}))
+          .map(({node}) => contributions.push({handle: node.nameWithOwner, stars: node.stargazerCount, issues: node.issues.totalCount, pulls: node.pullRequests.totalCount, organization: node.isInOrganization, avatarUrl: node.owner.avatarUrl}))
         pushed = edges.length
       }
       while ((pushed) && (cursor))
