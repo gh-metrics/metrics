@@ -174,8 +174,6 @@ function quit(reason) {
     info("GitHub token format", /^github_pat_/.test(token) ? "fine-grained" : /^gh[pousr]_/.test(token) ? "classic" : "legacy or invalid")
     if (!token)
       throw new Error("You must provide a valid GitHub personal token to gather your metrics (see https://github.com/gh-metrics/metrics/blob/master/.github/readme/partials/documentation/setup/action.md for more information)")
-    if (/^github_pat_/.test(token))
-      throw new Error("It seems you're trying to use a fine-grained personal access token. These are currently unsupported as GitHub does not support them (yet?) for GraphQL API authentication (see https://docs.github.com/fr/graphql/guides/forming-calls-with-graphql#authenticating-with-graphql for more information). Use a classic token instead.")
     conf.settings.token = token
     const api = {}
     const resources = {}
