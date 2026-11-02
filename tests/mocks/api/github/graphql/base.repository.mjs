@@ -10,7 +10,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         diskUsage: Math.floor(Math.random() * 10000),
         homepageUrl: faker.internet.url(),
         watchers: {totalCount: faker.number.int(1000)},
-        stargazers: {totalCount: faker.number.int(10000)},
+        stargazerCount: faker.number.int(10000),
         languages: {
           edges: [
             {size: faker.number.int(100000), node: {color: faker.internet.color(), name: faker.lorem.word()}},

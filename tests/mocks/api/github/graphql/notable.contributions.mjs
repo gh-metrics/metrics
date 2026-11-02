@@ -22,7 +22,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
                   avatarUrl: null,
                 },
                 nameWithOwner: `${faker.internet.userName()}/${faker.lorem.slug()}`,
-                stargazers: {totalCount: faker.number.int(1000)},
+                stargazerCount: faker.number.int(1000),
                 watchers: {totalCount: faker.number.int(1000)},
                 forks: {totalCount: faker.number.int(1000)},
                 issues: {totalCount: faker.number.int(1000)},

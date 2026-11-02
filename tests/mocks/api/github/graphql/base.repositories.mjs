@@ -28,7 +28,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
             {
               name: faker.lorem.words(),
               watchers: {totalCount: faker.number.int(1000)},
-              stargazers: {totalCount: faker.number.int(10000)},
+              stargazerCount: faker.number.int(10000),
               owner: {login},
               languages: {
                 edges: [

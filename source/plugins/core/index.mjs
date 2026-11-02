@@ -83,8 +83,10 @@ export default async function({login, q}, {conf, data, rest, graphql, plugins, q
   //Iterate through user's repositories
   for (const repository of data.user.repositories.nodes) {
     //Simple properties with totalCount
-    for (const property of ["watchers", "stargazers", "issues_open", "issues_closed", "pr_open", "pr_closed", "pr_merged", "releases", "deployments", "environments"])
+    for (const property of ["watchers", "issues_open", "issues_closed", "pr_open", "pr_closed", "pr_merged", "releases", "deployments", "environments"])
       computed.repositories[property] += repository[property]?.totalCount ?? 0
+    //Stargazers (stargazerCount, since fine-grained tokens can't read the stargazers connection)
+    computed.repositories.stargazers += repository.stargazerCount ?? 0
     //Forks
     computed.repositories.forks += repository.forkCount
     if (repository.isFork)

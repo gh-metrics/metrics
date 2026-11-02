@@ -16,9 +16,7 @@ query NotableContributions {
           forks {
             totalCount
           }
-          stargazers {
-            totalCount
-          }
+          stargazerCount
           issues {
             totalCount
           }

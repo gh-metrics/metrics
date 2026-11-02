@@ -22,7 +22,7 @@ export default function({faker, query, login = faker.internet.userName()}) {
         totalCount: faker.number.int(100),
       },
       popular: {
-        nodes: [{stargazers: {totalCount: faker.number.int(50000)}}],
+        nodes: [{stargazerCount: faker.number.int(50000)}],
       },
       pullRequests: {
         nodes: [
