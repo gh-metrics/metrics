@@ -31,6 +31,12 @@ As a general rule, the following scopes may be required:
 - `read:project` for some projects related metrics
 - `gist` for publishing renders to gists instead of a repository
 
+Fine-grained personal access tokens also work. Give them access to all your repositories and the read permissions your plugins need. For example, the `base`, `achievements`, `languages` and `traffic` plugins worked with:
+- Repository permissions: `Metadata`, `Contents`, `Deployments` (for private repositories) and `Administration` (for `traffic`)
+- Account permissions: `Gists` (for `achievements`)
+
+A fine-grained token can only read repositories owned by its resource owner, so other owners' private repositories you contributed to are not counted.
+
 > 💡 For security reasons, it is advised to always use the least amount of scopes. It is possible to prevent security issues by [forking this repository](https://github.com/gh-metrics/metrics/fork) and using it in your workflow instead (more information available in step 3)
 
 ![Setup a GitHub personal token](/.github/readme/imgs/setup_personal_token.light.png#gh-light-mode-only)
