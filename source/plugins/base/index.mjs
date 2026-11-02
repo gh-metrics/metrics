@@ -191,7 +191,8 @@ export default async function({login, graphql, rest, data, q, queries, imports, 
           }
           const {[account]: {[type]: {edges = [], nodes = []} = {}}} = request
           cursor = edges?.[edges?.length - 1]?.cursor
-          data.user[type].nodes.push(...nodes)
+          //Repositories the token can't read come back as null (e.g. other owners' private repositories with a fine-grained token)
+          data.user[type].nodes.push(...nodes.filter(node => node))
           pushed = nodes.length
           console.debug(`metrics/compute/${login}/base > retrieved ${pushed} ${type} after ${cursor}`)
           if (pushed < batch) {
