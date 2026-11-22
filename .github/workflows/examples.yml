@@ -1070,7 +1070,7 @@ jobs:
           plugin_leetcode_sections: solved, skills, recent
           output_action: none
           delay: 120
-          user: gh-metrics
+          user: fjzzq2002
           plugins_errors_fatal: yes
         if: ${{ success() || failure() }}
       - name: 🕹️ Steam - Recently played games
